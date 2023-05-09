@@ -1,0 +1,55 @@
+[
+	
+	{"key":"delete","command":"moveFileToTrash"},
+    // 浏览远程文件
+    {
+        "key": "ctrl+alt+w",
+        "command": "sftp.revealInRemoteExplorer"
+    },
+    // 同步远程数据到本地
+    {
+        "key": "ctrl+alt+l",
+        "command": "sftp.sync.remoteToLocal"
+    },
+    // 同步本地数据到远程
+    {
+        "key": "ctrl+alt+r",
+        "command": "sftp.sync.localToRemote"
+    },
+    // 上传当前文件夹
+    {
+        "key": "ctrl+alt+u",
+        "command": "sftp.upload.folder"
+    },
+    // 下载当前文件夹
+    {
+        "key": "ctrl+alt+d",
+        "command": "sftp.download.folder"
+    },
+    // 项目管理器 右键菜单 FTP: 上传选中文件
+    {
+        "key": "ctrl+shift+u",
+        "command": "sftp.upload.file"
+    },
+	{
+	    "key": "ctrl+shift+d",
+	    "command": "sftp.download.file"
+	},
+    // 在本地编辑远程文件
+    {
+        "key": "ctrl+shift+e",
+        "command": "sftp.remoteExplorer.editInLocal"
+    },
+    // 删除远程文件
+    {
+        "key": "ctrl+shift+del",
+        "command": "sftp.delete.remote"
+    },
+    // 刷新
+    {
+        "key": "ctrl+shift+f",
+        "command": "sftp.remoteExplorer.refresh"
+    },
+	//uni-app生成H5网站"
+	{"key":"ctrl+alt+shift+u","command": "project.action.app.publish.html5"}
+]

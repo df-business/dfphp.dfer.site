@@ -1,0 +1,98 @@
+<df-body>
+    
+
+<div class="row">
+	<div class="col-sm-12">
+		<div class="ibox float-e-margins">
+			<div class="ibox-title">
+				<h5></h5>
+			</div>
+			<div class="ibox-content">
+				<form method="post" action='!!SplitUrl(" admin/login/SetchangePic ")!!' enctype="multipart/form-data">
+					<input name="data[pic]" id="pic" value="!!isset($output[0])?$output['pic']:'0'!!" hidden/>
+					<div class="form-horizontal m-t">
+						<div class="form-group">
+							<label class="col-sm-1 control-label">头像</label>
+							<div class="col-sm-4">
+								<div class="upload">
+									<div class="uploadPreview1">
+										!!isset($output[0])?"<img src='{$output["pic"]}' />":'暂无图片'!!
+									</div>
+									<div class="left">
+										<div class="uploadProgressBar"></div>
+										<div class="uploadBut1">选择图片</div>
+										<!--<input type="file" name="file" id="file" />-->
+									</div>
+									<div class="clear"></div>
+								</div>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<div class="col-sm-2 col-sm-offset-1">
+								<button class="btn btn-primary" type="submit">保存</button>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+</df-body>
+
+<df-footer>
+    
+
+
+<!-- webuploader js -->
+<link rel="stylesheet" href="/css_js/webuploader/webuploader.css" type="text/css" />
+<script src="/css_js/webuploader/webuploader.min.js"></script>
+<script type="text/javascript">
+	function uploadImg(button, div, input) {
+
+		var uploader = WebUploader.create({
+			// 自动上传
+			auto: true,
+			// 选择文件的按钮
+			pick: button,
+			// swf文件路径
+			swf: '/content/www/lib/webuploader/Uploader.swf',
+			// 文件接收服务端。
+			server: '!!SplitUrl("admin/login/UpchangePic/file")!!',
+			method: 'POST'
+		});
+		uploader.on('uploadProgress', function(file, percentage) {
+			$(div).html("上传中...");
+		});
+
+		uploader.on('uploadSuccess', function(file, response) {
+			//文件效验
+			if(response == "-1") //简单的图片上传需要验证
+				$(div).html('文件出错');
+			else if(response == "-2")
+				$(div).html('类型不允许');
+			else if(response == "-3")
+				$(div).html('文件太大');
+			else {
+				//获取原始数据
+				var data = response._raw + '?!!TIMESTAMP!!';
+				$(div).html("<img src=\"" + data + "\"  />");
+				$(input).val(data);
+			}
+		});
+
+		uploader.on('uploadError', function(file) {
+			$(div).html("上传失败");
+		});
+
+	}
+
+	//上传图片
+	$(function() {
+		uploadImg('.uploadBut1', ".uploadPreview1", "#pic");
+	})
+</script>
+
+</df-footer>

@@ -1,0 +1,56 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "71450b1adb808d4dc3d962c2761f0125",
+    "packages": [
+        {
+            "name": "dfer/tools",
+            "version": "v4.7.6",
+            "source": {
+                "type": "git",
+                "url": "https://gitcode.net/dofun333/dfer-tools",
+                "reference": "6b42e59ce0923e940d1edd6ecbab71cbb4165450"
+            },
+            "require": {
+                "php": ">=7.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Dfer\\Tools\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "df",
+                    "email": "df_business@qq.com"
+                }
+            ],
+            "description": "php工具包",
+            "homepage": "http://www.dfer.top",
+            "keywords": [
+                "df",
+                "dfer.top"
+            ],
+            "time": "2023-01-11T07:00:10+00:00"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": [],
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": {
+        "php": ">=7.0"
+    },
+    "platform-dev": [],
+    "plugin-api-version": "2.3.0"
+}

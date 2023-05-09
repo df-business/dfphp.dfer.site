@@ -1,0 +1,70 @@
+<!--=========引用=========-->
+<!--jq-->
+<script src="/css_js/jquery.min.js"></script>
+<script src="/css_js/jquery.ext.js"></script>
+<!--df-->
+<script src="/css_js/df.js"></script>
+
+<!--mui-->
+<script src="/css_js/mui/mui.min.js"></script>
+<link rel="stylesheet" href="../css_js/mui/mui.min.css" />
+
+<!--layui-->
+<script src="/css_js/layui/layui.js"></script>
+<link rel="stylesheet" href="/css_js/layui/css/layui.css" />
+<!--loader-->
+<script src="/css_js/Loaders/main.js"></script>
+<link rel="stylesheet" href="/css_js/Loaders/main.css" />
+<!--fonts-->
+<!--<script src="/css_js/FontFamily/init.js"></script>-->
+
+<link rel="stylesheet" href="../css_js/homepage/css/home.css" />
+
+
+<style>
+	.mui-content,.mui-scalable {
+		background-color: transparent !important;
+	}
+</style>
+<!--通用脚本-->
+<script>
+	//所有资源加载完成则执行
+	function loaded() {
+
+		$('#first_loading').remove(); //在js加载前添加loading效果，增加页面友好度，加载完成则删除
+		//如果有调用字体
+		if($('script[src$="FontFamily/init.js"]').length > 0) {
+			$("<style>").html(
+				'*{font-family: ft !important; }'
+			).appendTo("head");
+			log('自定义字体加载完成')
+		}
+
+		loading(2);
+		log('web complete');
+	}
+
+	//dom加载完毕
+	function ready() {
+		//		$.ProtectPage();
+		//		story()
+		//		hacker(1, '!!$home_layout["color"]!!');
+		//rJs加载会在插件还没加载完就显示页面，从而导致页面显示不健全，所以需要隐藏body，在rJs加载之后显示
+		$('#body').removeAttr('hidden')
+		loading(1);
+		log('dom complete');
+	}
+function resized(){
+//	location.reload()
+	
+	
+}
+
+
+	//只能识别执行到此加载的元素，故而放在网页尾部（识别出整个网页已加载完毕）
+	$(ready);
+	$(window).on('load', loaded);
+	$(window).on('resize', resized);
+
+
+</script>

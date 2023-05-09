@@ -1,0 +1,16 @@
+{
+	"name": "dfer/df-php",
+	"type": "project",
+	"description": "由Df打造的php版的Mvc框架，结构简洁，使用方便",
+	"license": "MIT",
+	"authors": [{
+		"name": "df",
+		"email": "df_business@qq.com"
+	}],
+	"homepage": "http://dfphp.dfer.top",
+	"require": {
+		"php": ">=7.0",
+		"dfer/tools": "^4.7"		
+	},
+	"keywords": ["df", "dfer.top"]		
+}
