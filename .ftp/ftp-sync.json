@@ -1,10 +1,10 @@
 {
-    "name": "dfphp_dfer_top",
+    "name": "dfphp_dfer_site",
     "host": "df315.top",
     "protocol": "sftp",
     "port": 22,
-    "username": "dfphp_dfer_top",
-    "password": "123",
-    "remotePath": "/dfphp.dfer.top",
+    "username": "dfphp_dfer_site",
+    "password": "666",
+    "remotePath": "/dfphp.dfer.site",
     "uploadOnSave": true
 }

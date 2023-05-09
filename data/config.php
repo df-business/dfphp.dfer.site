@@ -10,9 +10,9 @@ header("Content-Type:text/html; charset=utf-8");
 $dev = 0;
 #显示每次访问的地址
 $server = "localhost";
-$acc = "root";
-$pwd = "ItsDfAndDontHack";
-$database = "df_DfPHP";
+$acc = "dfphp_dfer_site";
+$pwd = "mMHBCAimbKKjPP67";
+$database = "dfphp_dfer_site";
 //email模块的开关
 $email_enable = false;
 //当前框架需要的最低php版本
