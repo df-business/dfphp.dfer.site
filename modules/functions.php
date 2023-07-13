@@ -1721,7 +1721,7 @@ function GetWeb()
     $para = array(
         'website' => SITE
     );
-    $rt = http_request("https://www.dfer.top/?A=webctl&c=main&a=user&para=0&a=updateuser", $para);
+    $rt = httpRequest("https://api.dfer.site/webctl/main/updateuser", $para);
     //var_dump($rt);
 }
 

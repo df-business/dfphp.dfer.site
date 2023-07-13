@@ -2,6 +2,7 @@
 //----------------------------------------------全局参数
 //只有定义了这个参数才能够正常调用文件
 define('INIT', 'df');
+define('VERSION', '2.0');
 define('DF', 'http://dfer.top/');
 //当前时间
 define('TIMESTAMP', time());

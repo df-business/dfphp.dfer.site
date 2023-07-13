@@ -1,4 +1,7 @@
-#更新文档 
+#更新文档
+
+## 2023年7月13日
+v2.0
 
 ## 2022年1月23日15:51:23
 - 数据库开启事务。防止高并发
@@ -32,6 +35,6 @@ ALTER TABLE `home_layout` ADD color varchar(10) DEFAULT '' COMMENT '主体字体
 ALTER TABLE `home_layout` ADD `keywords` VARCHAR(100);
 ALTER TABLE `home_layout` ADD `description` VARCHAR(100);
 
-ALTER TABLE `home_layout` ADD musicPlay tinyint DEFAULT 0 COMMENT '音乐自动播放'; 
+ALTER TABLE `home_layout` ADD musicPlay tinyint DEFAULT 0 COMMENT '音乐自动播放';
 
 ```
