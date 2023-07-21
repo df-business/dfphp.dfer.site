@@ -389,12 +389,13 @@ class homeController
     public function FreshCache($name)
     {
         global $m;
-
+    
         //清空数据库缓存
         $db_cache = del("cache");
+								$dir=ROOT . "cache";
         //清空文件缓存
-        $files_cache = $m -> deldir(ROOT . "cache");
-        show_json($db_cache, $files_cache);
+        $files_cache = $m -> deldir($dir);
+        show_json($files_cache, [$db_cache,$files_cache,$dir],$files_cache?'缓存文件夹已被删除':'缓存文件无法删除，请检查文件夹是否存在，以及文件夹权限！');
     }
 
     /*

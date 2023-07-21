@@ -22,13 +22,13 @@
 					title: "二选一",
 					btn: ['是', '否'] //按钮
 				}, function() {
-					//         location.reload(); 
+					//         location.reload();
 					post('!!SplitUrl("admin/home/FreshCache")!!', "",
 						function(x) {
 							if(x.status)
-								layer.msg('数据已刷新');
+								layer.msg(x.msg);
 							else
-								layer.msg('数据刷新失败', {
+								layer.msg(x.msg, {
 									icon: 1
 								}); //对应“/skin/default/icon.png”，从0开始排序，1代表图片里第二个图案
 						})
@@ -103,11 +103,11 @@
 						</li>
 						<!--菜单开始-->
 						<df-code>
-#生成无限级菜单 
-function Tree($data,$where){  
-foreach($data as $v){ 
-$v['src']=urldecode($v['src']); 
-if(empty($v['src'])){ 
+#生成无限级菜单
+function Tree($data,$where){
+foreach($data as $v){
+$v['src']=urldecode($v['src']);
+if(empty($v['src'])){
 echo <<<EOT
 	<li>
 	<a>
@@ -115,17 +115,17 @@ echo <<<EOT
 	</a>
 	<ul class="nav nav-second-level">
 EOT;
- 
+
 $m = show("select * from menu where parent={$v['Id']} and ({$where}) order by orderNum asc",'sql'); //logs("select * from menu where parent={$v['Id']} and ({$where}) order by orderNum asc");
-Tree($m,$where); 
+Tree($m,$where);
 echo <<<EOT
 	</ul>
-	</li> 
+	</li>
 EOT;
-} else{ 
-	if(strpos($v['src'],'js:')!==false) 
-	$src='onclick="'.str_replace('js:','',$v['src']).'"'; 
-	else if(strpos($v['src'],'url:')!==false) 
+} else{
+	if(strpos($v['src'],'js:')!==false)
+	$src='onclick="'.str_replace('js:','',$v['src']).'"';
+	else if(strpos($v['src'],'url:')!==false)
 	$src='href="'.str_replace('url:','',$v['src']).'"';
 	else $src='href="'.SplitUrl($v['src']).'"';
 echo <<<EOT
@@ -135,10 +135,10 @@ echo <<<EOT
 	</a>
 	</li>
 EOT;
-} 
-} 
-} 
-Tree($menu,$where); 
+}
+}
+}
+Tree($menu,$where);
 </df-code>
 					</ul>
 
@@ -391,7 +391,7 @@ Tree($menu,$where);
 
 							<div class="sidebar-title">
 								<h3> <i class="fa fa-comments-o"></i>累计访问量达到</h3>
-								<small><i class="fa fa-tim"></i>!!$dt['hits']!!次      
+								<small><i class="fa fa-tim"></i>!!$dt['hits']!!次
                             	   </small>
 							</div>
 
@@ -420,7 +420,7 @@ Tree($menu,$where);
 						<div id="tab-3" class="tab-pane">
 
 							<div class="sidebar-title">
-								<h3> <i class="fa fa-cube"></i> 提笔难书三千绪 
+								<h3> <i class="fa fa-cube"></i> 提笔难书三千绪
 
 </h3>
 								<small><i class="fa fa-tim"></i> 举杯空酌半生愁</small>
