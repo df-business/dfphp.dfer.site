@@ -29,12 +29,11 @@ class Model {
 	}
 
 	//php低版本无法兼容高版本，需要进行警告
-	function php_ver_notice() {
-		global $dfPHP_ver;
+	function php_ver_notice() {		
 		$ver = explode(".", PHP_VERSION);
 		$ver_0 = $ver[0];
-		if ($ver_0 < $dfPHP_ver) {
-			show_message("PHP版本不符合要求", sprintf("需要至少php%s", $dfPHP_ver), null, "error");
+		if ($ver_0 < DF_PHP_VER) {
+			show_message("PHP版本不符合要求", sprintf("需要至少php%s", DF_PHP_VER), null, "error");
 		}
 	}
 
@@ -574,7 +573,7 @@ class Model {
 	public function col_user_info() {
 		global $_df;
 		$db = 'home_user_info';
-		$user = show_list($db, ['ip'=>IP]);
+		$user = show_first($db, ['ip'=>IP]);
 		if (count($user) > 0) {
 			$dt = array('browser' => $_SERVER['HTTP_USER_AGENT'], 'hits' => $user['hits'] + 1, 'time' => $_df['time']);
 			update($db, $dt, $user['Id']);

@@ -7,12 +7,12 @@ if(isset($_GET['f'])){
 }
 
 //初始页面	
-$src =isset($_GET['s'])?$_GET['s']:($seo?"index":"homepage");
+$src =isset($_GET['s'])?$_GET['s']:(SEO?"index":"homepage");
 debug(sprintf("当前页面原始路径：%s",$src));
 $src=explode('/',$src);
 
 //seo不影响后台
-if($seo&&$src[0]!="df"&&count($src)<=2)
+if(SEO&&$src[0]!="df"&&count($src)<=2)
 {
 $Area='homepage';
 $c_name = 'home'.'controller'; 
@@ -44,15 +44,15 @@ $c_path ='Areas/'.$Area.'/controller/'.$c_name.'.php';
 
 
  //开发模式
- if($dev)
+ if(DEV)
  file_exists($c_path) or die('控制器文件不存在:'.$c_path);
  else
  file_exists($c_path) or header("Location: /404.html"); 
  require($c_path); 
  $controller = new $c_name; 
  //开发模式
- if($dev)
- method_exists($controller,$action) or die(sprintf('文件:%s<br>控制器、方法定义出错:[%s][%s]',$c_path,json_encode($controller),$action));
+ if(DEV)
+ method_exists($controller,$action) or die(sprintf('文件:%s<br>控制器、方法定义出错:%s %s',$c_path,json_encode($_GET),json_encode($src)));
  else
  method_exists($controller,$action) or header("Location: /404.html");
  $controller->$action(empty($param)?0:$param);

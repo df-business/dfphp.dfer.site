@@ -14,12 +14,12 @@ defined('INIT') or exit('Access Denied');
  */
 function view($area, $ctrl, $func, $layout)
 {
-    global $dev, $wap_page_enable;
+
 
 
     //手机、pc分开调用模板
     //手机模板
-    if (isMobile() && $wap_page_enable) {
+    if (isMobile() && WAP_PAGE_ENABLE) {
         //处理控制器之外的文件
         if (empty($layout)) {
             $layout = $from = ROOT . "/{$area}/{$ctrl}_m.htm";
@@ -61,7 +61,7 @@ function view($area, $ctrl, $func, $layout)
 
 
     //如果前端文件不存在，或者前端文件修改时间小于html、布局页、后台页，或者处于测试状态
-    if (!is_file($to) || filemtime($from) > filemtime($to) || filemtime($layout) > filemtime($to) || filemtime($back) > filemtime($to) || $dev) {
+    if (!is_file($to) || filemtime($from) > filemtime($to) || filemtime($layout) > filemtime($to) || filemtime($back) > filemtime($to) || DEV) {
         //确认好文件路径之后，进行html的替换，生成php文件
         view_conversion($from, $to, $layout);
     }
@@ -131,18 +131,24 @@ function view_replace($str, $layout)
 
 
     //布局
-    if (count($html) > 0) {
-        $layout = preg_replace('/<df-html([\s\S]*?)\/>/', $html[1], $layout);
-    }
-    if (count($header) > 0) {
-        $layout = preg_replace('/<df-header([\s\S]*?)\/>/', $header[1], $layout);
-    }
-    if (count($body) > 0) {
-        $layout = preg_replace('/<df-body([\s\S]*?)\/>/', $body[1], $layout);
-    }
-    if (count($footer) > 0) {
-        $layout = preg_replace('/<df-footer([\s\S]*?)\/>/', $footer[1], $layout);
-    }
+	if (count($html) == 0) {
+		$html=['',''];
+	}
+
+	if (count($header) == 0) {
+		$header=['',''];
+	}
+	if (count($body) == 0) {
+		$body=['',''];
+	}
+	if (count($footer) == 0) {
+		$footer=['',''];
+	}
+
+	$layout = preg_replace('/<df-html([\s\S]*?)\/>/', $html[1], $layout);
+	$layout = preg_replace('/<df-header([\s\S]*?)\/>/', $header[1], $layout);
+	$layout = preg_replace('/<df-body([\s\S]*?)\/>/', $body[1], $layout);
+	$layout = preg_replace('/<df-footer([\s\S]*?)\/>/', $footer[1], $layout);
     //	var_dump($layout);die();
     //遍历list,需要提前替换
     $layout = preg_replace('/<df-each ([\s\S]*?)>/', '<?php $num=0; if(isset($1))foreach($1 as $k=>$v){  $num++;        ?>', $layout);
@@ -542,9 +548,12 @@ function query_format($tb, $para = array(), $order = array(), $limit = array())
     } elseif (is_string($order)) {
         $order = 'order by Id ' . $order;
     } elseif (is_array($order)) {
-        if (count($order) == 2) {
-            $order = sprintf('order by %s %s', $order[0], $order[1]);
-        }
+							if (count($order) == 2) {
+							 $order = sprintf('order by %s %s', $order[0], $order[1]);
+							}
+							else
+								$order = sprintf('order by %s %s', array_key_first($order), $order[array_key_first($order)]);
+
     }
 
 
@@ -564,7 +573,7 @@ function query_format($tb, $para = array(), $order = array(), $limit = array())
     //带条件获取整个表的数据
     $sqlString = sprintf("select * from `%s` %s %s %s", $tb, $where, $order, $limit); //sql语句的表名区分大小写
 
-    //var_dump([$sqlString,$tb, $where,$order, $limit]);
+    // var_dump([$sqlString,$tb, $where,$order, $limit]);
 
     return $sqlString;
 }
@@ -610,12 +619,12 @@ function query_format_update_insert($tb, $data = array(), $para = array())
 
     //新增
     if (empty($para)) {
-        $data_str = '';
+        $data_str=$data_str_key =$data_str_val= '';
         if (!empty($data)) {
             foreach ($data as $key => $value) {
                 if (empty($value)) {
                     $value = getTypeValue($tb, $key);
-                } elseif (is_int($val)) {
+                } elseif (is_int($value)) {
                     $value = intval($value);
                 } else {
                     $value = mysqli_escape_string($db, $value);
@@ -640,7 +649,7 @@ function query_format_update_insert($tb, $data = array(), $para = array())
             foreach ($data as $key => $value) {
                 if (empty($value)) {
                     $value = getTypeValue($tb, $key);
-                } elseif (is_int($val)) {
+                } elseif (is_int($value)) {
                     $value = intval($value);
                 } else {
                     $value = mysqli_escape_string($db, $value);
@@ -799,7 +808,6 @@ function show_auto($tb, $para = array(), $order = array(), $limit = array())
  */
 class Enum
 {
-
     const goBack = 1;
     const reloadParent = 2;
     const reloadCurrent = 3;
@@ -857,7 +865,7 @@ function update($tb, $data = array(), $para = array(), $rt = null)
         //执行js代码
         elseif ($js = strstr($rt, "js:")) {
             echo "<script>{$js}</script>";
-            //调用后台跳转页面
+        //调用后台跳转页面
         } else {
             message('操作成功', $rt);
         }
@@ -910,7 +918,7 @@ function insert($tb, $data = array(), $rt = null)
         //执行js代码
         elseif ($js = strstr($rt, "js:")) {
             echo "<script>{$js}</script>";
-            //调用后台跳转页面
+        //调用后台跳转页面
         } else {
             message('操作成功', $rt);
         }
@@ -970,7 +978,7 @@ function del($tb, $para = array(), $rt = null)
         //执行js代码
         elseif ($js = strstr($rt, "js:")) {
             echo "<script>{$js}</script>";
-            //调用后台跳转页面
+        //调用后台跳转页面
         } else {
             message('操作成功', $rt);
         }
@@ -1339,7 +1347,7 @@ function upload_file($name, $size = 0, $editTool = 0, $Path = '')
                 //layui编辑器上传
                 elseif ($editTool == 2) {
                     $json = array(code => 0, msg => 'error', 'data' => array('src' => $newname, 'title' => $newname));
-                    echo (json_encode($json));
+                    echo(json_encode($json));
                 }
             }
         }
@@ -1787,7 +1795,7 @@ function arr2url($data)
 function html($str, $encode = true)
 {
     if ($encode) {
-        return htmlspecialchars($str);
+        return htmlspecialchars($str, ENT_IGNORE);
     } else {
         return htmlspecialchars_decode($str);
     }
@@ -2114,8 +2122,7 @@ function is_timestamp($timestamp)
 //打印调试信息
 function debug($str)
 {
-    global $dev;
-    if ($dev) {
-        echo sprintf("[debug]%s <br/>\n", $str);
+    if (DEV) {
+        echo sprintf("<!-- [debug]%s -->\n", $str);
     }
 }

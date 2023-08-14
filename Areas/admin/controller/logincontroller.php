@@ -10,6 +10,7 @@ class loginController
         global $m, $_df;
         GetWeb();
         $m -> VerifyLogin();
+								$err="";
         //接收post
         if (isset($_POST['submit'])) {
             $user_sm = $_POST['data'];

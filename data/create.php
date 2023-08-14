@@ -6,11 +6,14 @@ Created by dfer on 2017-10-23.
 Copyright 2017 dfer. All rights reserved.
 -->
 <?php
-define('INIT', 'df');
-$create = true;
-require "db.php";
 
-$dev or die("<br>当前没有处于开发模式");
+
+
+$create = true;
+require "share.php";
+DEV or die("<br>当前没有处于开发模式");
+
+
 
 /*默认值在输入一部分内容之后会自动填充
  *
@@ -19,9 +22,9 @@ $dev or die("<br>当前没有处于开发模式");
 //————————————————————————————————————————创建数据库
 //————————————————————核心库
 //后台登陆账号，不要删
-$sql[] = "CREATE TABLE `df` 
+$sql[] = "CREATE TABLE `df`
 (
-Id int NOT NULL AUTO_INCREMENT, 
+Id int NOT NULL AUTO_INCREMENT,
 PRIMARY KEY(Id),
 nm varchar(50) DEFAULT 'df' COMMENT '账号名',
 pw varchar(50) DEFAULT 'df',
@@ -32,18 +35,18 @@ lastlogintime datetime COMMENT '上次访问'
 )DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 ";
 //账号权限，不要删
-$sql[] = "CREATE TABLE `roles` 
+$sql[] = "CREATE TABLE `roles`
 (
-Id int NOT NULL AUTO_INCREMENT, 
+Id int NOT NULL AUTO_INCREMENT,
 PRIMARY KEY(Id),
 nm varchar(50) DEFAULT '普通用户' COMMENT '权限名',
 roles varchar(100) DEFAULT '1|2' COMMENT '权限内容'
 )DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 ";
 //常用数据，不要删
-$sql[] = "CREATE TABLE `dt` 
+$sql[] = "CREATE TABLE `dt`
 (
-Id int NOT NULL AUTO_INCREMENT, 
+Id int NOT NULL AUTO_INCREMENT,
 PRIMARY KEY(Id),
 `key` varchar(15) DEFAULT '' COMMENT '参数名',
 `val` varchar(150) DEFAULT '0' COMMENT '值',
@@ -54,7 +57,7 @@ subs varchar(100) DEFAULT '' COMMENT '描述'
 //后台菜单，不要删
 $sql[] = "CREATE TABLE menu
 (
-Id int NOT NULL AUTO_INCREMENT, 
+Id int NOT NULL AUTO_INCREMENT,
 PRIMARY KEY(Id),
 title varchar(50) COMMENT '标题',
 src varchar(100) COMMENT '路径',
@@ -66,7 +69,7 @@ orderNum int DEFAULT 0 COMMENT '排序编号'
 //html页面，不要删
 $sql[] = "CREATE TABLE html
 (
-Id int NOT NULL AUTO_INCREMENT, 
+Id int NOT NULL AUTO_INCREMENT,
 PRIMARY KEY(Id),
 fileN varchar(50) COMMENT 'htm文件名',
 src varchar(100) COMMENT '动态路径',
@@ -84,7 +87,7 @@ $sql[] = "CREATE TABLE cache
 //日志，不要删
 $sql[] = "CREATE TABLE logs
 (
-Id int NOT NULL AUTO_INCREMENT, 
+Id int NOT NULL AUTO_INCREMENT,
 PRIMARY KEY(Id),
 str longtext COMMENT '记录内容',
 time datetime
@@ -93,9 +96,9 @@ time datetime
 //————————————————————基础库
 
 //用户信息收集
-$sql[] = "CREATE TABLE home_user_info 
+$sql[] = "CREATE TABLE home_user_info
 (
-Id int NOT NULL AUTO_INCREMENT, 
+Id int NOT NULL AUTO_INCREMENT,
 PRIMARY KEY(Id),
 ip varchar(55) DEFAULT '' COMMENT '访问者ip',
 browser varchar(500) DEFAULT '' COMMENT '访问者使用的浏览器',
@@ -105,9 +108,9 @@ time datetime COMMENT '访问者最近访问的时间'
 )ENGINE=InnoDB COMMENT='用户信息收集' DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci";
 
 //主页布局
-$sql[] = "CREATE TABLE home_layout 
+$sql[] = "CREATE TABLE home_layout
 (
-Id int NOT NULL AUTO_INCREMENT, 
+Id int NOT NULL AUTO_INCREMENT,
 PRIMARY KEY(Id),
 title varchar(100) DEFAULT '' COMMENT '',
 keywords varchar(100) DEFAULT '' COMMENT '关键字',
@@ -120,9 +123,9 @@ musicPlay tinyint DEFAULT 0 COMMENT '音乐自动播放',
 )DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci";
 
 //背景图片列表
-$sql[] = "CREATE TABLE home_layout_img 
+$sql[] = "CREATE TABLE home_layout_img
 (
-Id int NOT NULL AUTO_INCREMENT, 
+Id int NOT NULL AUTO_INCREMENT,
 PRIMARY KEY(Id),
 title varchar(100) DEFAULT '' COMMENT '',
 img varchar(100) DEFAULT '' COMMENT '背景图像'
@@ -131,7 +134,7 @@ img varchar(100) DEFAULT '' COMMENT '背景图像'
 //栏目
 $sql[] = "CREATE TABLE home_column
 (
-Id int NOT NULL AUTO_INCREMENT, 
+Id int NOT NULL AUTO_INCREMENT,
 PRIMARY KEY(Id),
 menu varchar(100) DEFAULT '' COMMENT '',
 title varchar(100) DEFAULT '' COMMENT '',
@@ -142,7 +145,7 @@ content longtext COMMENT '内容'
 //链接
 $sql[] = "CREATE TABLE home_link
 (
-Id int NOT NULL AUTO_INCREMENT, 
+Id int NOT NULL AUTO_INCREMENT,
 PRIMARY KEY(Id),
 title varchar(100) DEFAULT '' COMMENT '',
 `src` varchar(100) DEFAULT '' COMMENT ''
@@ -151,7 +154,7 @@ title varchar(100) DEFAULT '' COMMENT '',
 //音乐
 $sql[] = "CREATE TABLE home_music
 (
-Id int NOT NULL AUTO_INCREMENT, 
+Id int NOT NULL AUTO_INCREMENT,
 PRIMARY KEY(Id),
 title varchar(100) DEFAULT '' COMMENT '',
 `src` varchar(100) DEFAULT '' COMMENT ''
@@ -160,7 +163,7 @@ title varchar(100) DEFAULT '' COMMENT '',
 //留言
 $sql[] = "CREATE TABLE message
 (
-Id int NOT NULL AUTO_INCREMENT, 
+Id int NOT NULL AUTO_INCREMENT,
 PRIMARY KEY(Id),
 name varchar(100) DEFAULT '' COMMENT '',
 E_mail varchar(100) DEFAULT '' COMMENT '',
@@ -172,7 +175,7 @@ time varchar(50)
 //记事本
 $sql[] = "CREATE TABLE notepad
 (
-Id int NOT NULL AUTO_INCREMENT, 
+Id int NOT NULL AUTO_INCREMENT,
 PRIMARY KEY(Id),
 title varchar(50) COMMENT '标题',
 content longtext COMMENT '内容',
@@ -183,7 +186,7 @@ time varchar(50)
 //站点介绍
 $sql[] = "CREATE TABLE `column`
 (
-Id int NOT NULL AUTO_INCREMENT, 
+Id int NOT NULL AUTO_INCREMENT,
 PRIMARY KEY(Id),
 menu varchar(50),
 title varchar(55),
@@ -195,7 +198,7 @@ content longtext
 //demo
 $sql[] = "CREATE TABLE `demo`
 (
-Id int NOT NULL AUTO_INCREMENT, 
+Id int NOT NULL AUTO_INCREMENT,
 PRIMARY KEY(Id),
 title varchar(55),
 type int,
@@ -208,13 +211,15 @@ time datetime
 ";
 //————————————————————拓展库
 
-$sql[] = "CREATE TABLE `test` 
+$sql[] = "CREATE TABLE `test`
 (
-Id int NOT NULL AUTO_INCREMENT, 
+Id int NOT NULL AUTO_INCREMENT,
 PRIMARY KEY(Id),
 title varchar(50) COMMENT '标题'
 )ENGINE=InnoDB DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 ";
+
+
 
 /*
  *存在数据库是前提条件
