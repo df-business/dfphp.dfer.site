@@ -171,62 +171,11 @@ Tree($menu,$where);
 								</li>
 
 								<li class="dropdown  m-l-xl">
-									<a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
-										<i class="fa fa-envelope"></i> <span class="label label-warning">!!count($message)!!</span>
+									<a class="dropdown-toggle count-info J_menuItem" href="!!SplitUrl('homepage/column/message/')!!">
+										<i class="fa fa-envelope"></i> <span class="label label-warning">!!count($message)!!条消息</span>
 									</a>
-									<ul class="dropdown-menu dropdown-messages">
-										<df-each $message>
-											<li class="m-t-xs">
-												<div class="dropdown-messages-box">
-													<div class="media-body ">
-														<small class="pull-right text-navy"></small>
-														<a href="!!SplitUrl('homepage/column/message/'.$v['Id'])!!" class="pull-left J_menuItem">
-															<strong></strong>
-															<df-val value="name" />
-														</a>
-														<br>
 
-													</div>
-												</div>
-											</li>
-										</df-each>
-										<li class="divider"></li>
-
-										<li>
-											<div class="text-center link-block">
-												<a class="J_menuItem" href="!!SplitUrl('homepage/column/message/')!!">
-													<i class="fa fa-envelope"></i> <strong> 查看所有消息</strong>
-												</a>
-											</div>
-										</li>
-									</ul>
 								</li>
-								<li class="dropdown">
-									<a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
-										<i class="fa fa-bell"></i> <span class="label label-primary"></span>
-									</a>
-									<ul class="dropdown-menu dropdown-alerts">
-										<li>
-											<a href="" class="J_menuItem">
-												<div>
-													<i class="fa fa-envelope fa-fw"></i> 有 0 条消息
-													<span class="pull-right text-muted small">最近一个星期</span>
-												</div>
-											</a>
-										</li>
-										<li class="divider"></li>
-
-										<li>
-											<div class="text-center link-block">
-												<a class="J_menuItem" href="">
-													<strong>查看所有 </strong>
-													<i class="fa fa-angle-right"></i>
-												</a>
-											</div>
-										</li>
-									</ul>
-								</li>
-
 								<li class="dropdown hidden-xs">
 									<a class="right-sidebar-toggle" aria-expanded="false">
 										<i class="fa fa-tasks"></i> 主题
@@ -287,8 +236,8 @@ Tree($menu,$where);
 					</div>
 					<div onclick="changeSSL()" style="!!SSL_STATE?'color: red;':''!!float: left;margin-right: 3%;">!!SSL_STATE?"ssl开启":"ssl关闭"!!</div>
 					<div class="pull-right">
-						&copy; 2017-2020
-						<a href="http://www.dfer.top/" target="_blank">www.dfer.top</a>
+						&copy; 2017-2023
+						<a href="http://www.dfer.top/" target="_blank">www.dfer.site</a>
 					</div>
 				</div>
 			</div>
@@ -296,24 +245,6 @@ Tree($menu,$where);
 			<!--右侧边栏开始-->
 			<div id="right-sidebar">
 				<div class="sidebar-container">
-
-					<ul class="nav nav-tabs navs-3">
-						<li class="active">
-							<a data-toggle="tab" href="#tab-1">
-								<i class="fa fa-gear"></i>
-							</a>
-						</li>
-						<li>
-							<a data-toggle="tab" href="#tab-2">
-								<i class="fa fa-gear"></i>
-							</a>
-						</li>
-						<li>
-							<a data-toggle="tab" href="#tab-3">
-								<i class="fa fa-gear"></i>
-							</a>
-						</li>
-					</ul>
 
 					<div class="tab-content">
 						<div id="tab-1" class="tab-pane active">
@@ -387,73 +318,7 @@ Tree($menu,$where);
 								</div>
 							</div>
 						</div>
-						<div id="tab-2" class="tab-pane">
 
-							<div class="sidebar-title">
-								<h3> <i class="fa fa-comments-o"></i>累计访问量达到</h3>
-								<small><i class="fa fa-tim"></i>!!$dt['hits']!!次
-                            	   </small>
-							</div>
-
-							<div>
-
-								<div class="sidebar-message">
-									<a href="#">
-										<div class="pull-left text-center">
-											<img alt="image" class="img-circle message-avatar" src="/css_js/AdminFrame/img/a1.jpg">
-											<div class="m-t-xs">
-												<i class="fa fa-star-half-full text-warning"></i>
-											</div>
-										</div>
-										<div class="media-heading">Df的小迷妹</div>
-										<div class="media-body">
-
-											Df最帅了
-											<small class="text-muted">今天 4:21</small>
-										</div>
-									</a>
-								</div>·
-
-							</div>
-
-						</div>
-						<div id="tab-3" class="tab-pane">
-
-							<div class="sidebar-title">
-								<h3> <i class="fa fa-cube"></i> 提笔难书三千绪
-
-</h3>
-								<small><i class="fa fa-tim"></i> 举杯空酌半生愁</small>
-							</div>
-
-							<ul class="sidebar-list">
-								<li>
-									<a href="#">
-										<div class="small pull-right m-t-xs">一千年以后</div>
-										<h4>自是一情深似海</h4>不需锦衣沽功名
-
-										<div class="small">已完成： 99%</div>
-										<div class="progress progress-mini">
-											<div style="width: 22%;" class="progress-bar progress-bar-warning"></div>
-										</div>
-										<div class="small text-muted m-t-xs">项目截止： 2025.10.01</div>
-									</a>
-								</li>
-
-								<li>
-									<a href="#">
-										<div class="small pull-right m-t-xs">十年以后</div>
-										<h4>陌上炊烟寥寥起</h4> 一壶浊酒醉平生
-										<div class="small">已完成： 99.9%</div>
-										<div class="progress progress-mini">
-											<div style="width: 14%;" class="progress-bar progress-bar-info"></div>
-										</div>
-									</a>
-								</li>
-
-							</ul>
-
-						</div>
 					</div>
 
 				</div>

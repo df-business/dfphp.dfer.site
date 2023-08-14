@@ -6,13 +6,9 @@ Created by dfer on 2017-10-23.
 Copyright 2017 dfer. All rights reserved.
 -->
 <?php
-
-
-
 $create = true;
 require "share.php";
 DEV or die("<br>当前没有处于开发模式");
-
 
 
 /*默认值在输入一部分内容之后会自动填充
@@ -209,6 +205,7 @@ msg longtext,
 time datetime
 )DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 ";
+
 //————————————————————拓展库
 
 $sql[] = "CREATE TABLE `test`
@@ -222,107 +219,121 @@ title varchar(50) COMMENT '标题'
 
 
 /*
- *存在数据库是前提条件
+ * 存在数据库是前提条件
  * 数据库不存在就创建数据库
  *
  * 先创建库，然后自我刷新，创建表
  */
-if (!mysqli_select_db($con, $database))
-	if (mysqli_query($con, "CREATE DATABASE {$database}")) {
-		echo("Database {$database} created successfully ");
-		header('location:create.php');
-		die();
-	} else {
-		echo "{$database} created err: " . mysqli_error($con);
-	}
+if (!mysqli_select_db($con, $database)) {
+    if (mysqli_query($con, "CREATE DATABASE {$database}")) {
+        echo("数据库 {$database} 创建成功");
+        header('refresh:0;url=create.php');
+        die();
+    } else {
+        echo "{$database} 创建失败: " . mysqli_error($con);
+    }
+}
 echo "<br>";
 
 //创建表
 $num = 0;
 foreach ($sql as $val) {
-	$num++;
-	echo $num . ".";
-	$str = explode("(", $val);
-	$str = $str[0];
-	if ($db -> query($val))
-		echo $str . " successfully";
-	else
-		echo $str . " err: " . $db -> error;
-	echo "<br>";
+    $num++;
+    echo $num . ".";
+    $str = explode("(", $val);
+    $str = $str[0];
+    if ($db -> query($val)) {
+        echo $str . " [成功]";
+    } else {
+        echo $str . " [失败: " . $db -> error."]";
+    }
+    echo "<br>";
 }
 
 //————————————————————————————————————————添加初始数据
 //添加登陆账号
 //echo $db->query("SELECT * FROM `df`")->fetch_array()[1];   //读取首条数据
 $query = $db -> query("SELECT COUNT(*) AS count FROM `df`") -> fetch_array();
-if ($query[0] < 1)
-	if ($db -> query("insert into `df`(nm,pw,pic) values('df','df','/favicon.png')"))
-		echo "Add data df successfully";
-	else
-		echo "Add data df fail";
-else
-	echo "Data df exist";
+if ($query[0] < 1) {
+    if ($db -> query("insert into `df`(nm,pw,pic) values('df','df','/favicon.png')")) {
+        echo "添加数据 [df] 成功";
+    } else {
+        echo "添加数据 [df] 失败";
+    }
+} else {
+				echo "数据 [df] 已存在";
+}
 echo '<br>';
 //添加账号权限
 $query = $db -> query("SELECT COUNT(*) AS count FROM `roles`") -> fetch_array();
-if ($query[0] < 1)
-	if ($db -> query("insert into `roles`(nm,roles) values('超级用户',''),('普通用户','1|2|7|10|15|16|')"))
-		echo "Add data roles successfully";
-	else
-		echo "Add data roles fail";
-else
-	echo "Data roles exist";
+if ($query[0] < 1) {
+    if ($db -> query("insert into `roles`(nm,roles) values('超级用户',''),('普通用户','1|2|7|10|15|16|')")) {
+        echo "添加数据 [roles] 成功";
+    } else {
+        echo "添加数据 [roles] 失败";
+    }
+} else {
+    echo "数据 [roles] 已存在";
+}
 echo '<br>';
 //添加默认布局
 $query = $db -> query("SELECT COUNT(*) AS count FROM `home_layout`") -> fetch_array();
-if ($query[0] < 1)
-	if ($db -> query("insert into `home_layout`(`title`,keywords,description,Inscribe,img1,color) values('DfPHP','DfPHP,轻量级php框架','DfPHP——简洁的php框架','by Df','/img/bg.jpg','#f0f4e3')"))
-		echo "Add data home_layout successfully";
-	else
-		echo "Add data home_layout fail";
-else
-	echo "Data home_layout exist";
+if ($query[0] < 1) {
+    if ($db -> query("insert into `home_layout`(`title`,keywords,description,Inscribe,img1,color) values('DfPHP','DfPHP,轻量级php框架','DfPHP——简洁的php框架','by Df','/img/bg.jpg','#f0f4e3')")) {
+        echo "添加数据 [home_layout] 成功";
+    } else {
+        echo "添加数据 [home_layout] 失败";
+    }
+} else {
+    echo "数据 [home_layout] 已存在";
+}
 echo '<br>';
 
 //添加默认栏目
 $query = $db -> query("SELECT COUNT(*) AS count FROM `home_column`") -> fetch_array();
-if ($query[0] < 1)
-	if ($db -> query('INSERT INTO `home_column` (`Id`, `menu`, `title`, `describe`, `content`) VALUES
+if ($query[0] < 1) {
+    if ($db -> query('INSERT INTO `home_column` (`Id`, `menu`, `title`, `describe`, `content`) VALUES
 	(1, "", "关键字说明", "", "<p><span style="white-space: nowrap;">//布局</span></p><p><span style="white-space: nowrap;">&nbsp;&lt;df-html/&gt;</span></p><p><span style="white-space: nowrap;">&nbsp;&lt;df-header/&gt;</span></p><p><span style="white-space: nowrap;">&nbsp;&lt;df-body/&gt;</span></p><p><span style="white-space: nowrap;">&nbsp;&lt;df-footer/&gt;&nbsp;</span></p><p><span style="white-space: nowrap;">&nbsp;&lt;df-header&gt;&lt;/df-header&gt;</span></p><p><span style="white-space: nowrap;">&nbsp;&lt;df-body&gt;&lt;/df-body&gt;</span></p><p><span style="white-space: nowrap;">&nbsp;&lt;df-footer&gt;&lt;/df-footer&gt;</span></p><p><span style="white-space: nowrap;">&nbsp;</span></p><p><span style="white-space: nowrap;">&nbsp;//打印参数</span></p><p><span style="white-space: nowrap;">&nbsp;&lt;df-print value=""&gt;</span></p><p><span style="white-space: nowrap;">&nbsp;!!$str!!</span></p><p><span style="white-space: nowrap;">&nbsp;</span></p><p><span style="white-space: nowrap;">&nbsp;</span></p><p><span style="white-space: nowrap;">&nbsp;//执行php代码</span></p><p><span style="white-space: nowrap;">&nbsp;&lt;df-code&gt;</span></p><p><span style="white-space: nowrap;">&nbsp;!{}!</span></p><p><span style="white-space: nowrap;">&nbsp;</span></p><p><span style="white-space: nowrap;">&nbsp;//遍历数组，来循环显示多条数据</span></p><p><span style="white-space: nowrap;">&nbsp;&lt;df-each $0&gt;</span></p><p><span style="white-space: nowrap;">&nbsp;&lt;df-val value=""/&gt;</span></p><p><span style="white-space: nowrap;">&nbsp;!``</span></p><p><span style="white-space: nowrap;">&nbsp;&lt;/df-each&gt;</span></p><p><span style="white-space: nowrap;">&nbsp;</span></p><p><span style="white-space: nowrap;">//这里放关键字，防止整理代码格式的时候关键字被破坏</span></p><p><span style="white-space: nowrap;">/*d<span style="white-space:pre">	</span></span></p><p><span style="white-space: nowrap;">d*/</span></p><p><span style="white-space: nowrap;">&nbsp;</span></p><p><span style="white-space: nowrap;">&nbsp;//if语句</span></p><p><span style="white-space: nowrap;">&nbsp;&lt;df-if $0&gt;</span></p><p><span style="white-space: nowrap;">&nbsp;&lt;df-elif $1&gt;</span></p><p><span style="white-space: nowrap;">&nbsp;&lt;df-else&gt;</span></p><p><span style="white-space: nowrap;">&nbsp;&lt;/df-if&gt;</span></p><p><span style="white-space: nowrap;">&nbsp;</span></p><p><span style="white-space: nowrap;">&nbsp;!{if true}</span></p><p><span style="white-space: nowrap;">&nbsp;!{elif false}</span></p><p><span style="white-space: nowrap;">&nbsp;!{else}</span></p><p><span style="white-space: nowrap;">&nbsp;!{/else}</span></p><p><br></p>"),
 	(2, "", "数据库操作", "", "<p><span style=\"white-space: nowrap;\">#查询#</span></p><p><span style=\"white-space: nowrap;\">//有多行就输出数组，否则返回单个list（有些情况必须返回数组，就添加order）</span></p><p><span style=\"white-space: nowrap;\">show(\"df\",1,\"type\",\" \");&nbsp; &nbsp;&nbsp;</span></p><p><span style=\"white-space: nowrap;\">// 根据字符串进行查询</span></p><p><span style=\"white-space: nowrap;\">show(\"df\",\"谷雨光影\",\"subs\");&nbsp;</span></p><p><span style=\"white-space: nowrap;\">// 按id降序输出全表&nbsp;&nbsp;</span></p><p><span style=\"white-space: nowrap;\">show(\"df\",-1,\"id\",\"desc\");<span style=\"white-space:pre\">	</span></span></p><p><span style=\"white-space: nowrap;\">//输出type为1的特定数目的数据</span></p><p><span style=\"white-space: nowrap;\">show(\"df\",1,\"type\",\"limit 0,5\");<span style=\"white-space:pre\">	</span></span></p><p><span style=\"white-space: nowrap;\">//输出type为1的数据并进行排序</span></p><p><span style=\"white-space: nowrap;\">show(\"df\",1,\"type\",\"order by id desc\");</span></p><p><span style=\"white-space: nowrap;\">//执行sql语句<span style=\"white-space:pre\">	</span></span></p><p><span style=\"white-space: nowrap;\">show(\"select * from df\",0);<span style=\"white-space:pre\">	</span></span></p><p><span style=\"white-space: nowrap;\">//按条件输出全表</span></p><p><span style=\"white-space: nowrap;\">show(\"menu\",$param,\"parent\",\"order by oderNum desc\");</span></p><p><span style=\"white-space: nowrap;\">//分页查询(页数,行数)</span></p><p><span style=\"white-space: nowrap;\">show_page(self::$db_d,$page,$rows);</span></p><p><span style=\"white-space: nowrap;\"><br></span></p><p><span style=\"white-space: nowrap;\">##新增、修改##</span></p><p><span style=\"white-space: nowrap;\">//新增数据，之后不进行任何操作</span></p><p><span style=\"white-space: nowrap;\">update(\"df\",$arr)<span style=\"white-space:pre\">		</span></span></p><p><span style=\"white-space: nowrap;\">//根据id新增、修改数据，之后进行页面跳转</span></p><p><span style=\"white-space: nowrap;\">update(self::$db_hc,$dt,$id,(\"homepage/column/\".self::$db_hc));<span style=\"white-space:pre\">	</span></span></p><p><span style=\"white-space: nowrap;\"><br></span></p><p><span style=\"white-space: nowrap;\"><br></span></p><p><span style=\"white-space: nowrap;\">##删除##</span></p><p><span style=\"white-space: nowrap;\">//根据id进行删除</span></p><p><span style=\"white-space: nowrap;\">del(\"db\",3);</span></p><p><span style=\"white-space: nowrap;\">//清空表</span></p><p><span style=\"white-space: nowrap;\">clear(\"db\")</span></p><p><br></p>"),
 	(3, "", "框架介绍", "", "<p>-由Df打造的php版的Mvc框架，结构简洁，使用方便</p><p>-可以在此框架的基础上开发出各种各样的网站</p><p>-有很好的拓展性，可以不断增加新的功能</p><p>-由df提供技术支持</p><p>-此项目将不断完善</p><p>-工作QQ：3504725309&nbsp; &nbsp; &nbsp;&nbsp;</p><p>-个人网站：www.dfer.top</p><p>-论坛：forum.dfer.top&nbsp;</p><p>-QQ群：76673820</p><p>&nbsp;</p><p><br></p>");
-'))
-		echo "Add data home_layout successfully";
-	else
-		echo "Add data home_layout fail";
-else
-	echo "Data home_layout exist";
+')) {
+        echo "添加数据 [home_column] 成功";
+    } else {
+        echo "添加数据 [home_column] 失败";
+    }
+} else {
+    echo "数据 [home_column] 已存在";
+}
 echo '<br>';
 //添加通用参数
 $query = $db -> query("SELECT COUNT(*) AS count FROM `dt`") -> fetch_array();
-if ($query[0] < 1)
-	if ($db -> query("insert into `dt`(`key`,val,subs) values('hits','0','用户访问量'),('admin','0','开启超级权限')"))
-		echo "Add data dt successfully";
-	else
-		echo "Add data dt fail";
-else
-	echo "Data dt exist";
+if ($query[0] < 1) {
+    if ($db -> query("insert into `dt`(`key`,val,subs) values('hits','0','用户访问量'),('admin','0','开启超级权限')")) {
+        echo "添加数据 [dt] 成功";
+    } else {
+        echo "添加数据 [dt] 失败";
+    }
+} else {
+    echo "数据 [dt] 已存在";
+}
 echo '<br>';
 //添加静态页面
 $query = $db -> query("SELECT COUNT(*) AS count FROM `html`") -> fetch_array();
-if ($query[0] < 1)
-	if ($db -> query("insert into `html` (`fileN`,`src`) values('index','homepage/home/')"))
-		echo "Add data html successfully";
-	else
-		echo "Add data html fail";
-else
-	echo "Data html exist";
+if ($query[0] < 1) {
+    if ($db -> query("insert into `html` (`fileN`,`src`) values('index','homepage/home/')")) {
+        echo "添加数据 [html] 成功";
+    } else {
+        echo "添加数据 [html] 失败";
+    }
+} else {
+    echo "数据 [html] 已存在";
+}
 echo '<br>';
 
 //添加基础菜单
 $query = $db -> query("SELECT COUNT(*) AS count FROM `menu`") -> fetch_array();
-if ($query[0] < 1)
-	if ($db -> query("INSERT INTO `menu` (`title`, `src`, `type`, `parent`, `orderNum`) VALUES
+if ($query[0] < 1) {
+    if ($db -> query("INSERT INTO `menu` (`title`, `src`, `type`, `parent`, `orderNum`) VALUES
 ('动态首页', 'homepage%2Fhome%2F', 'home', 0, 0),
 ('主页管理', '', 'folder', 0, 1),
 ('用户管理', '', 'user', 0, 2),
@@ -349,24 +360,27 @@ if ($query[0] < 1)
 ('查看字体', 'url%3A%2Fmodules%2Ffont-spider%2Ffont.html', 'file', 4, 8880),
 ('页面管理', 'admin%2Fhome%2Fhtml', 'file', 4, 8881),
 ('生成', 'admin%2Fhome%2FcreateStaticPage', 'file', 4, 8882)
-;"))
-
-		echo "Add data menu successfully";
-	else
-		echo "Add data menu fail";
-else
-	echo "Data df menu exist";
+;")) {
+        echo "添加数据 [menu] 成功";
+    } else {
+        echo "添加数据 [menu] 失败";
+    }
+} else {
+    echo "数据 [menu] 已存在";
+}
 echo '<br>';
 
 //数据结构更新
 $sql_update = "ALTER TABLE `sp_club_info` ADD `content` longtext;";
-if (!empty($sql_update))
-	if ($db -> query($sql_update))
-		echo "sql update successfully";
-	else
-		echo "sql update fail";
-else
-	echo "sql update nothing";
+if (!empty($sql_update)) {
+    if ($db -> query($sql_update)) {
+        echo "数据结构 更新成功";
+    } else {
+        echo "数据结构 更新失败";
+    }
+} else {
+    echo "数据结构 不需要更新";
+}
 echo '<br>';
 
 $db -> close();

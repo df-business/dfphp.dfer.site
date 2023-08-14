@@ -488,12 +488,11 @@ function query($sql)
     $r = $db->query($sql);
     //容错处理
     if (!empty($db->error)) {
-        echo $db->error;
+        echo($db->error);
         $err = sprintf("语句：%s\r\n错误信息：%s", $sql, json_encode($db->error));
-        logs($err, 'sql err');
+        logs($err, 'sql错误');
         //die();
     }
-
     return $r;
 }
 
@@ -766,7 +765,6 @@ function show_first($tb, $para = array(), $order = array(), $limit = array())
 {
     $sql = query_format($tb, $para, $order, $limit);
     $r = query($sql);
-
     $rt = $r->fetch_array(MYSQLI_BOTH);
     return $rt;
 }

@@ -12,7 +12,7 @@ define('ROOT', $_SERVER['DOCUMENT_ROOT'] . '/');
 define('IP', $_SERVER['REMOTE_ADDR']);
 
 #开发模式开关（调试完之后关闭此开关，否则有泄露网站结构的风险）
-define('DEV', 1);
+define('DEV', 0);
 define('SERVER', 'localhost');
 define('ACC', 'dfphp_dfer_site');
 define('PWD', 'mMHBCAimbKKjPP67');

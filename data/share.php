@@ -40,52 +40,48 @@ if ($show_err == 1) {
 $m = m('model');
 $m->php_ver_notice();
 //mail
-if (EMAIL_ENABLE)
-	$mail = m('PHPMailer');
+if (EMAIL_ENABLE) {
+    $mail = m('PHPMailer');
+}
 
 //-----------------------------------数据库
-$db_status=0;
 //连接服务器
-if (!isset($db)) {
-    $con = mysqli_connect(SERVER, ACC, PWD);
-    if (!$con) {
-        echo "server [{$server}] connect fail";
-        echo "<br>";
+$con = mysqli_connect(SERVER, ACC, PWD);
+if (!$con) {
+    echo "服务器 [{$server}] 连接失败";
+    echo "<br>";
+    die();
+}
+$database=DATABASE;
+if (mysqli_select_db($con, $database)) {
+    //数据库存在
+    @$db = new MySQLi(SERVER, ACC, PWD, $database);
+    //连接数据库，忽略错误
+    //当bool1为false就会执行bool2，当数据库出错就会输出字符并终止程序
+    !mysqli_connect_error() or die("数据库 [{$database}] 错误");
+    //防止乱码
+    $db -> query('set names utf8');
+} else {
+    if (empty($create)) {
+        //数据库不存在会执行到这里（创建库之后自动刷新不会执行到这里）
+        echo("数据库 [{$database}] 不存在 <br> <a href='/data/create.php'>创建数据库</a> <br> ");
         die();
     }
-				$database=DATABASE;
-    //判断数据库是否存在
-    var_dump(mysqli_select_db($con, $database));
-    if (mysqli_select_db($con, $database)) {
-        @$db = new MySQLi(SERVER, ACC, PWD, $database);
-        //连接数据库，忽略错误
-        //当bool1为false就会执行bool2，当数据库出错就会输出字符并终止程序
-        !mysqli_connect_error() or die("database [{$database}] error");
-        //防止乱码
-        $db -> query('set names utf8');
-								$db_status=1;
-								//-----------------------------------基础参数
-								if($db_status==1)
-								{
-								// //合并数组
-								// $_GP = array_merge($_GET, $_POST);
-								// $_gp = $m -> ihtmlspecialchars($_GP);
-
-								// //公用参数
-								// $_df=[
-								// 	'logo'=> DF . "favicon.png",
-								// 	'author'=> "谷雨陈",
-								// 	'qq'=> "3504725309",
-								// 	'time'=> getTime(TIMESTAMP),
-								// 	'admin'=>boolval(show_first('dt', ['key'=>'admin'])['val'])
-								// ];
-								}
-    } else {
-        //数据库不存在会执行到这里（创建库之后自动刷新不会执行到这里）
-        echo("database [{$database}] not exist <br> <a href='/data/create.php'>创建数据库</a>");
-        //只有create状态下能够继续执行
-        !empty($create) or die();
-    }
+    //只有create为true的状态下能够继续执行
 }
 
 
+//-----------------------------------基础参数
+if (empty($create)) {
+	//合并数组
+	$_GP = array_merge($_GET, $_POST);
+	$_gp = $m -> ihtmlspecialchars($_GP);
+	//公用参数
+	$_df=[
+	'logo'=> DF . "favicon.png",
+	'author'=> "谷雨陈",
+	'qq'=> "3504725309",
+	'time'=> getTime(TIMESTAMP),
+	'admin'=>boolval(show_first('dt', ['key'=>'admin'])['val'])
+];
+}
