@@ -1,0 +1,285 @@
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>layui</title>
+		<meta name="renderer" content="webkit">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<link href="/assets/mui/mui.min.css" rel="stylesheet" />
+		<script src="/assets/mui/mui.min.js"></script>
+
+	</head>
+
+	<body>
+		<!--导航-->
+		<nav class="mui-bar mui-bar-tab" id="nav">
+			<a class="mui-tab-item mui-active" href="#home" id='1'>
+				<!--<span class="mui-icon df-icon-home" style="left: 2px;"></span>-->
+				<span class="mui-tab-label">首页</span>
+			</a>
+
+			<a class="mui-tab-item" id="2" href="#found">
+				<!--<span class="mui-icon df-icon-share" style="left: 6px;"></span>-->
+				<span class="mui-tab-label">发现</span>
+			</a>
+
+
+	<a class="mui-tab-item" id="2" href="http://dev.dcloud.net.cn/mui/ui/">
+				<!--<span class="mui-icon df-icon-share" style="left: 6px;"></span>-->
+				<span class="mui-tab-label">官网</span>
+			</a>
+		</nav>
+
+		<div class="mui-content" style="padding-bottom:0px">
+			<div id="home" class="mui-control-content mui-active" style="margin-bottom: 25%;">
+				<line>折叠面板</line>
+				<ul class="mui-table-view">
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">面板1</a>
+						<div class="mui-collapse-content">
+							<p>面板1子内容</p>
+						</div>
+					</li>
+				</ul>
+				<line>按钮</line>
+				<button type="button" class="mui-btn">默认</button>
+				<button type="button" class="mui-btn mui-btn-primary">蓝色</button>
+				<button type="button" class="mui-btn mui-btn-success">绿色</button>
+				<button type="button" class="mui-btn mui-btn-warning">黄色</button>
+				<button type="button" class="mui-btn mui-btn-danger">红色</button>
+				<button type="button" class="mui-btn mui-btn-royal">紫色</button>
+				<button type="button" data-loading-icon="mui-spinner mui-spinner-custom" class="mui-btn mui-btn-primary">确认</button>
+				<line></line>
+				<div class="mui-card">
+					<!--页眉，放置标题-->
+					<div class="mui-card-header">页眉</div>
+					<!--内容区-->
+					<div class="mui-card-content">内容区</div>
+					<!--页脚，放置补充信息或支持的操作-->
+					<div class="mui-card-footer">页脚</div>
+				</div>
+				<line></line>
+				<div class="mui-input-row mui-checkbox">
+					<label>checkbox示例</label>
+					<input name="checkbox1" value="Item 1" type="checkbox" checked>
+				</div>
+				<line>弹窗</line>
+				<table class="table table-bordered table-striped">
+					<thead>
+						<tr>
+							<th style="width: 150px;">组件名</th>
+							<th>作用</th>
+							<th>快速体验</th>
+						</tr>
+					</thead>
+					<tbody id="dialogDemo">
+						<tr>
+							<td>
+								<a href="#alert">alert</a>
+							</td>
+							<td>警告框</td>
+							<td><button type="button" class="mui-btn mui-btn-blue mui-btn-outlined" id="alertBtn">警告框</button></td>
+						</tr>
+						<tr>
+							<td>
+								<a href="#confirm">confirm</a>
+							</td>
+							<td>确认框</td>
+							<td><button type="button" class="mui-btn mui-btn-blue mui-btn-outlined" id="confirmBtn">确认框</button></td>
+						</tr>
+						<tr>
+							<td>
+								<a href="#prompt">prompt</a>
+							</td>
+							<td>输入对话框</td>
+							<td><button type="button" class="mui-btn mui-btn-blue mui-btn-outlined" id="promptBtn">输入对话框</button></td>
+						</tr>
+						<tr>
+							<td>
+								<a href="#toast">toast</a>
+							</td>
+							<td>消息提示框</td>
+							<td><button type="button" class="mui-btn mui-btn-blue mui-btn-outlined" id="toastBtn">自动消失提示框</button></td>
+						</tr>
+					</tbody>
+				</table>
+
+				<script type="text/javascript">
+					(function() {
+						var ele = ['alertBtn', 'confirmBtn', 'promptBtn', 'toastBtn'];
+						var btn = ['是', '否'];
+						mui('#dialogDemo').on('click', 'button', function(e) {
+							var target = e.target.id;
+							switch(e.target.id) {
+								case 'alertBtn':
+									mui.alert('欢迎使用 MUI !')
+									break;
+								case 'confirmBtn':
+									mui.confirm('MUI是个好框架', 'Hello MUI', btn, function(e) {
+										e.index == 0 ? mui.toast('感谢您的支持!') : mui.toast('MUI 没有得到你的认可,继续加油!')
+									})
+									break;
+								case 'promptBtn':
+									mui.prompt('请输入您对MUI的评语', '性能好', 'Hello MUI', '', function(e) {
+										e.index == 1 && e.value != '' && mui.toast('谢谢您的评价: ' + e.value)
+									})
+									break;
+								case 'toastBtn':
+									mui.toast('欢迎体验Hello MUI')
+									break;
+								default:
+									break;
+							}
+						})
+					})()
+
+					mui.toast('登陆成功', {
+						duration: 'long',
+						type: 'div'
+					})
+				</script>
+				<line>轮播图</line>
+				<div class="mui-slider" style="width: 50%;height: 33%;">
+					<div class="mui-slider-group">
+						<div class="mui-slider-item">
+							<a href="#"><img src="/img/bg.jpg" /></a>
+						</div>
+						<div class="mui-slider-item">
+							<a href="#"><img src="/img/logo.png" /></a>
+						</div>
+						<div class="mui-slider-item">
+							<a href="#"><img src="/img/bg.jpg" /></a>
+						</div>
+						<div class="mui-slider-item">
+							<a href="#"><img src="/img/bg.jpg" /></a>
+						</div>
+					</div>
+				</div>
+
+				<script>
+					//获得slider插件对象
+					var gallery = mui('.mui-slider');
+					gallery.slider({
+						interval: 1000 //自动轮播周期，若为0则不自动播放，默认为0；
+					});
+				</script>
+				<line>搜索</line>
+				<div class="mui-input-row mui-search">
+					<input type="search" class="mui-input-clear" placeholder="">
+				</div>
+				<line>表单</line>
+				<form class="mui-input-group">
+					<div class="mui-input-row">
+						<label>用户名</label>
+						<input type="text" class="mui-input-clear" placeholder="请输入用户名">
+					</div>
+					<div class="mui-input-row">
+						<label>密码</label>
+						<input type="password" class="mui-input-password" placeholder="请输入密码">
+					</div>
+					<div class="mui-button-row">
+						<button type="button" class="mui-btn mui-btn-primary">确认</button>
+						<button type="button" class="mui-btn mui-btn-danger">取消</button>
+					</div>
+				</form>
+
+				<line>
+					<a href="http://dev.dcloud.net.cn/mui/ui/#gallery" target="_blank">图标</a>
+				</line>
+
+				<span class="mui-icon mui-icon-weixin"></span>
+				<span class="mui-icon mui-icon-paperplane"></span>
+				<span class="mui-icon mui-icon-qq"></span>
+				<span class="mui-icon mui-icon-download"></span>
+				<span class="mui-icon mui-icon-chat"></span>
+				<span class="mui-icon mui-icon-email"></span>
+
+				<line>验证</line>
+				<div class="mui-input-group" id="input_example">
+					<div class="mui-input-row">
+						<label>用户名：</label>
+						<input type="text" class="mui-input-clear" placeholder="请输入用户名">
+					</div>
+					<div class="mui-input-row">
+						<label>密码：</label>
+						<input type="password" class="mui-input-clear mui-input-password" placeholder="请输入密码">
+					</div>
+					<div class="mui-button-row">
+						<button type="button" class="mui-btn mui-btn-primary" onclick="very()">确认</button>
+						<button type="button" class="mui-btn mui-btn-danger">取消</button>
+					</div>
+				</div>
+
+				<script>
+					function very() {
+						check = true;
+						mui("#input_example input").each(function() {
+							//若当前input为空，则alert提醒 
+							if(!this.value || this.value.trim() == "") {
+								var label = this.previousElementSibling;
+								mui.alert(label.innerText + "不允许为空");
+								check = false;
+								return false;
+							}
+						}); //校验通过，继续执行业务逻辑 
+						if(check) {
+							mui.alert('验证通过!')
+						}
+					}
+				</script>
+				<line>横向滚动</line>
+				<div class="mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+					<div class="mui-scroll">
+						<a class="mui-control-item mui-active">
+							推荐
+						</a>
+						<a class="mui-control-item">
+							热点
+						</a>
+						<a class="mui-control-item">
+							北京
+						</a>
+						<a class="mui-control-item">
+							社会
+						</a>
+						<a class="mui-control-item">
+							娱乐
+						</a>
+						<a class="mui-control-item">
+							科技
+						</a>
+					</div>
+
+				</div>
+				<script>
+					mui('.mui-scroll-wrapper').scroll({
+						deceleration: 0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
+					});
+				</script>
+
+				<line>开关</line>
+				<!-- 简洁模式开关关闭状态 -->
+				<div class="mui-switch mui-switch-mini">
+					<div class="mui-switch-handle"></div>
+				</div>
+				<!-- 简洁模式开关打开状态 -->
+				<div class="mui-switch mui-switch-mini mui-active">
+					<div class="mui-switch-handle"></div>
+				</div>
+			</div>
+
+			<div id="found" class="mui-control-content" style="margin-bottom: 25%;">
+
+				<div class="mui-card-header mui-card-media">
+					<img src="/assets/img/logo.png" />
+					<div class="mui-media-body">
+						Df
+						<p>发表于 2016-06-30 15:30</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+
+</html>

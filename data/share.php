@@ -6,7 +6,7 @@ define('INIT', 'df');
 //使html内容可以擦除
 ob_start();
 //开启缓存
-Session_Start();
+session_start();
 //设置时区
 date_default_timezone_set("PRC");
 //编码为utf-8

@@ -16,7 +16,7 @@ if(SEO&&$src[0]!="df"&&count($src)<=2)
 {
 $Area='homepage';
 $c_name = 'home'.'controller'; 
-$c_path ='Areas/'.$Area.'/controller/'.$c_name.'.php';
+$c_path ='areas/'.$Area.'/controller/'.$c_name.'.php';
 
 $action=empty($src[0])?'':$src[0];//方法
 if(substr($action,-5)==".html")
@@ -39,7 +39,7 @@ $param=str_replace(".html","",$param);
 //后台重定向
 $Area=strtolower($Area)=='df'?'admin':$Area;
 $c_name = $controller.'controller'; 
-$c_path ='Areas/'.$Area.'/controller/'.$c_name.'.php';
+$c_path ='areas/'.$Area.'/controller/'.$c_name.'.php';
 }
 
 

@@ -63,7 +63,7 @@ RewriteRule ^(.*)$ index.php?s=$1
 ├── cache
 │   ├── Areas
 │   └── share
-├── css_js
+├── assets
 │   ├── 404
 │   ├── AdminFrame
 │   ├── FontFamily

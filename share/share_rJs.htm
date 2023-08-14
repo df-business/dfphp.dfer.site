@@ -1,8 +1,8 @@
 <!--=========引用=========-->
 <!--rJs框架-->
-<script src="/css_js/requireJs/require.js" data-main=""></script>
+<script src="/assets/requireJs/require.js" data-main=""></script>
 <!--rJs参数。因为运行内容需要在页面中进行声明，所以不能将参数直接赋值给rJs的“data-main”-->
-<!--<script src="/css_js/requireJs/init.js"></script>-->
+<!--<script src="/assets/requireJs/init.js"></script>-->
 <script type="text/javascript">
  /*
   * requireJs的初始界面
@@ -15,7 +15,7 @@
   */
  //基本参数
 
- var url = '/css_js/';
+ var url = '/assets/';
  require.config({
   //版本信息，会自动放到所有加载的文件之后，用来保证首次访问都会刷新缓存
   urlArgs: 'v=' + (new Date()).getTime(),
@@ -46,14 +46,14 @@
   },
   shim: {
    'mui': {
-    deps: ['css!/css_js/mui/mui.min']
+    deps: ['css!/assets/mui/mui.min']
    },
    'layui': {
-    deps: ['css!/css_js/layui/css/layui']
+    deps: ['css!/assets/layui/css/layui']
    },
    //homepage
    'homepage': {
-    deps: ['css!/css_js/homepage/css/init']
+    deps: ['css!/assets/homepage/css/init']
    }
 
   }

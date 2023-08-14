@@ -112,7 +112,7 @@ title varchar(100) DEFAULT '' COMMENT '',
 keywords varchar(100) DEFAULT '' COMMENT '关键字',
 description varchar(100) DEFAULT '' COMMENT '网页简介',
 Inscribe varchar(300) DEFAULT '' COMMENT '',
-img1 varchar(100) DEFAULT '/img/bg.jpg' COMMENT '背景图像',
+img1 varchar(100) DEFAULT '/assets/img/bg.jpg' COMMENT '背景图像',
 color varchar(10) DEFAULT '' COMMENT '主体字体颜色',
 musicPlay tinyint DEFAULT 0 COMMENT '音乐自动播放',
 `sceneId` int DEFAULT 0 COMMENT '模板id'
@@ -279,7 +279,7 @@ echo '<br>';
 //添加默认布局
 $query = $db -> query("SELECT COUNT(*) AS count FROM `home_layout`") -> fetch_array();
 if ($query[0] < 1) {
-    if ($db -> query("insert into `home_layout`(`title`,keywords,description,Inscribe,img1,color) values('DfPHP','DfPHP,轻量级php框架','DfPHP——简洁的php框架','by Df','/img/bg.jpg','#f0f4e3')")) {
+    if ($db -> query("insert into `home_layout`(`title`,keywords,description,Inscribe,img1,color) values('DfPHP','DfPHP,轻量级php框架','DfPHP——简洁的php框架','by Df','/assets/img/bg.jpg','#f0f4e3')")) {
         echo "添加数据 [home_layout] 成功";
     } else {
         echo "添加数据 [home_layout] 失败";

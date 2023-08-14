@@ -49,6 +49,7 @@ class homeController
 				//退出登陆
 				public function ext($param)
 				{
+								setcookie(session_name(), session_id(), time()-1, '/');
 								delSession($model -> data["ses"], "admin/login/index");
 				}
 
@@ -69,8 +70,8 @@ class homeController
 		$DF_PHP_VER=DF_PHP_VER;
 							$df=<<<EOT
 										<!--layui-->
-											<link rel="stylesheet" href="/css_js/layui/css/layui.css" media="all">
-											<!--<script src="/css_js/layui/layui.js" charset="utf-8"></script>-->
+											<link rel="stylesheet" href="/assets/layui/css/layui.css" media="all">
+											<!--<script src="/assets/layui/layui.js" charset="utf-8"></script>-->
 										<table class="layui-table" style="width: 50%;">
 													<colgroup>
 															<col width="35%">

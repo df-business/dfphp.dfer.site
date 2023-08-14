@@ -27,12 +27,12 @@ function view($area, $ctrl, $func, $layout)
             //wap页面不存在就调用pc页面
             $layout = $from = !is_file($layout) ? ROOT . "/{$area}/{$ctrl}.htm" : $layout;
         } else {
-            $back = ROOT . "/Areas/{$area}/controller/{$ctrl}controller.php";
-            $from_base = ROOT . "/Areas/{$area}/view/{$ctrl}/{$func}_m.htm";
-            $to = ROOT . "/cache/Areas/{$area}/view/{$ctrl}/{$func}_m.php";
+            $back = ROOT . "/areas/{$area}/controller/{$ctrl}controller.php";
+            $from_base = ROOT . "/areas/{$area}/view/{$ctrl}/{$func}_m.htm";
+            $to = ROOT . "/cache/areas/{$area}/view/{$ctrl}/{$func}_m.php";
             $layout_base = ROOT . "/share/{$layout}_m.htm";
             //wap页面不存在就调用pc页面
-            $from = !is_file($from_base) ? ROOT . "/Areas/{$area}/view/{$ctrl}/{$func}.htm" : $from_base;
+            $from = !is_file($from_base) ? ROOT . "/areas/{$area}/view/{$ctrl}/{$func}.htm" : $from_base;
             $layout = !is_file($layout_base) ? ROOT . "/share/{$layout}.htm" : $layout_base;
             //	  	die($layout);
         }
@@ -45,9 +45,9 @@ function view($area, $ctrl, $func, $layout)
             $back = $to = ROOT . "/cache/{$area}/{$ctrl}.php";
         } else {
             //很奇怪无法获取php文件的修改时间，获取到的是空
-            $back = ROOT . "/Areas/{$area}/controller/{$ctrl}controller.php";
-            $from = ROOT . "/Areas/{$area}/view/{$ctrl}/{$func}.htm";
-            $to = ROOT . "/cache/Areas/{$area}/view/{$ctrl}/{$func}.php";
+            $back = ROOT . "/areas/{$area}/controller/{$ctrl}controller.php";
+            $from = ROOT . "/areas/{$area}/view/{$ctrl}/{$func}.htm";
+            $to = ROOT . "/cache/areas/{$area}/view/{$ctrl}/{$func}.php";
             $layout = ROOT . "/share/{$layout}.htm";
         }
     }
@@ -131,24 +131,24 @@ function view_replace($str, $layout)
 
 
     //布局
-	if (count($html) == 0) {
-		$html=['',''];
-	}
+    if (count($html) == 0) {
+        $html=['',''];
+    }
 
-	if (count($header) == 0) {
-		$header=['',''];
-	}
-	if (count($body) == 0) {
-		$body=['',''];
-	}
-	if (count($footer) == 0) {
-		$footer=['',''];
-	}
+    if (count($header) == 0) {
+        $header=['',''];
+    }
+    if (count($body) == 0) {
+        $body=['',''];
+    }
+    if (count($footer) == 0) {
+        $footer=['',''];
+    }
 
-	$layout = preg_replace('/<df-html([\s\S]*?)\/>/', $html[1], $layout);
-	$layout = preg_replace('/<df-header([\s\S]*?)\/>/', $header[1], $layout);
-	$layout = preg_replace('/<df-body([\s\S]*?)\/>/', $body[1], $layout);
-	$layout = preg_replace('/<df-footer([\s\S]*?)\/>/', $footer[1], $layout);
+    $layout = preg_replace('/<df-html([\s\S]*?)\/>/', $html[1], $layout);
+    $layout = preg_replace('/<df-header([\s\S]*?)\/>/', $header[1], $layout);
+    $layout = preg_replace('/<df-body([\s\S]*?)\/>/', $body[1], $layout);
+    $layout = preg_replace('/<df-footer([\s\S]*?)\/>/', $footer[1], $layout);
     //	var_dump($layout);die();
     //遍历list,需要提前替换
     $layout = preg_replace('/<df-each ([\s\S]*?)>/', '<?php $num=0; if(isset($1))foreach($1 as $k=>$v){  $num++;        ?>', $layout);
@@ -547,12 +547,11 @@ function query_format($tb, $para = array(), $order = array(), $limit = array())
     } elseif (is_string($order)) {
         $order = 'order by Id ' . $order;
     } elseif (is_array($order)) {
-							if (count($order) == 2) {
-							 $order = sprintf('order by %s %s', $order[0], $order[1]);
-							}
-							else
-								$order = sprintf('order by %s %s', array_key_first($order), $order[array_key_first($order)]);
-
+        if (count($order) == 2) {
+            $order = sprintf('order by %s %s', $order[0], $order[1]);
+        } else {
+            $order = sprintf('order by %s %s', array_key_first($order), $order[array_key_first($order)]);
+        }
     }
 
 
@@ -1249,7 +1248,7 @@ function writeFile($str, $file = "df.php")
  *
  *
  * 可以用来覆盖特定文件
- * upload_file($name,"120*120",0,'img/ewm1.jpg');
+ * upload_file($name,"120*120",0,'/assets/img/ewm1.jpg');
  *
  *
  * upload_file($name,0,2);  //layui编辑器上传
@@ -1503,7 +1502,7 @@ function setSession($name, $val, $rt = "")
 
 //删除ses并跳转页面
 function delSession($name = '', $rt = "")
-{
+{    
     if (empty($name)) {
         session_destroy();
     } else {
@@ -1814,7 +1813,7 @@ function fileW($fileN, $str)
 
 /*拼接js或者css
  *
- * eg：/index.php?f=/css_js/df.js,/css_js/FontFamily/init.js
+ * eg：/index.php?f=/assets/df.js,/assets/FontFamily/init.js
  */
 function AddF($f)
 {

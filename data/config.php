@@ -25,6 +25,8 @@ define('DF_PHP_VER', 8);
 define('SEO', 1);
 //PC页面、手机页面分离开关
 define('WAP_PAGE_ENABLE', 1);
+// 3*24小时
+define('SESSION_EXPIRES', 3*24*3600);
 
 
 

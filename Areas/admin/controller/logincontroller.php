@@ -10,7 +10,7 @@ class loginController
         global $m, $_df;
         GetWeb();
         $m -> VerifyLogin();
-								$err="";
+        $err="";
         //接收post
         if (isset($_POST['submit'])) {
             $user_sm = $_POST['data'];
@@ -18,6 +18,8 @@ class loginController
             if ($user != null) {
                 if ($user["pw"] == $user_sm["pw"] && $user["nm"] == $user_sm["nm"]) {
                     update('df', array('lastlogintime' => getTime(TIMESTAMP)), $user[0]);
+																				// 设置session在cookie的保存时间
+																				setcookie(session_name(), session_id(), time() + SESSION_EXPIRES, '/');
                     setSession($m -> data["ses"], array($user[0], strToHex($user["nm"]), strToHex($user["pw"])), "admin/home/index");
                 }
             }
