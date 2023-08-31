@@ -114,6 +114,14 @@ class homeController
 								//加载视图
 				}
 
+				public function notepad_ss($param)
+				{
+								global $m;
+								show_page(self::$db_N,[],"admin/home/".self::$db_N);
+								include                           view(__ROOT__, str_replace('Controller', '', __CLASS__), __FUNCTION__, 'backShare');
+								//加载视图
+				}
+
 				//修改记事本
 				public function notepadadd($param)
 				{

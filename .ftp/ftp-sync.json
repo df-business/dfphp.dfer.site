@@ -1,6 +1,6 @@
 {
     "name": "dfphp_dfer_site",
-    "host": "df315.top",
+    "host": "ip.dfer.site",
     "protocol": "sftp",
     "port": 22,
     "username": "dfphp_dfer_site",
