@@ -1334,18 +1334,25 @@ function upload_file($name, $size = 0, $editTool = 0, $Path = '')
                 //header("Content-type: image/jpeg");
                 //js上传插件会接收所有的echo数据
                 //um单个文件上传
-                if ($editTool == 0) {
-                    echo delSpace($newname);
-                } //js上传插件会接收所有的echo数据
-                //um编辑框
-                elseif ($editTool == 1) {
-                    echo "{'url':'{$newname}','state':'SUCCESS',name:'',originalName:'',size:'',type:''}";
-                }
-                //layui编辑器上传
-                elseif ($editTool == 2) {
-                    $json = array(code => 0, msg => 'error', 'data' => array('src' => $newname, 'title' => $newname));
-                    echo(json_encode($json));
-                }
+																if ($editTool == 0) {
+																    echo delSpace($newname);
+																} //js上传插件会接收所有的echo数据
+																//um编辑框
+																elseif ($editTool == 1) {
+																    echo "{'url':'{$newname}','state':'SUCCESS',name:'',originalName:'',size:'',type:''}";
+																}
+																//layui编辑器上传
+																elseif ($editTool == 2) {
+																    $json = array(code => 0, msg => 'error', 'data' => array('src' => $newname, 'title' => $newname));
+																    echo(json_encode($json));
+																}
+																//editormd编辑器上传
+																else if($editTool==3){
+																	$json=["success"=>1,"url"=>$newname,"state"=>'SUCCESS',"name"=>"","originalName"=>'',"size"=>'',"type"=>''];
+																	echo(json_encode($json));
+																}
+																else
+																	echo $newname;
             }
         }
     }
