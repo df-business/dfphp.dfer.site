@@ -14,9 +14,6 @@ defined('INIT') or exit('Access Denied');
  */
 function view($area, $ctrl, $func, $layout)
 {
-
-
-
     //手机、pc分开调用模板
     //手机模板
     if (isMobile() && WAP_PAGE_ENABLE) {
@@ -185,6 +182,7 @@ function view_replace($str, $layout)
     //打印字符串，只能匹配单行
     $layout = preg_replace('/<df-print value=\"([\s\S]*?)\"\/>/', '<?php echo $1 ?>', $layout);
     $layout = preg_replace('/!!([\s\S]*?)!!/', '<?php echo $1 ?>', $layout);
+				$layout = preg_replace('/{([\s\S]*?)}/', '<?php echo $1 ?>', $layout);
 
 
     //防止关键字被非法格式化而进行注释，最后恢复被注释的内容
@@ -1509,7 +1507,7 @@ function setSession($name, $val, $rt = "")
 
 //删除ses并跳转页面
 function delSession($name = '', $rt = "")
-{    
+{
     if (empty($name)) {
         session_destroy();
     } else {
