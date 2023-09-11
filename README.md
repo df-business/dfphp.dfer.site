@@ -15,10 +15,10 @@ composer create-project dfer/df-php
 # 框架介绍
 - DfPHP
 - 轻量级PHP开发框架
-- [dfphp.dfer.top](dfphp.dfer.top)
+- [dfphp.dfer.top](dfphp.dfer.site)
 - 由于df在做项目的过程中越来越习惯基于tp和vue的前后端分离写法，此框架将不再作为开发的首选方案，将减缓更新频率，仅作为老系统的过渡方案
 - 工作QQ：3504725309
-- 个人网站：www.dfer.top
+- 个人网站：www.dfer.site
 - QQ群：76673820
 
 
@@ -65,10 +65,10 @@ RewriteRule ^(.*)$ index.php?s=$1
 │   └── share
 ├── assets
 │   ├── 404
-│   ├── AdminFrame
-│   ├── FontFamily
-│   ├── Loaders
-│   ├── SiteCloud
+│   ├── admin
+│   ├── fontFamily
+│   ├── loaders
+│   ├── siteCloud
 │   ├── dataTables
 │   ├── homepage
 │   ├── jqTemplate
@@ -228,6 +228,6 @@ clear('db')
 
 
 ---
-***(c) Copyright 2020 Df. All Rights Reserved.***
+***(c) Copyright 2020-2023 Df. All Rights Reserved.***
 
 

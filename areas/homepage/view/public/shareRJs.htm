@@ -1,0 +1,153 @@
+<!--=========引用=========-->
+<!--rJs框架-->
+<script src="/assets/requireJs/require.js" data-main=""></script>
+<!--rJs参数。因为运行内容需要在页面中进行声明，所以不能将参数直接赋值给rJs的“data-main”-->
+<!--<script src="/assets/requireJs/init.js"></script>-->
+<script type="text/javascript">
+ /*
+  * requireJs的初始界面
+  *
+  *
+  *
+  * 这里定义所有需要引用的文件
+  *
+  * 在share文件进行引用
+  */
+ //基本参数
+
+ var url = '/assets/';
+ require.config({
+  //版本信息，会自动放到所有加载的文件之后，用来保证首次访问都会刷新缓存
+  urlArgs: 'v=' + (new Date()).getTime(),
+  //所有文件都会以此路径进行加载
+  baseUrl: url,
+  //引用其余路径的文件
+  paths: {
+   //public
+   jq: 'jquery.min',
+   df: 'df', //自定义函数
+   siteCloud: 'siteCloud/init', //流量统计初始化
+   layui: 'layui/layui', //
+   fontFamily: 'fontFamily/init', //自定义字体文件的初始化
+   loaders: 'loaders/main', //加载效果初始化
+   mui: 'mui/mui.min', //wap网页框架
+   jqTemplate: 'jqTemplate/jquery.tmpl', //动态加载数据的框架
+   mui_Ext: 'mui/func', //关于mui的自定义函数
+   jqExt: 'jquery.ext', //jq拓展方法
+   //homepage
+   homepage: 'homepage/js/init'
+
+  },
+  //载入rJs的css.js
+  map: {
+   '*': {
+    'css': 'requireJs/css'
+   }
+  },
+  shim: {
+   'mui': {
+    deps: ['css!/assets/mui/mui.min']
+   },
+   'layui': {
+    deps: ['css!/assets/layui/css/layui']
+   },
+   //homepage
+   'homepage': {
+    deps: ['css!/assets/homepage/css/init']
+   }
+
+  }
+
+ });
+</script>
+
+<!--通用脚本-->
+<script>
+ require(['jq'], function(jq) {
+  //引用js文件，调用其中模块的方法，没有声明模块则直接调用方法
+  require(['jqExt', 'df', 'loaders', 'layui'], function(jqExt, df) {
+   //根据不同页面，分别调用js文件
+   var url_a = jQuery.getUrlParam('a') == null ? 'index' : jQuery.getUrlParam('a');
+   log("!!$home_layout['title']!!_{0}_public loaded".format(url_a));
+   switch (url_a) {
+    case 'index':
+     //引用js文件，调用其中模块的方法，没有声明模块则直接调用方法
+     require(['mui', 'jqTemplate'], function(a, b, und) {
+      require(['mui_Ext', 'homepage'], function() {
+       var url_a = jQuery.getUrlParam('a') == null ? 'index' : jQuery.getUrlParam('a');
+       console.log("!!$home_layout['title']!!_{0} loaded".format(url_a));
+      });
+     });
+     break;
+    default:
+     break;
+   }
+
+   //所有资源加载完成则执行
+   function loaded() {
+    $('#first_loading').remove(); //在js加载前添加loading效果，增加页面友好度，加载完成则删除
+    //如果有调用字体
+    if ((typeof fontFamily_switch != 'undefined') && fontFamily_switch) {
+     $("<style>").html(
+      '*{font-family: ft !important; }'
+     ).appendTo("head");
+     log('自定义字体加载完成')
+    } else {
+     log('未使用自定义字体')
+    }
+
+    loading(2);
+    log('web complete');
+    //调用df的初始函数
+    df.init();
+   }
+
+   //dom加载完毕
+   function ready() {
+    //						loaded();
+    $.ProtectPage();
+    story("欢迎光临寒舍，有问题联系：www.dfer.top", "black");
+    hacker({
+     delay: 500,
+     fontColor: '!!$home_layout["color"]!!'
+    });
+    //rJs加载会在插件还没加载完就显示页面，从而导致页面显示不健全，所以需要隐藏body，在rJs加载之后显示
+    $('#body').removeAttr('hidden');
+    loading(1);
+    log('dom complete');
+   }
+
+   //只能识别执行到此加载的元素，故而放在网页尾部（识别出整个网页已加载完毕）
+   $(ready);
+   //所有数据加载完毕
+   var check_loaded = setInterval(function() {
+    //								log(getCookie("loaded"))
+    if (getCookie("loaded") == "true") {
+     loaded();
+     delCookie("loaded");
+     clearInterval(check_loaded);
+    }
+
+   }, 1000);
+
+  });
+
+ })
+
+ function setCookie(c_name, value, expiredays) //setCookie("na",1,-1)表示删除
+ {
+  if (expiredays == undefined)
+   expiredays = 1; //默认保存一天
+  var exdate = new Date()
+  exdate.setDate(exdate.getDate() + expiredays)
+  document.cookie = c_name + "=" + escape(value) +
+   ((expiredays == null) ? "" : ";expires=" + exdate.toGMTString()) + "; path=/"; //“ path=/”定义全局cookie
+ }
+ //load只能在第一层级的时候完全生效，而下层函数不能往上传递数据，只好通过cookie传递参数（第二层级只能在清空缓存的时候生效）
+ window.onload = function() {
+  setCookie("loaded", "true");
+ }
+</script>
+<style>
+
+</style>

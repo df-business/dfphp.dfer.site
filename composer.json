@@ -7,10 +7,11 @@
 		"name": "df",
 		"email": "df_business@qq.com"
 	}],
-	"homepage": "http://dfphp.dfer.top",
+	"homepage": "http://dfphp.dfer.site",
 	"require": {
 		"php": ">=7.0",
-		"dfer/tools": "^4.7"		
+		"dfer/tools": "^1.0.0",
+		"dfer/df-php-core": "^1.0.0"
 	},
-	"keywords": ["df", "dfer.top"]		
+	"keywords": ["df", "dfer.site"]
 }
