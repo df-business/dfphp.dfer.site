@@ -2,7 +2,7 @@
 defined('INIT') or exit('Access Denied');
 //----------------------------------------------全局参数
 
-define('VERSION', '2.1.1');
+define('VERSION', '2.1.2');
 define('DF', 'http://dfer.top/');
 //当前时间
 define('TIMESTAMP', time());
