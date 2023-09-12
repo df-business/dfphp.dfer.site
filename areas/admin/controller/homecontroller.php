@@ -40,7 +40,7 @@ class homeController
 								}
 								$sql = "select * from menu where parent=0 and ({$where}) order by orderNum asc";
 								$menu = show($sql);
-								include    view(__ROOT__, str_replace('Controller', '', __CLASS__), __FUNCTION__, 'iconShare');
+								include    view_back('iconShare');
 								//加载视图
 
 								//首页搜索，放在view之后才能加载到js自定义函数
@@ -56,7 +56,7 @@ class homeController
 				//后台信息汇总
 				public function desktop($param)
 				{
-								include                           view(__ROOT__, str_replace('Controller', '', __CLASS__), __FUNCTION__, 'backShare');
+								include                           view_back();
 								//加载视图
 				}
 
@@ -110,7 +110,7 @@ class homeController
 				{
 								global $m;
 								$output = show_list(self::$db_N, [], ['time','desc']);
-								include                           view(__ROOT__, str_replace('Controller', '', __CLASS__), __FUNCTION__, 'backShare');
+								include                           view_back();
 								//加载视图
 				}
 
@@ -119,7 +119,7 @@ class homeController
 				{
 								global $m;
 								show_page(self::$db_N,[],"admin/home/".self::$db_N);
-								include                           view(__ROOT__, str_replace('Controller', '', __CLASS__), __FUNCTION__, 'backShare');
+								include                           view_back();
 								//加载视图
 				}
 
@@ -129,7 +129,7 @@ class homeController
 				{
 								global $m;
 								$output = show_first(self::$db_N, ["Id"=>$param]);
-								include                           view(__ROOT__, str_replace('Controller', '', __CLASS__), __FUNCTION__, 'backShare');
+								include                           view_back();
 								//加载视图
 				}
 
@@ -144,7 +144,7 @@ class homeController
 				public function notepadview($param)
 				{
 								$output = show_first(self::$db_N, ["Id"=>$param]);
-								include                           view(__ROOT__, str_replace('Controller', '', __CLASS__), __FUNCTION__, 'backShare');
+								include                           view_back();
 								//加载视图
 				}
 
@@ -168,7 +168,7 @@ class homeController
 				{
 								global $m;
 								$output = show_list(self::$db_d);
-								include                           view(__ROOT__, str_replace('Controller', '', __CLASS__), __FUNCTION__, 'backShare');
+								include                           view_back();
 								//加载视图
 				}
 
@@ -178,7 +178,7 @@ class homeController
 								$err = $_GET['err'];
 								$output =show_first(self::$db_d, $param);
 								$type = show_list(self::$db_roles);
-								include view(__ROOT__, str_replace('Controller', '', __CLASS__), __FUNCTION__, 'backShare');
+								include view_back();
 								//加载视图
 				}
 
@@ -191,7 +191,7 @@ class homeController
 				public function dfview($param)
 				{
 								$output = show(self::$db_d, $param);
-								include                           view(__ROOT__, str_replace('Controller', '', __CLASS__), __FUNCTION__, 'backShare');
+								include                           view_back();
 								//加载视图
 				}
 
@@ -229,7 +229,7 @@ class homeController
 								global $m;
 
 								$output = show_list(self::$db_roles);
-								include                           view(__ROOT__, str_replace('Controller', '', __CLASS__), __FUNCTION__, 'backShare');
+								include                           view_back();
 								//加载视图
 				}
 
@@ -238,14 +238,14 @@ class homeController
 								global $m;
 								$err = $_GET['err'];
 								$output = show_first(self::$db_roles, $param);
-								include                           view(__ROOT__, str_replace('Controller', '', __CLASS__), __FUNCTION__, 'backShare');
+								include                           view_back();
 								//加载视图
 				}
 
 				public function rolesview($param)
 				{
 								$output = show_first(self::$db_roles, $param);
-								include                           view(__ROOT__, str_replace('Controller', '', __CLASS__), __FUNCTION__, 'backShare');
+								include                           view_back();
 								//加载视图
 				}
 
@@ -271,7 +271,7 @@ class homeController
 								global $m;
 
 								$output = show_list(self::$db_guests, [], ['id'=>'desc']);
-								include                           view(__ROOT__, str_replace('Controller', '', __CLASS__), __FUNCTION__, 'backShare');
+								include                           view_back();
 								//加载视图
 				}
 
@@ -281,7 +281,7 @@ class homeController
 				{
 								global $m;
 								$output = show_list(self::$db_htm);
-								include                           view(__ROOT__, str_replace('Controller', '', __CLASS__), __FUNCTION__, 'backShare');
+								include                           view_back();
 								//加载视图
 				}
 
@@ -290,15 +290,15 @@ class homeController
 				{
 								global $m;
 								$output = show_first(self::$db_htm, $param);
-								include                           view(__ROOT__, str_replace('Controller', '', __CLASS__), __FUNCTION__, 'backShare');
+								include                           view_back();
 								//加载视图
 				}
 
 				//预览
 				public function htmlview($param)
 				{
-								$output = shshow_firstow(self::$db_htm, $param);
-								include                           view(__ROOT__, str_replace('Controller', '', __CLASS__), __FUNCTION__, 'backShare');
+								$output = show_firstow(self::$db_htm, $param);
+								include                           view_back();
 								//加载视图
 				}
 
@@ -331,7 +331,7 @@ class homeController
 								$l_parent_id=$l_parent[count($l_parent)-1];
 								array_pop($l_parent);
 								$l_parent=implode(',', $l_parent);
-								include                           view(__ROOT__, str_replace('Controller', '', __CLASS__), __FUNCTION__, 'backShare');
+								include                           view_back();
 								//加载视图
 				}
 
@@ -352,7 +352,7 @@ class homeController
 								$parent_id = $_GET['parent_id'];
 
 								//var_dump(show_first('menu',$parent));
-								include                           view(__ROOT__, str_replace('Controller', '', __CLASS__), __FUNCTION__, 'backShare');
+								include view_back();
 								//加载视图
 				}
 
@@ -381,7 +381,7 @@ class homeController
 				{
 								global $m;
 								$output = show_first(self::$db_c, 1);
-								include                           view(__ROOT__, str_replace('Controller', '', __CLASS__), __FUNCTION__, 'backShare');
+								include                           view_back();
 								//加载视图
 				}
 
@@ -405,7 +405,7 @@ class homeController
 				{
 								global $m;
 								$output = show_first(self::$db_c, 1);
-								include                           view(__ROOT__, str_replace('Controller', '', __CLASS__), __FUNCTION__, 'backShare');
+								include                           view_back();
 								//加载视图
 				}
 
@@ -425,7 +425,7 @@ class homeController
 
 								$output = show_list('logs');
 
-								include                           view(__ROOT__, str_replace('Controller', '', __CLASS__), __FUNCTION__, 'backShare');
+								include                           view_back();
 								//加载视图
 				}
 
@@ -485,7 +485,7 @@ class homeController
 
 
 								$str .= sprintf("<a href='%s' target='_blank'>%s(用来优化字体文件)</a>：已生成<br>", $path, $path);
-								include view(__ROOT__, str_replace('Controller', '', __CLASS__), __FUNCTION__, 'backShare');
+								include view_back();
 								//加载视图
 				}
 }

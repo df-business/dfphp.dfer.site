@@ -6,8 +6,8 @@ require "web.config.php";
       //-----------------主页
      //首页
    function index($param){
-   	global $m;   
-$home_layout = show_first("home_layout",['Id'=>1]);  
+   	global $m;
+$home_layout = show_first("home_layout",['Id'=>1]);
 $home_column = show_list("home_column",[],["Id"=>"asc"]);
 $home_link = show_list("home_link");
 $home_music =show_list("home_music");
@@ -18,10 +18,10 @@ sql("update dt set val=val+1 where `key`='hits'");
 $m->col_user_info();
 
 //           var_dump(json_decode(cache_r("home_layout")['value'])); //  die();
-     
-        include view(__ROOT__,str_replace('Controller','',__CLASS__),__FUNCTION__,'homeShare');//加载视图   
-}     
-    
+
+        include view_front();
+}
+
  function test(){
  	echo '123123';
  	begin('test');
@@ -34,11 +34,11 @@ echo '<br>';
 $r=	query('select * from test');
 var_dump($r);
  	die();
- } 
+ }
 //------------------------------------------------------留言
 
 
-static $db_mes='message'; 
+static $db_mes='message';
 function Post_Msg(){
 $dt = $_POST['data'];
 //var_dump($dt);
@@ -55,15 +55,15 @@ show_json($myValue,($myValue>0?'留言成功':'留言失败'));
 
 
 //删除
-           function delPost_Msg($id){     
+           function delPost_Msg($id){
 
 $myValue =del(self::$db_mes,$id,"homepage/column/".self::$db_mes);
-}  
-     
+}
+
 
 
 }
- 
- 
- 
+
+
+
 ?>

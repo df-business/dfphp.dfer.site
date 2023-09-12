@@ -10,14 +10,14 @@ class columnController {
 	function home_column($param) {
 		global $m;
 		$output = show_list(self::$db_hc, [],'asc');
-		include  view(__ROOT__, str_replace('Controller', '', __CLASS__), __FUNCTION__, 'backShare');
+		include  view_back();
 		//加载视图
 	}
 
 	function home_columnadd($param) {
 		global $m;
 		$output = show_first(self::$db_hc, $param);
-		include  view(__ROOT__, str_replace('Controller', '', __CLASS__), __FUNCTION__, 'backShare');
+		include  view_back();
 		//加载视图
 	}
 
@@ -52,7 +52,7 @@ class columnController {
 	public function message($param) {
 		global $m;
 		$output = show_list(self::$db_mes,[], ["time"=>'desc']);
-		include  view(__ROOT__, str_replace('Controller', '', __CLASS__), __FUNCTION__, 'backShare');
+		include  view_back();
 		//加载视图
 	}
 
@@ -61,7 +61,7 @@ class columnController {
 
 		$output = show_first(self::$db_mes, $param);
 		update(self::$db_mes, ["status"=>true],$param);
-		include  view(__ROOT__, str_replace('Controller', '', __CLASS__), __FUNCTION__, 'backShare');
+		include  view_back();
 		//加载视图
 	}
 
@@ -71,14 +71,14 @@ class columnController {
 		global $m;
 		$output = show_list(self::$db_hl);
 
-		include  view(__ROOT__, str_replace('Controller', '', __CLASS__), __FUNCTION__, 'backShare');
+		include  view_back();
 		//加载视图
 	}
 
 	function home_linkadd($param) {
 		global $m;
 		$output = show_first(self::$db_hl, $param);
-		include  view(__ROOT__, str_replace('Controller', '', __CLASS__), __FUNCTION__, 'backShare');
+		include  view_back();
 	}
 
 	function home_linkupdate() {
@@ -102,7 +102,7 @@ class columnController {
 
 		global $m;
 		$output = show_list(self::$db_hm);
-		include  view(__ROOT__, str_replace('Controller', '', __CLASS__), __FUNCTION__, 'backShare');
+		include  view_back();
 		//加载视图
 	}
 
@@ -110,7 +110,7 @@ class columnController {
 		global $m;
 
 		$output = $param != 0 ? show_first(self::$db_hm, $param) : "";
-		include  view(__ROOT__, str_replace('Controller', '', __CLASS__), __FUNCTION__, 'backShare');
+		include  view_back();
 		//加载视图
 	}
 
@@ -143,7 +143,7 @@ class columnController {
 		$output = show_first(self::$db_hlo, $param);
 		$img = show_list(self::$db_hli);
 		//var_dump($img);
-		include  view(__ROOT__, str_replace('Controller', '', __CLASS__), __FUNCTION__, 'backShare');
+		include  view_back();
 		//加载视图
 	}
 

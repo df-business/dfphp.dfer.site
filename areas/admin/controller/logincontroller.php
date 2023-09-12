@@ -25,7 +25,7 @@ class loginController
             }
             $err="同志，请确定你的账号和密码";
         }
-        include    view(__ROOT__, str_replace('Controller', '', __CLASS__), __FUNCTION__, 'iconShare');
+        include view_back('iconShare');
         //加载视图
     }
 
@@ -35,7 +35,7 @@ class loginController
     {
         global $m;
         $output = show_first(self::$db_d, 1);
-        include    view(__ROOT__, str_replace('Controller', '', __CLASS__), __FUNCTION__, 'backShare');
+        include    view_back();
         //加载视图
     }
 
@@ -65,7 +65,7 @@ class loginController
         $id = getSession($m -> data["ses"]);
         $id = $id[0];
         $output = show_first(self::$db_d, $id);
-        include    view(__ROOT__, str_replace('Controller', '', __CLASS__), __FUNCTION__, 'backShare');
+        include    view_back();
         //加载视图
     }
 

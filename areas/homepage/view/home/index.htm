@@ -1,13 +1,14 @@
 <df-header>
-	<!--闲云野鹤醉溪月-->
+	<!--'闲云野鹤醉溪月'-->
 	<style>
 
 	</style>
+
 </df-header>
 
 <df-body>
 	<fieldset class="layui-elem-field layui-field-title" style="margin-top: 0;">
-		<legend style="color: !!$home_layout['color']!!;">DfPHP v!!VERSION!!</legend>
+		<legend style="color: !!$home_layout['color']!!;">!!$home_layout['description']!! v!!VERSION!!</legend>
 	</fieldset>
 
 	<div style="padding: 20px;">
@@ -35,21 +36,10 @@
 
 	<!--script-->
 	<script>
-		require(['jq'], function() {
+		$(function() {
+			var url_a = jQuery.getUrlParam('a') == null ? 'index' : jQuery.getUrlParam('a');
+			console.log("!!$home_layout['title']!!_{0} loaded".format(url_a));
 
-			//引用js文件，调用其中模块的方法，没有声明模块则直接调用方法
-			require(['df', 'mui', 'jqTemplate'], function(a, b, und) {
-				require(['mui_Ext', 'homepage'], function() {
-					var url_a = jQuery.getUrlParam('a') == null ? 'index' : jQuery.getUrlParam('a');
-					log("self 0");
-
-				});
-			});
-
-			//引用js文件，调用其中模块的方法，没有声明模块则直接调用方法
-			require(['df', 'layui'], function(m1, m2) {
-				log("self 1");
-			});
 		})
 	</script>
 

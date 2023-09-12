@@ -4836,7 +4836,7 @@ body.modal-open {
 .logo-name {
 	color: transparent;
 	margin-bottom: 0px;
-	background: url('/img/favicon_256.png') no-repeat;
+	background: url('../img/favicon_256.png') no-repeat;
 	background-size: 100% 100%;
 }
 

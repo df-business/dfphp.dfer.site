@@ -1,0 +1,42 @@
+<df-code>
+	global $m,$_df;
+	$m->VerifyLogin(1);
+</df-code>
+
+<html>
+
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+
+		<!-- ********************** layui START ********************** -->
+		<link href="//unpkg.com/layui@2.8.15/dist/css/layui.css" rel="stylesheet">
+		<script src="//unpkg.com/layui@2.8.15/dist/layui.js"></script>
+		<!-- **********************  layui END  ********************** -->
+
+
+		<link href="!!THEME_ADMIN_ASSETS!!/admin/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+		<link href="!!THEME_ADMIN_ASSETS!!/admin/css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
+		<link href="!!THEME_ADMIN_ASSETS!!/admin/css/style.css?v=4.1.0" rel="stylesheet">
+		
+		<!-- ********************** jq START ********************** -->
+		<script src="!!THEME_ADMIN_ASSETS!!/admin/js/jquery.min.js"></script>
+		<!-- **********************  jq END  ********************** -->
+		<script src="!!THEME_ADMIN_ASSETS!!/df.js"></script>
+
+		<df-header />
+	</head>
+
+	<body class="gray-bg">
+		<div class="wrapper wrapper-content">
+			<df-body />
+		</div>
+		<!-- 全局js -->
+		<script src="!!THEME_ADMIN_ASSETS!!/admin/js/bootstrap.min.js?v=3.3.6"></script>
+		<!-- 自定义js -->
+		<script src="!!THEME_ADMIN_ASSETS!!/admin/js/content.js?v=1.0.0"></script>
+	</body>
+
+	<df-footer />
+
+</html>

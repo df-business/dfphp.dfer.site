@@ -2,7 +2,7 @@
 chcp 65001
 @echo off
 echo 一键发布...
-set ver=2.1.3
+set ver=2.1.4
 git add *
 git commit -m %ver%
 git push

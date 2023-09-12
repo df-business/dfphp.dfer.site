@@ -6,5 +6,5 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
-    'Dfer\\Tools\\' => array($vendorDir . '/dfer/tools/src'),
+    'Dfer\\Tools\\' => array($vendorDir . '/dfer/df-php-core/src', $vendorDir . '/dfer/tools/src'),
 );

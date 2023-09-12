@@ -16,7 +16,8 @@ class ComposerStaticInit68cebca366bc29d13b813540eb4ae89e
     public static $prefixDirsPsr4 = array (
         'Dfer\\Tools\\' => 
         array (
-            0 => __DIR__ . '/..' . '/dfer/tools/src',
+            0 => __DIR__ . '/..' . '/dfer/df-php-core/src',
+            1 => __DIR__ . '/..' . '/dfer/tools/src',
         ),
     );
 

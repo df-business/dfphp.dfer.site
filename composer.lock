@@ -4,15 +4,50 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "71450b1adb808d4dc3d962c2761f0125",
+    "content-hash": "fc64111174011f34198f897c2b0b5c4c",
     "packages": [
         {
+            "name": "dfer/df-php-core",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://gitcode.net/dofun333/df-php-core",
+                "reference": "fc206ca64511f541563c8b57c181100b70644134"
+            },
+            "require": {
+                "php": ">=7.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Dfer\\Tools\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "df",
+                    "email": "df_business@qq.com"
+                }
+            ],
+            "description": "df-php内核",
+            "homepage": "http://www.dfer.top",
+            "keywords": [
+                "df",
+                "dfer.top"
+            ],
+            "time": "2023-09-12T02:01:13+00:00"
+        },
+        {
             "name": "dfer/tools",
-            "version": "v4.7.6",
+            "version": "1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://gitcode.net/dofun333/dfer-tools",
-                "reference": "6b42e59ce0923e940d1edd6ecbab71cbb4165450"
+                "reference": "515a4e922de0fc63dafca181cda9cfb5f3543aeb"
             },
             "require": {
                 "php": ">=7.0"
@@ -34,12 +69,12 @@
                 }
             ],
             "description": "php工具包",
-            "homepage": "http://www.dfer.top",
+            "homepage": "http://www.dfer.site",
             "keywords": [
                 "df",
-                "dfer.top"
+                "dfer.site"
             ],
-            "time": "2023-01-11T07:00:10+00:00"
+            "time": "2023-09-11T05:37:21+00:00"
         }
     ],
     "packages-dev": [],

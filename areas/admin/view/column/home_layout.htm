@@ -7,7 +7,7 @@
 					<h5></h5>
 				</div>
 				<div class="ibox-content">
-					<form method="post" action='!!SplitUrl(sprintf(" homepage/column/%supdate ",self::$db_hlo))!!' class="layui-form">
+					<form method="post" action='!!SplitUrl(sprintf(" admin/column/%supdate ",self::$db_hlo))!!' class="layui-form">
 						<input name="id" value="!!isset($output[0])?$output[0]:'0'!!" hidden/>
 						<input name="data[img1]" id="img1" value="!!isset($output[0])?$output['img1']:''!!" hidden/>
 						<input name="data[musicPlay]" value="!!isset($output[0])?$output['musicPlay']:'0'!!" hidden/>
@@ -83,7 +83,7 @@
 								<div class="col-sm-4">
 									<div class="upload">
 										<div id="uploadPreview2">
-											/assets/fontFamily/font.TTF
+											!!THEME_ADMIN_ASSETS!!/fontFamily/font.TTF
 										</div>
 										<div class="left">
 											<div class="uploadProgressBar"></div>
@@ -125,8 +125,8 @@
 <df-footer>
 
 	<!-- webuploader-->
-	<link rel="stylesheet" href="/assets/webuploader/webuploader.css" type="text/css" />
-	<script src="/assets/webuploader/webuploader.min.js"></script>
+	<link rel="stylesheet" href="!!THEME_ADMIN_ASSETS!!/webuploader/webuploader.css" type="text/css" />
+	<script src="!!THEME_ADMIN_ASSETS!!/webuploader/webuploader.min.js"></script>
 	<script type="text/javascript">
 		layui.use(['form', 'colorpicker'], function() {
 			var $ = layui.$;
