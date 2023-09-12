@@ -8,11 +8,11 @@
     "packages": [
         {
             "name": "dfer/df-php-core",
-            "version": "1.0.2",
+            "version": "1.0.3",
             "source": {
                 "type": "git",
                 "url": "https://gitcode.net/dofun333/df-php-core",
-                "reference": "0b47749d98a0c0b77bb2a3e89a56de8c2a0fc189"
+                "reference": "ac0a9331ef0fb93f8665dadd226bf2a01a20dad9"
             },
             "require": {
                 "php": ">=7.0"
@@ -39,7 +39,7 @@
                 "df",
                 "dfer.top"
             ],
-            "time": "2023-09-12T02:13:47+00:00"
+            "time": "2023-09-12T02:26:46+00:00"
         },
         {
             "name": "dfer/tools",

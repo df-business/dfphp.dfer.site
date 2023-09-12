@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => 'dfer/df-php',
-        'pretty_version' => '2.x-dev',
-        'version' => '2.9999999.9999999.9999999-dev',
-        'reference' => 'e96eabcb806caa20de34f8eb6203933a16cc09cd',
+        'pretty_version' => '3.x-dev',
+        'version' => '3.9999999.9999999.9999999-dev',
+        'reference' => '40fda86d1a4f077b19d861cfd8caa3a3a540927c',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -11,18 +11,18 @@
     ),
     'versions' => array(
         'dfer/df-php' => array(
-            'pretty_version' => '2.x-dev',
-            'version' => '2.9999999.9999999.9999999-dev',
-            'reference' => 'e96eabcb806caa20de34f8eb6203933a16cc09cd',
+            'pretty_version' => '3.x-dev',
+            'version' => '3.9999999.9999999.9999999-dev',
+            'reference' => '40fda86d1a4f077b19d861cfd8caa3a3a540927c',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
             'dev_requirement' => false,
         ),
         'dfer/df-php-core' => array(
-            'pretty_version' => '1.0.2',
-            'version' => '1.0.2.0',
-            'reference' => '0b47749d98a0c0b77bb2a3e89a56de8c2a0fc189',
+            'pretty_version' => '1.0.3',
+            'version' => '1.0.3.0',
+            'reference' => 'ac0a9331ef0fb93f8665dadd226bf2a01a20dad9',
             'type' => 'library',
             'install_path' => __DIR__ . '/../dfer/df-php-core',
             'aliases' => array(),
