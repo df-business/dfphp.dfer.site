@@ -1,0 +1,164 @@
+ <!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<title>DfPHP - v2.1.2</title>
+		<meta name="author" content="Df" />
+		<meta name="keywords" content="DfPHP,轻量级php框架" />
+		<meta name="description" content="DfPHP——简洁的php框架" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+		<meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width" />
+		<!--页面尺寸-->
+		<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+		<!--手机状态栏的颜色-->
+		<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+		<!--作为独立的网页，进行全屏显示-->
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<link rel="shortcut icon" href="/areas/homepage/view/public/assets/img/favicon.ico" />
+		<link rel="apple-touch-icon" href="/areas/homepage/view/public/assets/img/favicon.png" />
+		<!--=========自定义alert=========-->
+		<!-- <link rel="stylesheet" type="text/css" href="/areas/homepage/view/public/assets/sweetalert/sweetalert.css">
+		<script type="text/javascript" src="/areas/homepage/view/public/assets/sweetalert/sweetalert-dev.js"></script> -->
+		<!--=========引用=========-->
+
+		<!-- ********************** jq START ********************** -->
+		<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+		<script src="/areas/homepage/view/public/assets/jquery.ext.js"></script>
+		<!-- **********************  jq END  ********************** -->
+
+		<script src="/areas/homepage/view/public/assets/df.js"></script>
+
+		<!-- ********************** layui START ********************** -->
+		<link href="//unpkg.com/layui@2.8.15/dist/css/layui.css" rel="stylesheet">
+		<script src="//unpkg.com/layui@2.8.15/dist/layui.js"></script>
+		<!-- **********************  layui END  ********************** -->
+
+		<!-- ********************** loader START ********************** -->
+		<script src="/areas/homepage/view/public/assets/loaders/main.js"></script>
+		<link rel="stylesheet" href="/areas/homepage/view/public/assets/loaders/main.css" />
+		<!-- **********************  loader END  ********************** -->
+
+		<!-- <script src="/assets/fontFamily/init.js"></script> -->
+
+		<style>
+
+		</style>
+		<!--通用脚本-->
+		<script>
+		 //所有资源加载完成则执行
+		 function loaded() {
+		  //在js加载前添加loading效果，增加页面友好度，加载完成则删除
+		  $('#first_loading').remove();
+		  //如果有调用字体
+		  if ($('script[src$="fontFamily/init.js"]').length > 0) {
+		   $("<style>").html(
+		    '*{font-family: ft !important; }'
+		   ).appendTo("head");
+		   log('自定义字体加载完成')
+		  } else {
+		   log('未使用自定义字体')
+		  }
+
+		  loading(2);
+		  log('web complete');
+		  df_init();
+		 }
+
+		 //dom加载完毕
+		 function ready() {
+		  $.ProtectPage();
+		  story("欢迎光临寒舍，有问题联系：www.dfer.site", "black")
+		  // hacker(1, '#ffffff');
+		  $('#body').removeAttr('hidden')
+		  loading(1);
+		  log('dom complete');
+		 }
+
+		 //只能识别执行到此加载的元素，故而放在网页尾部（识别出整个网页已加载完毕）
+		 $(ready);
+		 $(window).on('load', loaded);
+		</script>
+
+
+		
+	<!--'闲云野鹤醉溪月'-->
+	<style>
+
+	</style>
+
+
+		<style>
+			html,
+			body {
+				height: 100%;
+			}
+
+			#body {
+				background: url(/areas/homepage/view/public/assets/img/bg.jpg) no-repeat;
+				background-size: 100% 100%;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div hidden="" id="first_loading" style="z-index:66666;position: fixed;left: 49%;top: 45%;"><img src="/areas/homepage/view/public/assets/img/loading-1.gif"></div>
+		<div hidden="" id="body">
+			
+	<fieldset class="layui-elem-field layui-field-title" style="margin-top: 0;">
+		<legend style="color: #ffffff;">DfPHP——简洁的php框架</legend>
+	</fieldset>
+
+	<div style="padding: 20px;">
+		<div class="layui-row layui-col-space15">
+
+												<div class="layui-col-md6">
+						<div class="layui-card">
+							<div class="layui-card-header">关键字说明</div>
+							<div class="layui-card-body">
+								<p>									</p><p><span style="white-space: nowrap;">//布局</span></p><p><span style="white-space: nowrap;">&nbsp;#header()</span></p><p><span style="white-space: nowrap;">&nbsp;#body()</span></p><p><span style="white-space: nowrap;">&nbsp;#footer()&nbsp;</span></p><p><span style="white-space: nowrap;">&nbsp;#header{}#</span></p><p><span style="white-space: nowrap;">&nbsp;#body{}#</span></p><p><span style="white-space: nowrap;">&nbsp;#footer{}#</span></p><p><span style="white-space: nowrap;">&nbsp;</span></p><p><span style="white-space: nowrap;">&nbsp;//打印参数</span></p><p><span style="white-space: nowrap;">&nbsp;!!$str!!</span></p><p><span style="white-space: nowrap;">&nbsp;</span></p><p><span style="white-space: nowrap;">&nbsp;//执行php代码</span></p><p><span style="white-space: nowrap;">&nbsp;!{}!</span></p><p><span style="white-space: nowrap;">&nbsp;</span></p><p><span style="white-space: nowrap;">&nbsp;//遍历数组，来循环显示多条数据</span></p><p><span style="white-space: nowrap;">&nbsp;!{each $arr}</span></p><p><span style="white-space: nowrap;">&nbsp;!``</span></p><p><span style="white-space: nowrap;">&nbsp;!{/each}</span></p><p><span style="white-space: nowrap;">&nbsp;</span></p><p><span style="white-space: nowrap;">//这里放关键字，防止整理代码格式的时候关键字被破坏</span></p><p><span style="white-space: nowrap;">/*d<span style="white-space:pre">	</span></span></p><p><span style="white-space: nowrap;">d*/</span></p><p><span style="white-space: nowrap;">&nbsp;</span></p><p><span style="white-space: nowrap;">&nbsp;//if语句</span></p><p><span style="white-space: nowrap;">&nbsp;!{if true}</span></p><p><span style="white-space: nowrap;">&nbsp;!{elif false}</span></p><p><span style="white-space: nowrap;">&nbsp;!{else}</span></p><p><span style="white-space: nowrap;">&nbsp;!{/else}</span></p><p><span style="white-space: nowrap;">&nbsp;</span></p><p><br></p><p>								</p>							</div>
+						</div>
+					</div>
+																<div class="layui-col-md6">
+						<div class="layui-card">
+							<div class="layui-card-header">数据库操作</div>
+							<div class="layui-card-body">
+								<p><span style="white-space: nowrap;">#查询#</span></p><p><span style="white-space: nowrap;">//有多行就输出数组，否则返回单个list（有些情况必须返回数组，就添加order）</span></p><p><span style="white-space: nowrap;">show("df",1,"type"," ");&nbsp; &nbsp;&nbsp;</span></p><p><span style="white-space: nowrap;">// 根据字符串进行查询</span></p><p><span style="white-space: nowrap;">show("df","谷雨光影","subs");&nbsp;</span></p><p><span style="white-space: nowrap;">// 按id降序输出全表&nbsp;&nbsp;</span></p><p><span style="white-space: nowrap;">show("df",-1,"id","desc");<span style="white-space:pre">	</span></span></p><p><span style="white-space: nowrap;">//输出type为1的特定数目的数据</span></p><p><span style="white-space: nowrap;">show("df",1,"type","limit 0,5");<span style="white-space:pre">	</span></span></p><p><span style="white-space: nowrap;">//输出type为1的数据并进行排序</span></p><p><span style="white-space: nowrap;">show("df",1,"type","order by id desc");</span></p><p><span style="white-space: nowrap;">//执行sql语句<span style="white-space:pre">	</span></span></p><p><span style="white-space: nowrap;">show("select * from df",0);<span style="white-space:pre">	</span></span></p><p><span style="white-space: nowrap;">//按条件输出全表</span></p><p><span style="white-space: nowrap;">show("menu",$param,"parent","order by oderNum desc");</span></p><p><span style="white-space: nowrap;">//分页查询(页数,行数)</span></p><p><span style="white-space: nowrap;">show_page(self::$db_d,$page,$rows);</span></p><p><span style="white-space: nowrap;"><br></span></p><p><span style="white-space: nowrap;">##新增、修改##</span></p><p><span style="white-space: nowrap;">//新增数据，之后不进行任何操作</span></p><p><span style="white-space: nowrap;">update("df",$arr)<span style="white-space:pre">		</span></span></p><p><span style="white-space: nowrap;">//根据id新增、修改数据，之后进行页面跳转</span></p><p><span style="white-space: nowrap;">update(self::$db_hc,$dt,$id,("homepage/column/".self::$db_hc));<span style="white-space:pre">	</span></span></p><p><span style="white-space: nowrap;"><br></span></p><p><span style="white-space: nowrap;"><br></span></p><p><span style="white-space: nowrap;">##删除##</span></p><p><span style="white-space: nowrap;">//根据id进行删除</span></p><p><span style="white-space: nowrap;">del("db",3);</span></p><p><span style="white-space: nowrap;">//清空表</span></p><p><span style="white-space: nowrap;">clear("db")</span></p><p><br></p>							</div>
+						</div>
+					</div>
+																<div class="layui-col-md6">
+						<div class="layui-card">
+							<div class="layui-card-header">数据库操作返回json</div>
+							<div class="layui-card-body">
+								<p><span style="white-space: nowrap;"><br></span></p><p><span style="white-space: nowrap;">#查询返回json数据</span></p><p><span style="white-space: nowrap;">//根据id查询</span></p><p><span style="white-space: nowrap;">tableToJson("df","id","desc",1);</span></p><p><span style="white-space: nowrap;">//根据time降序排列&nbsp;</span></p><p><span style="white-space: nowrap;">tableToJson("df","time");&nbsp;</span></p><p><span style="white-space: nowrap;">//根据time升序排列</span></p><p><span style="white-space: nowrap;">tableToJson("df","time","asc");</span></p><p><span style="white-space: nowrap;">//自定义sql查询</span></p><p><span style="white-space: nowrap;">tableToJson("sql","select * from df");</span></p><p><span style="white-space: nowrap;">#更新返回json</span></p><p><span style="white-space: nowrap;">jsonUpdate("db",array("nm"=&gt;"123"),3);</span></p><p><span style="white-space: nowrap;">#清空</span></p><p><span style="white-space: nowrap;">jsonClear("db")</span></p><p><br></p>							</div>
+						</div>
+					</div>
+																<div class="layui-col-md6">
+						<div class="layui-card">
+							<div class="layui-card-header">框架介绍</div>
+							<div class="layui-card-body">
+								<p>									</p><ul><li><p>- 由Df打造的php版的Mvc框架，结构简洁，使用方便</p></li><li><p>- 可以在此框架的基础上开发出各种各样的网站</p></li><li><p>- 有很好的拓展性，可以不断增加新的功能</p></li><li><p>- 由df提供技术支持</p></li><li><p>- 此项目将不断完善</p></li><li><p>- 工作QQ：3504725309&nbsp; &nbsp; &nbsp;&nbsp;</p></li><li><p>- 个人网站：www.dfer.site</p></li><li><p>- 论坛：www.szswz.cc&nbsp;</p></li><li><p>- QQ群：76673820</p></li></ul><p>&nbsp;</p><p><br></p><p>								</p>							</div>
+						</div>
+					</div>
+									</div>
+	</div>
+
+	<div class="foot" style="color: #ffffff;">dfphp.dfer.site</div>
+
+
+		</div>
+	</body>
+
+	
+
+	<!--script-->
+	<script>
+		$(function() {
+			var url_a = jQuery.getUrlParam('a') == null ? 'index' : jQuery.getUrlParam('a');
+			console.log("DfPHP_{0} loaded".format(url_a));
+
+		})
+	</script>
+
+
+
+</html>

@@ -69,9 +69,10 @@ class homeController
 		$VERSION=VERSION;
 		$DF_PHP_VER=DF_PHP_VER;
 							$df=<<<EOT
-										<!--layui-->
-											<link rel="stylesheet" href="/assets/layui/css/layui.css" media="all">
-											<!--<script src="/assets/layui/layui.js" charset="utf-8"></script>-->
+										<!-- ********************** layui START ********************** -->
+										<link href="//unpkg.com/layui@2.8.15/dist/css/layui.css" rel="stylesheet">
+										<script src="//unpkg.com/layui@2.8.15/dist/layui.js"></script>
+										<!-- **********************  layui END  ********************** -->
 										<table class="layui-table" style="width: 50%;">
 													<colgroup>
 															<col width="35%">
@@ -119,7 +120,7 @@ class homeController
 				{
 								global $m;
 								show_page(self::$db_N,[],"admin/home/".self::$db_N);
-								include                           view_back();
+								include view_back();
 								//加载视图
 				}
 

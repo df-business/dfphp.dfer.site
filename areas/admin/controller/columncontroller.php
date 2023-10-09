@@ -26,13 +26,13 @@ class columnController {
 		$dt = $_POST['data'];
 		$id = $_POST['id'];
 
-		$myValue = update(self::$db_hc, $dt, $id, ("homepage/column/" . self::$db_hc));
+		$myValue = update(self::$db_hc, $dt, $id, ("admin/column/" . self::$db_hc));
 	}
 
 	//删除
 	function home_columndel($id) {
 		global $m;
-		$myValue = del(self::$db_hc, $id, "homepage/column/" . self::$db_hc);
+		$myValue = del(self::$db_hc, $id, "admin/column/" . self::$db_hc);
 	}
 
 	//富文本上传组件
@@ -87,13 +87,13 @@ class columnController {
 		$dt = $_POST['data'];
 		$id = $_POST['id'];
 
-		$myValue = update(self::$db_hl, $dt, $id, ("homepage/column/" . self::$db_hl));
+		$myValue = update(self::$db_hl, $dt, $id, ("admin/column/" . self::$db_hl));
 	}
 
 	//删除
 	function home_linkdel($id) {
 		global $m;
-		$myValue = del(self::$db_hl, $id, "homepage/column/" . self::$db_hl);
+		$myValue = del(self::$db_hl, $id, "admin/column/" . self::$db_hl);
 	}
 
 	//--------------------------------音乐
@@ -120,13 +120,13 @@ class columnController {
 		$dt = $_POST['data'];
 		$id = $_POST['id'];
 
-		$myValue = update(self::$db_hm, $dt, $id, ("homepage/column/" . self::$db_hm));
+		$myValue = update(self::$db_hm, $dt, $id, ("admin/column/" . self::$db_hm));
 	}
 
 	//删除
 	function home_musicdel($id) {
 		global $m;
-		$myValue = del(self::$db_hm, $id, "homepage/column/" . self::$db_hm);
+		$myValue = del(self::$db_hm, $id, "admin/column/" . self::$db_hm);
 	}
 
 	//上传组件
@@ -153,7 +153,7 @@ class columnController {
 		$dt = $_POST['data'];
 		$id = $_POST['id'];
 
-		$myValue = update(self::$db_hlo, $dt, $id, sprintf("homepage/column/%s/1", self::$db_hlo));
+		$myValue = update(self::$db_hlo, $dt, $id, sprintf("admin/column/%s/1", self::$db_hlo));
 	}
 
 	//上传组件
