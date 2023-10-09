@@ -53,16 +53,16 @@ $ctrl_path ='areas/'.$area_name.'/controller/'.$ctrl_name.'.php';
  if(DEV)
  file_exists($ctrl_path) or die('控制器文件不存在:'.$ctrl_path);
  else
- file_exists($ctrl_path) or header("Location: /404.html");
+ file_exists($ctrl_path) or header(sprintf("Location: %s/../404.html",THEME_HOMEPAGE_ASSETS));
  require($ctrl_path);
  $controller = new $ctrl_name;
  //开发模式
  if(DEV)
  method_exists($controller,$action_name) or die(sprintf('文件:%s<br>控制器、方法定义出错:%s %s',$ctrl_path,json_encode($_GET),json_encode($src)));
  else
- method_exists($controller,$action_name) or header("Location: /404.html");
+ method_exists($controller,$action_name) or header(sprintf("Location: %s/../404.html",THEME_HOMEPAGE_ASSETS));
  $controller->$action_name(empty($param)?0:$param);
  }catch(Exception $e){
- 	 header("Location: /404.html");
+		 header(sprintf("Location: %s/../404.html",THEME_HOMEPAGE_ASSETS));
  }
 ?>
