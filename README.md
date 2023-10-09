@@ -24,7 +24,7 @@ composer create-project dfer/df-php
 
 
 # 运行环境
-- 此项目支持的最高版本为php7，不支持php8。推荐版本为：php7.3
+- php8
 - 服务器最低配置：1cpu、1G、1Mbps
 
 # 开发模式
