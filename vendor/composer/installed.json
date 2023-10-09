@@ -2,17 +2,17 @@
     "packages": [
         {
             "name": "dfer/df-php-core",
-            "version": "1.0.4",
-            "version_normalized": "1.0.4.0",
+            "version": "1.0.5",
+            "version_normalized": "1.0.5.0",
             "source": {
                 "type": "git",
                 "url": "https://gitcode.net/dofun333/df-php-core",
-                "reference": "b69953e6e02ed7fb1e43737235f3f3ce3a5fb594"
+                "reference": "8b670fa1ad2911c2879c367a0661227d23628bd5"
             },
             "require": {
                 "php": ">=7.0"
             },
-            "time": "2023-09-12T02:59:11+00:00",
+            "time": "2023-09-15T06:32:11+00:00",
             "type": "library",
             "installation-source": "source",
             "autoload": {
@@ -40,17 +40,17 @@
         },
         {
             "name": "dfer/tools",
-            "version": "1.0.1",
-            "version_normalized": "1.0.1.0",
+            "version": "1.0.7",
+            "version_normalized": "1.0.7.0",
             "source": {
                 "type": "git",
                 "url": "https://gitcode.net/dofun333/dfer-tools",
-                "reference": "ceb5d38f56ed022154e4e8a83ef39714e2baea21"
+                "reference": "18c8bc52094526a88eb3f51ef70e6868e6de55b2"
             },
             "require": {
                 "php": ">=7.0"
             },
-            "time": "2023-09-12T02:51:12+00:00",
+            "time": "2023-09-28T09:28:07+00:00",
             "type": "library",
             "installation-source": "source",
             "autoload": {
