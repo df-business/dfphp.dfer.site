@@ -15,10 +15,10 @@ composer create-project dfer/df-php
 # 框架介绍
 - DfPHP
 - 轻量级PHP开发框架
-- [dfphp.dfer.top](dfphp.dfer.site)
+- [dfphp.dfer.site](dfphp.dfer.site)
 - 由于df在做项目的过程中越来越习惯基于tp和vue的前后端分离写法，此框架将不再作为开发的首选方案，将减缓更新频率，仅作为老系统的过渡方案
 - 工作QQ：3504725309
-- 个人网站：www.dfer.site
+- 网站：www.dfer.site
 - QQ群：76673820
 
 
