@@ -10,7 +10,7 @@
 				<div class="ibox-content">
 					<div class="row form-horizontal form-group">
 						<div class="col-sm-1">
-							<a href='!!SplitUrl(sprintf("admin/column/%sadd",self::$db_hc))!!'
+							<a href='!!splitUrl(sprintf("admin/column/%s_add",self::$db_hc))!!'
 								class="btn btn-primary btn-sm"><i class="fa fa-plus"></i>&nbsp;添加</a>
 						</div>
 
@@ -32,8 +32,8 @@
 									<td>!`title`</td>
 									<td class='center'>
 										<a
-											href='!!SplitUrl(sprintf("admin/column/%sadd/{$v[0]}",self::$db_hc))!!'>[编辑]</a>
-										<!--<a href='!!SplitUrl("homepage/column/columndel/{$v[0]}")!!' onclick='return confirm("您确认要删除吗？")'>[删除]</a>-->
+											href='!!splitUrl(sprintf("admin/column/%s_add/{$v[0]}",self::$db_hc))!!'>[编辑]</a>
+										<!--<a href='!!splitUrl("homepage/column/columndel/{$v[0]}")!!' onclick='return confirm("您确认要删除吗？")'>[删除]</a>-->
 									</td>
 								</tr>
 							</df-each>

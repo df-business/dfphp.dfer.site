@@ -30,7 +30,7 @@
 								<tr>
 									<td>!!$num!!</td>
 									<td><a
-											href='!!SplitUrl(sprintf("admin/column/%sview/{$v[0]}",self::$db_mes))!!'>!`name`</a>
+											href='!!splitUrl(sprintf("admin/column/%s_view/{$v[0]}",self::$db_mes))!!'>!`name`</a>
 									</td>
 									<td>
 										<a target="_blank"
@@ -40,7 +40,7 @@
 									<td>!!$v['status']?'已读':'未读'!!</td>
 									<td>!`time`</td>
 									<td class='center'>
-										<a href='!!SplitUrl(sprintf("admin/home/delPost_Msg/{$v[0]}",self::$db_mes))!!'
+										<a href='!!splitUrl(sprintf("admin/home/delPost_Msg/{$v[0]}",self::$db_mes))!!'
 											onclick='return confirm("您确认要删除吗？")'>[删除]</a>
 									</td>
 								</tr>

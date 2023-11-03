@@ -9,7 +9,7 @@
 				<div class="ibox-content">
 					<div class="row form-horizontal form-group">
 						<div class="col-sm-1">
-							<a href='!!SplitUrl(sprintf("admin/home/%sadd",self::$db_htm))!!' class="btn btn-primary btn-sm"><i class="fa fa-plus"></i>&nbsp;添加</a>
+							<a href='!!splitUrl(sprintf("admin/home/%s_add",self::$db_htm))!!' class="btn btn-primary btn-sm"><i class="fa fa-plus"></i>&nbsp;添加</a>
 						</div>
 
 					</div>
@@ -33,12 +33,12 @@
 										<a href='/html/!`fileN`'>!`fileN`</a>
 									</td>
 									<td>
-										<a href='!!SplitUrl($v["src"])!!'>!`src`</a>
+										<a href='!!splitUrl($v["src"])!!'>!`src`</a>
 									</td>
 									<td>!`comment`</td>
 									<td class='center'>
-										<a href='!!SplitUrl(sprintf("admin/home/%sadd/{$v[0]}",self::$db_htm))!!'>[编辑]</a>
-										<a href='!!SplitUrl(sprintf("admin/home/%sdel/{$v[0]}",self::$db_htm))!!' onclick='return confirm("您确认要删除吗？")'>[删除]</a>
+										<a href='!!splitUrl(sprintf("admin/home/%s_add/{$v[0]}",self::$db_htm))!!'>[编辑]</a>
+										<a href='!!splitUrl(sprintf("admin/home/%s_del/{$v[0]}",self::$db_htm))!!' onclick='return confirm("您确认要删除吗？")'>[删除]</a>
 									</td>
 								</tr>
 							</df-each>

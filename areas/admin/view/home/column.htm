@@ -7,7 +7,7 @@
 					<h5></h5>
 				</div>
 				<div class="ibox-content">
-					<form method="post" action="!!SplitUrl(sprintf('admin/home/%supdate',self::$db_c))!!">
+					<form method="post" action="!!splitUrl(sprintf('admin/home/%s_update',self::$db_c))!!">
 						<input name="id" value="!!isset($output[0])?$output[0]:'0'!!" hidden/>
 						<input name="data[content]" id="content" hidden/>
 						<div class="form-horizontal m-t">
@@ -41,7 +41,7 @@
 
 </df-body>
 <df-footer>
-    
+
 
 
 	<!-- umeditor-->
@@ -68,13 +68,12 @@
 			$("#content").val($("#Body").html());
 			return verify();
 		}
-		window.UMEDITOR_CONFIG.imageUrl = "!!SplitUrl(sprintf('admin/home/%sUp/upfile',self::$db_c))!!";
+		window.UMEDITOR_CONFIG.imageUrl = "!!splitUrl(sprintf('admin/home/%s_edit_up',self::$db_c))!!";
 		var um1 = UM.getEditor('Body');
 		um1.addListener('fullscreenchanged', resetbody);
 
 		function resetbody(type, isfullscreen) {
 			if(!isfullscreen) {
-				// 重置编辑器内容区域高度，这个高度在切换全屏时会改变，应该是 UMEditor 自身的BUG
 				$("body").css("overflow", "");
 			}
 		}

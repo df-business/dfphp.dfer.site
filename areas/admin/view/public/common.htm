@@ -18,7 +18,7 @@
 		<link href="!!THEME_ADMIN_ASSETS!!/admin/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
 		<link href="!!THEME_ADMIN_ASSETS!!/admin/css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
 		<link href="!!THEME_ADMIN_ASSETS!!/admin/css/style.css?v=4.1.0" rel="stylesheet">
-		
+
 		<!-- ********************** jq START ********************** -->
 		<script src="!!THEME_ADMIN_ASSETS!!/admin/js/jquery.min.js"></script>
 		<!-- **********************  jq END  ********************** -->
@@ -38,5 +38,59 @@
 	</body>
 
 	<df-footer />
+
+	<script>
+		//上传
+		function upload(trigger_obj, preview_obj, input_obj, upload_api) {
+
+			var uploader = WebUploader.create({
+				auto: true,
+				pick: trigger_obj,
+				server: upload_api,
+				method: 'POST'
+			});
+
+
+			uploader.on('uploadBeforeSend', function() {
+				console.log('uploadBeforeSend')
+				$(preview_obj).after(`<div class="layui-progress layui-progress-big" lay-showpercent="true" lay-filter="${input_obj.replace('#', '')}">
+													<div class="layui-progress-bar layui-bg-red" lay-percent="0%"></div>
+												 </div>`);
+			});
+
+			uploader.on('uploadProgress', function(file, percentage) {
+				per = Math.round(percentage * 100)
+				layui.use('element', function() {
+					var element = layui.element;
+					console.log(input_obj.replace('#', ''), `${per}%`);
+					element.progress(input_obj.replace('#', ''), `${per}%`)
+				})
+			});
+
+			uploader.on('uploadSuccess', function(file, response) {
+				if (response == "-1")
+					$(preview_obj).html('文件出错（超出服务器允许上传的体积，请设置php.ini）');
+				else if (response == "-2")
+					$(preview_obj).html('类型不允许');
+				else if (response == "-3")
+					$(preview_obj).html('文件太大');
+				else {
+					//获取原始数据
+					var type = response.type;
+					var url = response.url;
+					if (type == 'img')
+						$(preview_obj).html(`<img src="${url}" />`);
+					else
+						$(preview_obj).append(`<div>${url}</div>`);
+					$(input_obj).val(url);
+				}
+			});
+
+			uploader.on('uploadError', function(file) {
+				$(preview_obj).html("上传失败");
+			});
+
+		}
+	</script>
 
 </html>

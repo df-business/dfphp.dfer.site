@@ -1,46 +1,49 @@
 <?php
+use \Dfer\Tools\Files;
 
-require "web.config.php";
-
-class loginController
+class LoginController
 {
-    //--------------------------登陆
+    // ********************** 登陆 START **********************
+    public static $db_d = 'df';
     public function index($param)
     {
-        global $m, $_df;
+        global $m, $_df,$common;
         GetWeb();
         $m -> VerifyLogin();
         $err="";
         //接收post
         if (isset($_POST['submit'])) {
             $user_sm = $_POST['data'];
-            $user = show_first("df", ['nm'=>$user_sm['nm']]);
+            $user = showFirst("df", ['nm'=>$user_sm['nm']]);
             if ($user != null) {
                 if ($user["pw"] == $user_sm["pw"] && $user["nm"] == $user_sm["nm"]) {
-                    update('df', array('lastlogintime' => getTime(TIMESTAMP)), $user[0]);
+                    update('df', array('lastlogintime' => $common->getTime(TIMESTAMP)), $user[0]);
 																				// 设置session在cookie的保存时间
 																				setcookie(session_name(), session_id(), time() + SESSION_EXPIRES, '/');
-                    setSession($m -> data["ses"], array($user[0], strToHex($user["nm"]), strToHex($user["pw"])), "admin/home/index");
+                    setSession($m -> data["ses"], array($user[0], $common->strToHex($user["nm"]),  $common->strToHex($user["pw"])), "admin/home/index");
                 }
             }
             $err="同志，请确定你的账号和密码";
         }
-        include view_back('iconShare');
-        //加载视图
+        include viewBack('iconShare');
     }
 
-    public static $db_d = 'df';
-    //-------------------------------------------修改头像
+				// **********************  登陆 END  **********************
+
+				// ********************** 修改头像 START **********************
+
     public function changePic($param)
     {
-        global $m;
-        $output = show_first(self::$db_d, 1);
-        include    view_back();
-        //加载视图
+
+        $output = showFirst(self::$db_d, 1);
+        include    viewBack();
     }
 
-    //上传头像
-    public function SetchangePic($param)
+    /**
+					* 上传头像
+					* @param {Object} $param
+					*/
+    public function setChangePic($param)
     {
         global $m;
         $dt = $_POST['data'];
@@ -49,37 +52,48 @@ class loginController
         $myValue = update(self::$db_d, $dt, $id, Enum::reloadParent);
     }
 
-    //上传组件
-    public function UpchangePic($name)
+    /**
+					* 上传组件
+					* @param {Object} $name
+					*/
+    public function upChangePic($name)
     {
-        global $m;
-        $myValue = upload_file($name, "500*500", 0, 'img/logo.png');
+        global $files,$common;
+        $rt= $files->uploadFile(Files::UPLOAD_UMEDITOR_SINGLE, ['size'=>"500*500",'path'=>"areas/admin/view/public/assets/img/logo.png"]);
+								// var_dump($rt);
+								$common->showJsonBase($rt);
     }
 
-    //-------------------------------------------设置密码
+				// **********************  修改头像 END  **********************
 
-    public function setpwd($param)
+
+// ********************** 设置密码 START **********************
+
+    public function setPwd($param)
     {
         global $m;
         $err = $_GET['err'];
         $id = getSession($m -> data["ses"]);
         $id = $id[0];
-        $output = show_first(self::$db_d, $id);
-        include    view_back();
-        //加载视图
+        $output = showFirst(self::$db_d, $id);
+        include viewBack();
     }
 
-    //更新密码
-    public function Updatesetpwd($param)
+    /**
+					* 更新密码
+					* @param {Object} $param
+					*/
+    public function updateSetPwd($param)
     {
         global $m, $_df;
         $dt = $_POST['data'];
         $ndt["pw"] = $dt["npw"];
-        $output = show_first(self::$db_d, $dt['Id']);
+        $output = showFirst(self::$db_d, $dt['Id']);
         if ($output['pw'] != $dt['pw'] || empty($dt['pw'])) {
             toUrl(sprintf("admin/login/setpwd"), array('err' => '原密码有误'));
         }
-
-        $myValue = update(self::$db_d, $ndt, $dt['Id'], "admin/login/setpwd");
+        update(self::$db_d, $ndt, $dt['Id'], "admin/login/setpwd");
     }
+
+// **********************  设置密码 END  **********************
 }
