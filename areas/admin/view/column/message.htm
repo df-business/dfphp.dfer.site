@@ -30,7 +30,7 @@
 								<tr>
 									<td>!!$num!!</td>
 									<td><a
-											href='!!splitUrl(sprintf("admin/column/%s_view/{$v[0]}",self::$db_mes))!!'>!`name`</a>
+											href='!!splitUrl(str("admin/column/{0}_view/{1}",[self::$db_mes,$v[0]]))!!'>!`name`</a>
 									</td>
 									<td>
 										<a target="_blank"

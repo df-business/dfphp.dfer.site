@@ -8,7 +8,7 @@
 					<h5></h5>
 				</div>
 				<div class="ibox-content">
-					<form method="post" action='!!splitUrl(sprintf(" admin/column/%s_update ",self::$db_hm))!!'>
+					<form method="post" action='!!splitUrl(str("admin/column/{0}_update",[self::$db_hm]))!!'>
 						<input name="id" value="!!isset($output[0])?$output[0]:'0'!!" hidden />
 						<input name="data[src]" id="src" value="!!isset($output[0])?$output['src']:'0'!!" hidden />
 

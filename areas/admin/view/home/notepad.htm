@@ -11,7 +11,7 @@
 				<div class="ibox-content">
 					<div class="row form-horizontal form-group">
 						<div class="col-sm-1">
-							<a href='!!splitUrl(sprintf("admin/home/%s_add",self::$db_N))!!'
+							<a href='!!splitUrl(sprintf("admin/home/%s_add",self::$db_n))!!'
 								class="btn btn-primary btn-sm"><i class="fa fa-plus"></i>&nbsp;添加</a>
 						</div>
 
@@ -32,13 +32,13 @@
 									<td>!!$num!!</td>
 									<td>
 										<a
-											href='!!splitUrl(sprintf("admin/home/%sview/%s",self::$db_N,$v[0]))!!'>!`title`</a>
+											href='!!splitUrl(str("admin/home/{0}_view/{1}",[self::$db_n,$v[0]]))!!'>!`title`</a>
 									</td>
 									<td>!`time`</td>
 									<td class='center'>
 										<a
-											href='!!splitUrl(sprintf("admin/home/%s_add/%s",self::$db_N,$v[0]))!!'>[编辑]</a>
-										<a href='!!splitUrl(sprintf("admin/home/%s_del/%s",self::$db_N,$v[0]))!!'
+											href='!!splitUrl(sprintf("admin/home/%s_add/%s",self::$db_n,$v[0]))!!'>[编辑]</a>
+										<a href='!!splitUrl(sprintf("admin/home/%s_del/%s",self::$db_n,$v[0]))!!'
 											onclick='return confirm("您确认要删除吗？")'>[删除]</a>
 									</td>
 								</tr>

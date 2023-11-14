@@ -12,9 +12,9 @@ class HomeController
 	public function index($param)
 	{
 		global $m, $common;
-		$id = $m->VerifyLogin(1);
+		$id = $m->verifyLogin(1);
 		if (!empty($_POST['top-search'])) {
-			show_json(true, null, $_POST['top-search']);
+			$common->showJson(true, null, $_POST['top-search']);
 		}
 		//验证登录
 		$output = showFirst("df", ['Id' => $id]);
@@ -22,7 +22,7 @@ class HomeController
 
 		//留言
 		$message = showList("message", ['status' => 0]);
-		$notepad = showList(self::$db_N);
+		$notepad = showList(self::$db_n);
 		if ($output['nm'] == 'df') {
 			$where = '1';
 			$output['role'] = "超级管理员";
@@ -60,8 +60,7 @@ class HomeController
 	public function desktop($param)
 	{
 		include viewBack();
-		//加载视图
-	}
+		}
 
 	/**
 		* 框架信息
@@ -70,7 +69,7 @@ class HomeController
 	public function info($param)
 	{
 		global $m;
-		$id = $m->VerifyLogin(1);
+		$id = $m->verifyLogin(1);
 		$PHP_VERSION = PHP_VERSION;
 		$VERSION = VERSION;
 		$DF_PHP_VER = DF_PHP_VER;
@@ -111,24 +110,13 @@ class HomeController
 
 	// ********************** 记事本 START **********************
 
-	public static $db_N = 'notepad';
+	public static $db_n = 'notepad';
 	public function notepad($param)
 	{
 		global $m;
-		$output = showList(self::$db_N, [], ['time', 'desc']);
+		$output = showList(self::$db_n, [], ['time', 'desc']);
 		include viewBack();
-		//加载视图
-	}
-
-
-	public function notepadSs($param)
-	{
-		global $m;
-		showPage(self::$db_N, [], "admin/home/" . self::$db_N);
-		include viewBack();
-		//加载视图
-	}
-
+		}
 
 	/**
 		* 修改记事本
@@ -137,10 +125,9 @@ class HomeController
 	public function notepadAdd($param)
 	{
 		global $m;
-		$output = showFirst(self::$db_N, ["Id" => $param]);
+		$output = showFirst(self::$db_n, ["Id" => $param]);
 		include viewBack();
-		//加载视图
-	}
+		}
 
 	/**
 		* 记事本上传组件
@@ -158,10 +145,9 @@ class HomeController
 		*/
 	public function notepadView($param)
 	{
-		$output = showFirst(self::$db_N, ["Id" => $param]);
+		$output = showFirst(self::$db_n, ["Id" => $param]);
 		include viewBack();
-		//加载视图
-	}
+		}
 
 	/**
 		* 更新数据
@@ -170,7 +156,7 @@ class HomeController
 	{
 		$dt = $_POST['data'];
 		$id = $_POST['id'];
-		$myValue = update(self::$db_N, $dt, ["Id" => $id], ("admin/home/" . self::$db_N));
+		$myValue = update(self::$db_n, $dt, ["Id" => $id], ("admin/home/" . self::$db_n));
 	}
 
 	/**
@@ -179,8 +165,56 @@ class HomeController
 		*/
 	public function notepadDel($id)
 	{
-		$myValue = del(self::$db_N, $id, "admin/home/" . self::$db_N);
+		$myValue = del(self::$db_n, $id, "admin/home/" . self::$db_n);
 	}
+
+
+	public function notepadSs($param)
+	{
+		showPage(self::$db_n, [], str("admin/home/{0}_ss",[self::$db_n]));
+		include viewBack();
+		}
+
+		/**
+			* 修改记事本
+			* @param {Object} $param
+			*/
+		public function notepadSsAdd($param)
+		{
+			global $m;
+			$output = showFirst(self::$db_n, ["Id" => $param]);
+			include viewBack();
+			}
+
+			/**
+				* 删除
+				* @param {Object} $id
+				*/
+			public function notepadSsDel($id)
+			{
+				$myValue = del(self::$db_n, $id,  str("admin/home/{0}_ss",[self::$db_n]));
+			}
+
+			/**
+				* 更新数据
+				*/
+			public function notepadSsUpdate()
+			{
+				$dt = $_POST['data'];
+				$id = $_POST['id'];
+				$myValue = update(self::$db_n, $dt, ["Id" => $id], str("admin/home/{0}_ss",[self::$db_n]));
+			}
+
+
+		/**
+			* 预览记事本
+			* @param {Object} $param
+			*/
+		public function notepadSsView($param)
+		{
+			$output = showFirst(self::$db_n, ["Id" => $param]);
+			include viewBack();
+			}
 
 	// **********************  记事本 END  **********************
 
@@ -225,11 +259,11 @@ class HomeController
 		//新增
 		if ($output == null || $id > 0) {
 			$dt['lastlogintime'] = $common->getTime(TIMESTAMP);
-			update(self::$db_d, $dt, $id, ("admin/home/" . self::$db_d));
+			update(self::$db_d, $dt, $id, "admin/home/" . self::$db_d);
 		}
 		//修改
 		else {
-			toUrl(sprintf("admin/home/%sadd", self::$db_d), array('err' => '用户已经存在'));
+			toUrl(str("admin/home/{0}_add", [self::$db_d]), array('err' => '用户已经存在'));
 		}
 	}
 
@@ -278,7 +312,7 @@ class HomeController
 		$dt = $_POST['data'];
 		$id = $_POST['id'];
 
-		update(self::$db_roles, $dt, $id, ("admin/home/" . self::$db_roles));
+		update(self::$db_roles, $dt, $id, "admin/home/" . self::$db_roles);
 	}
 
 	/**
@@ -456,11 +490,10 @@ class HomeController
 	*/
 	public function log($param)
 	{
-		global $m, $_gp, $_df;
-
+		global $common;
 		if (!empty($_POST)) {
 			clear('logs');
-			show_json(1, 'clear');
+			$common->showJson(1, 'clear');
 		}
 
 		$output = showList('logs');

@@ -7,7 +7,7 @@
 					<h5></h5>
 				</div>
 				<div class="ibox-content">
-					<form method="post" action='!!splitUrl(sprintf(" admin/column/%s_update ",self::$db_hlo))!!'
+					<form method="post" action='!!splitUrl(str("admin/column/{0}_update",[self::$db_hlo]))!!'
 						class="layui-form">
 						<input name="id" value="!!isset($output[0])?$output[0]:'0'!!" hidden />
 						<input name="data[img1]" id="img1" value="!!isset($output[0])?$output['img1']:''!!" hidden />

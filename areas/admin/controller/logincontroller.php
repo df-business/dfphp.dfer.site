@@ -9,7 +9,7 @@ class LoginController
     {
         global $m, $_df,$common;
         GetWeb();
-        $m -> VerifyLogin();
+        $m -> verifyLogin();
         $err="";
         //接收post
         if (isset($_POST['submit'])) {
@@ -36,7 +36,7 @@ class LoginController
     {
 
         $output = showFirst(self::$db_d, 1);
-        include    viewBack();
+        include viewBack();
     }
 
     /**
