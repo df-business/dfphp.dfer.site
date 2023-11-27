@@ -9,9 +9,18 @@
 	}],
 	"homepage": "http://dfphp.dfer.site",
 	"require": {
-		"php": ">=7.0",
+		"php": ">=8.0",
 		"dfer/tools": "^1.0.0",
 		"dfer/df-php-core": "^1.0.0"
 	},
-	"keywords": ["df", "dfer.site"]
+	"keywords": ["df", "dfer.site"],
+	"autoload": {
+		"psr-4": {
+			"areas\\": "areas"
+		},
+		"psr-0": {
+			"": "extend/"
+		},
+		"classmap": ["extend/"]
+	}
 }

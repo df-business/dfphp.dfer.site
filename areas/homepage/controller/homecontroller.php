@@ -1,5 +1,5 @@
 <?php
-
+namespace areas\homepage\controller;
 
 class HomeController
 {
@@ -10,7 +10,7 @@ class HomeController
 		*/
 	function index($param)
 	{
-		global $m;
+		global $other;
 		$home_layout = showFirst("home_layout", ['Id' => 1]);
 		$home_column = showList("home_column", [], ["Id" => "asc"]);
 		$home_link = showList("home_link");
@@ -19,7 +19,7 @@ class HomeController
 		//var_dump($home_layout);die();
 		//访问量
 		sql("update dt set val=val+1 where `key`='hits'");
-		$m->colUserInfo();
+		$other->colUserInfo();
 
 		include viewFront();
 	}
@@ -49,9 +49,9 @@ class HomeController
 	{
 		$myValue = del(self::$db_mes, $id, "homepage/column/" . self::$db_mes);
 	}
-	
+
 	// **********************  留言 END  **********************
-	
-	
+
+
 }
 

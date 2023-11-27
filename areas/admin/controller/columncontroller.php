@@ -1,4 +1,5 @@
 <?php
+namespace areas\admin\controller;
 
 use Dfer\Tools\Files;
 class ColumnController {
@@ -170,14 +171,13 @@ class ColumnController {
 		$output = showFirst(self::$db_hlo, $param);
 		$img = showList(self::$db_hli);
 		//var_dump($img);
-		include  viewBack();
+		include viewBack();
 	}
 
 	function homeLayoutUpdate() {
 		$dt = $_POST['data'];
 		$id = $_POST['id'];
-
-		$myValue = update(self::$db_hlo, $dt, $id, sprintf("admin/column/%s/1", self::$db_hlo));
+		$myValue = update(self::$db_hlo, $dt, $id, str("admin/column/{0}/1",[self::$db_hlo]));
 	}
 
 	/**
@@ -202,8 +202,8 @@ class ColumnController {
 		* @param {Object} $name
 		*/
 	function homeLayoutPicDel($name) {
-		global $_gp, $files,$common;
-		$id = $_gp['id'];
+		global $_param, $files,$common;
+		$id = $_param['id'];
 		$img = showFirst(self::$db_hli, $id);
 		$rt = del(self::$db_hli, $id) . ',';
 		$rt .= $files -> delFile($img['img']);
@@ -211,6 +211,156 @@ class ColumnController {
 	}
 
 	// **********************  布局 END  **********************
+
+
+	// ********************** 记事本 START **********************
+
+	public static $db_n = 'notepad';
+	public function notepad($param)
+	{
+		global $m;
+		$output = showList(self::$db_n, [], ['time', 'desc']);
+		include viewBack();
+		}
+
+	/**
+		* 修改记事本
+		* @param {Object} $param
+		*/
+	public function notepadAdd($param)
+	{
+		global $m;
+		$output = showFirst(self::$db_n, ["Id" => $param]);
+		include viewBack();
+		}
+
+	/**
+		* 记事本上传组件
+		* @param {Object} $name
+		*/
+	public function notepadEditUp($name)
+	{
+		global $files,$common;
+		$common->showJsonBase($files->uploadFile(Files::UPLOAD_UMEDITOR_EDITOR));
+	}
+
+	/**
+		* 预览记事本
+		* @param {Object} $param
+		*/
+	public function notepadView($param)
+	{
+		$output = showFirst(self::$db_n, ["Id" => $param]);
+		include viewBack();
+		}
+
+	/**
+		* 更新数据
+		*/
+	public function notepadUpdate()
+	{
+		$dt = $_POST['data'];
+		$id = $_POST['id'];
+		$myValue = update(self::$db_n, $dt, ["Id" => $id], str("admin/column/{0}",[self::$db_n]));
+	}
+
+	/**
+		* 删除
+		* @param {Object} $id
+		*/
+	public function notepadDel($id)
+	{
+		$myValue = del(self::$db_n, $id, str("admin/column/{0}",[self::$db_n]));
+	}
+
+
+	public function notepadSs($param)
+	{
+		showPage(self::$db_n, [], str("admin/column/{0}_ss",[self::$db_n]));
+		include viewBack();
+		}
+
+		/**
+			* 修改记事本
+			* @param {Object} $param
+			*/
+		public function notepadSsAdd($param)
+		{
+			global $m;
+			$output = showFirst(self::$db_n, ["Id" => $param]);
+			include viewBack();
+			}
+
+			/**
+				* 删除
+				* @param {Object} $id
+				*/
+			public function notepadSsDel($id)
+			{
+				$myValue = del(self::$db_n, $id,  str("admin/column/{0}_ss",[self::$db_n]));
+			}
+
+			/**
+				* 更新数据
+				*/
+			public function notepadSsUpdate()
+			{
+				$dt = $_POST['data'];
+				$id = $_POST['id'];
+				$myValue = update(self::$db_n, $dt, ["Id" => $id], str("admin/column/{0}_ss",[self::$db_n]));
+			}
+
+
+		/**
+			* 预览记事本
+			* @param {Object} $param
+			*/
+		public function notepadSsView($param)
+		{
+			$output = showFirst(self::$db_n, ["Id" => $param]);
+			include viewBack();
+			}
+
+	// **********************  记事本 END  **********************
+
+
+	// ********************** 栏目 START **********************
+
+	public static $db_c = 'column';
+	public function column($param)
+	{
+		global $m;
+		$output = showFirst(self::$db_c, 1);
+		include viewBack();
+	}
+
+	public function columnUpdate()
+	{
+		global $m;
+		$dt = $_POST['data'];
+		$id = $_POST['id'];
+		$myValue = update(self::$db_c, $dt, $id, ("admin/column/" . self::$db_c));
+	}
+
+	public function columnEditUp($name)
+	{
+		global $files,$common;
+		$common->showJsonBase($files->uploadFile(Files::UPLOAD_UMEDITOR_EDITOR));
+	}
+
+	// **********************  栏目 END  **********************
+
+	/**
+		* 使用说明
+		* @param {Object} $param
+		*/
+	public function readme($param)
+	{
+		global $m;
+		$output = showFirst(self::$db_c, 1);
+		include viewBack();
+	}
+
 
 }
 ?>

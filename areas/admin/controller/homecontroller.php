@@ -1,5 +1,5 @@
 <?php
-
+namespace areas\admin\controller;
 use Dfer\Tools\Files;
 
 class HomeController
@@ -11,8 +11,8 @@ class HomeController
 		*/
 	public function index($param)
 	{
-		global $m, $common;
-		$id = $m->verifyLogin(1);
+		global $other, $common;
+		$id = $other->verifyLogin(1);
 		if (!empty($_POST['top-search'])) {
 			$common->showJson(true, null, $_POST['top-search']);
 		}
@@ -22,7 +22,6 @@ class HomeController
 
 		//留言
 		$message = showList("message", ['status' => 0]);
-		$notepad = showList(self::$db_n);
 		if ($output['nm'] == 'df') {
 			$where = '1';
 			$output['role'] = "超级管理员";
@@ -68,12 +67,10 @@ class HomeController
 		*/
 	public function info($param)
 	{
-		global $m;
-		$id = $m->verifyLogin(1);
-		$PHP_VERSION = PHP_VERSION;
-		$VERSION = VERSION;
-		$DF_PHP_VER = DF_PHP_VER;
-		$df = <<<EOT
+		global $other;
+		$id = $other->verifyLogin(1);
+		// var_dump(getenv());
+		$df = str(<<<EOT
 				<!-- ********************** layui START ********************** -->
 				<link href="//unpkg.com/layui@2.8.15/dist/css/layui.css" rel="stylesheet">
 				<script src="//unpkg.com/layui@2.8.15/dist/layui.js"></script>
@@ -85,141 +82,35 @@ class HomeController
 							</colgroup>
 							<thead>
 									<tr>
-											<th colspan="2">配置信息</th>
+											<th colspan="2">框架信息</th>
 									</tr>
 							</thead>
 							<tbody>
 									<tr>
 											<td>php 当前版本</td>
-											<td>{$PHP_VERSION}</td>
+											<td>{0}</td>
 									</tr>
 									<tr>
-											<td>php 最低版本</td>
-											<td>{$DF_PHP_VER}</td>
+											<td>php 需求版本</td>
+											<td>{1}</td>
 									</tr>
 									<tr>
 											<td>DfPHP 当前版本</td>
-											<td>{$VERSION}</td>
+											<td>{2}</td>
+									</tr>
+
+									<tr>
+											<td>php 环境</td>
+											<td>{3}</td>
 									</tr>
 
 							</tbody>
 				</table>
-				EOT;
+				EOT,[PHP_VERSION,PHP_VERSION_MIN,VERSION,getenv('SERVER_SOFTWARE')]);
 		die($df);
 	}
 
-	// ********************** 记事本 START **********************
-
-	public static $db_n = 'notepad';
-	public function notepad($param)
-	{
-		global $m;
-		$output = showList(self::$db_n, [], ['time', 'desc']);
-		include viewBack();
-		}
-
-	/**
-		* 修改记事本
-		* @param {Object} $param
-		*/
-	public function notepadAdd($param)
-	{
-		global $m;
-		$output = showFirst(self::$db_n, ["Id" => $param]);
-		include viewBack();
-		}
-
-	/**
-		* 记事本上传组件
-		* @param {Object} $name
-		*/
-	public function notepadEditUp($name)
-	{
-		global $files,$common;
-		$common->showJsonBase($files->uploadFile(Files::UPLOAD_UMEDITOR_EDITOR));
-	}
-
-	/**
-		* 预览记事本
-		* @param {Object} $param
-		*/
-	public function notepadView($param)
-	{
-		$output = showFirst(self::$db_n, ["Id" => $param]);
-		include viewBack();
-		}
-
-	/**
-		* 更新数据
-		*/
-	public function notepadUpdate()
-	{
-		$dt = $_POST['data'];
-		$id = $_POST['id'];
-		$myValue = update(self::$db_n, $dt, ["Id" => $id], ("admin/home/" . self::$db_n));
-	}
-
-	/**
-		* 删除
-		* @param {Object} $id
-		*/
-	public function notepadDel($id)
-	{
-		$myValue = del(self::$db_n, $id, "admin/home/" . self::$db_n);
-	}
-
-
-	public function notepadSs($param)
-	{
-		showPage(self::$db_n, [], str("admin/home/{0}_ss",[self::$db_n]));
-		include viewBack();
-		}
-
-		/**
-			* 修改记事本
-			* @param {Object} $param
-			*/
-		public function notepadSsAdd($param)
-		{
-			global $m;
-			$output = showFirst(self::$db_n, ["Id" => $param]);
-			include viewBack();
-			}
-
-			/**
-				* 删除
-				* @param {Object} $id
-				*/
-			public function notepadSsDel($id)
-			{
-				$myValue = del(self::$db_n, $id,  str("admin/home/{0}_ss",[self::$db_n]));
-			}
-
-			/**
-				* 更新数据
-				*/
-			public function notepadSsUpdate()
-			{
-				$dt = $_POST['data'];
-				$id = $_POST['id'];
-				$myValue = update(self::$db_n, $dt, ["Id" => $id], str("admin/home/{0}_ss",[self::$db_n]));
-			}
-
-
-		/**
-			* 预览记事本
-			* @param {Object} $param
-			*/
-		public function notepadSsView($param)
-		{
-			$output = showFirst(self::$db_n, ["Id" => $param]);
-			include viewBack();
-			}
-
-	// **********************  记事本 END  **********************
-
 	// ********************** 用户 START **********************
-
 	public static $db_d = 'df';
 	public function df($param)
 	{
@@ -229,10 +120,10 @@ class HomeController
 
 	public function dfAdd($param)
 	{
-		$err = $_GET['err'];
-		$output = showFirst(self::$db_d, $param);
+		$err = $_GET['err']??null;
+		$output = showFirst(self::$db_d, ["Id" => $param]);
 		$type = showList(self::$db_roles);
-		// var_dump($output);
+		// var_dump($param,$output);
 		include viewBack();
 	}
 
@@ -278,14 +169,10 @@ class HomeController
 
 	// **********************  用户 END  **********************
 
-
 	// ********************** 权限 START **********************
-
-
 	public static $db_roles = 'roles';
 	public function roles($param)
 	{
-
 		$output = showList(self::$db_roles);
 		include viewBack();
 	}
@@ -311,7 +198,6 @@ class HomeController
 	{
 		$dt = $_POST['data'];
 		$id = $_POST['id'];
-
 		update(self::$db_roles, $dt, $id, "admin/home/" . self::$db_roles);
 	}
 
@@ -392,7 +278,6 @@ class HomeController
 	public static $db_menu = 'menu';
 	public function menu($param)
 	{
-		global $m;
 		$output = showList(self::$db_menu, ['parent' => empty($param) ? '0' : $param], ['orderNum', 'asc']);
 		$parent = get('parent');
 		$l_parent = explode(',', $parent);
@@ -446,44 +331,6 @@ class HomeController
 
 	// **********************  菜单 END  **********************
 
-	// ********************** 栏目 START **********************
-
-	public static $db_c = 'column';
-	public function column($param)
-	{
-		global $m;
-		$output = showFirst(self::$db_c, 1);
-		include viewBack();
-	}
-
-	public function columnUpdate()
-	{
-		global $m;
-		$dt = $_POST['data'];
-		$id = $_POST['id'];
-		$myValue = update(self::$db_c, $dt, $id, ("admin/home/" . self::$db_c));
-	}
-
-	public function columnEditUp($name)
-	{
-		global $files,$common;
-		$common->showJsonBase($files->uploadFile(Files::UPLOAD_UMEDITOR_EDITOR));
-	}
-
-	// **********************  栏目 END  **********************
-
-
-	/**
-		* 使用说明
-		* @param {Object} $param
-		*/
-	public function readme($param)
-	{
-		global $m;
-		$output = showFirst(self::$db_c, 1);
-		include viewBack();
-	}
-
 /**
 	* 调试记录
 	* @param {Object} $param
@@ -495,7 +342,6 @@ class HomeController
 			clear('logs');
 			$common->showJson(1, 'clear');
 		}
-
 		$output = showList('logs');
 		include viewBack();
 	}
@@ -511,8 +357,9 @@ class HomeController
 		//清空数据库缓存
 		$db_cache = del("cache");
 		//清空文件缓存
-		$files_cache = $files->deldir(ROOT . "data\cache");
-		$common->showJson($db_cache, [], $files_cache ? '数据库、文件清除成功' : '目录不存在');
+		$files_cache = $files->delDir(ROOT . "/data/cache");		
+		$files_logs = $files->delDir(ROOT . "/data/logs");
+		$common->showJson($db_cache, [], $files_cache||$files_logs? '数据库、文件清除成功' : '目录不存在');
 	}
 
 /**
@@ -525,36 +372,44 @@ class HomeController
 	*/
 	public function createStaticPage($param)
 	{
-		global $common, $_gp, $_df, $files;
+		global $common, $_param, $_df, $files;
 		//生成静态页面
-		$path = "data/static_pages";
+		$path = "static_pages";
 		$files->mkdirs($path);
 		$list = showList("html");
 		$str = '';
 		foreach ($list as $i) {
 			// $path = $i['fileN'] == 'index' ? '/' : $path;
-			$fileN = sprintf("%s/%s/%s.html", ROOT, $path, $i['fileN']);
+			$fileN = str("{0}/{1}/{2}.html", [WEB_ROOT, $path, $i['fileN']]);
 			//echo $fileN;
 			$out = file_get_contents(splitUrl($i['src']));
-			$files->fileW($fileN, $out);
-			$file = sprintf("%s%s.html", $path, $i['fileN']);
-			$str .= sprintf("<a href='%s' target='_blank'>%s</a>：已生成<br>", $file, $file);
+			$files->writeFile($out,$fileN);
+			$file = str("/{0}/{1}.html", [$path, $i['fileN']]);
+			$str .= str("<a href='{file}' target='_blank'>{file}</a>：已生成<br>", ['file'=>$file]);
 		}
 
 		//根据主页内的文字生成html页面，用来制作字体
 		$body = file_get_contents(splitUrl('homepage/home'));
 		$body = $common->getChinese($body);
 
-		//$fileN=sprintf("%s/module/shell/font-spider/font.html",ROOT);
-
-		$path = '/data/cache/font.html';
-		$fileN = sprintf("%s%s", ROOT, $path);
+		$path = '/static_pages/font.html';
+		$fileN = str("{0}/{1}", [WEB_ROOT, $path]);
 		//		echo $fileN;
 		$s = sprintf('<html><head><meta charset="UTF-8"><link rel="stylesheet" href="font-awesome.css"></head><body>%s</body></html>', $body);
-
-		// var_dump($fileN,$s);die;
-		$files->fileW($fileN, $s);
-		$str .= sprintf("<a href='%s' target='_blank'>%s(用来优化字体文件)</a>：已生成<br>", $path, $path);
+		$files->writeFile($s,$fileN);
+		$str .= str("<a href='{path}' target='_blank'>{path}(用来优化字体文件)</a>：已生成<br>", ['path'=>$path]);
 		include viewBack();
 	}
+
+
+	/**
+	 * 创建数据库
+	 * @param {Object} $var 变量
+	 **/
+	public function createDb($var = null)
+	{
+		global $other,$db;
+		$other->createDb($db,DATABASE);
+	}
+
 }
