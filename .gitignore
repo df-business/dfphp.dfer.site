@@ -1,7 +1,8 @@
-/cache/
 /vendor/
 *.lock
 
 /data/cache/
-/data/static_pages/
 /data/upload/
+/public/static_pages/
+/public/upload/
+/data/logs/

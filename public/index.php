@@ -1,8 +1,7 @@
 <?php
-// [ 应用入口文件 ]
-namespace df;
+namespace Dfer\DfPhpCore\Modules;
 
 // 加载基础文件
-require __DIR__ . '/../vendor/autoload.php';
+require dirname(__DIR__) . '/vendor/autoload.php';
 
-main();
+(new Web())->run();
