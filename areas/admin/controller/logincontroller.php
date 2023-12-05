@@ -21,7 +21,7 @@ class LoginController
                     update('df', array('lastlogintime' => $common->getTime(TIMESTAMP)), $user[0]);
 																				// 设置session在cookie的保存时间
 																				setcookie(session_name(), session_id(), time() + SESSION_EXPIRES, '/');
-                    setSession($other -> data["ses"], array($user[0], $common->strToHex($user["nm"]),  $common->strToHex($user["pw"])), "admin/home/index");
+                    setSession(\Enum::sesName, array($user[0], $common->strToHex($user["nm"]),  $common->strToHex($user["pw"])), "admin/home/index");
                 }
             }
             $err="同志，请确定你的账号和密码";
@@ -75,7 +75,7 @@ class LoginController
     {
         global $other;
         $err = $_GET['err']??null;
-        $id = getSession($other->data["ses"]);
+        $id = getSession(\Enum::sesName);
         $id = $id[0];
         $output = showFirst(self::$db_d, $id);
         include viewBack();

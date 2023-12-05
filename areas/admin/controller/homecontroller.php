@@ -49,7 +49,7 @@ class HomeController
 	public function ext($param)
 	{
 		setcookie(session_name(), session_id(), time() - 1, '/');
-		delSession($model->data["ses"], "admin/login/index");
+		delSession(\Enum::sesName, "admin/login/index");
 	}
 
 	/**
@@ -357,7 +357,7 @@ class HomeController
 		//清空数据库缓存
 		$db_cache = del("cache");
 		//清空文件缓存
-		$files_cache = $files->delDir(ROOT . "/data/cache");		
+		$files_cache = $files->delDir(ROOT . "/data/cache");
 		$files_logs = $files->delDir(ROOT . "/data/logs");
 		$common->showJson($db_cache, [], $files_cache||$files_logs? '数据库、文件清除成功' : '目录不存在');
 	}

@@ -64,29 +64,29 @@
 	<body>
 		<div class="wrapper">
 			<h1>!!$msg!!</h1>
-			<p class="tm">跳转倒计时——<span id="time">!!$delay!!</span>秒</p>
+			<p class="tm">跳转倒计时——<span id="Time">!!$delay!!</span>秒</p>
 			<p class="btn"><a id="Btn" href="javascript:">立即跳转</a></p>
 		</div>
 		<script type="text/javascript">
-			function sendStats() {
+			function jump() {
 				!!$script!!
 			}
 
-			var time = document.getElementById('time');
+			var time = document.getElementById('Time');
 			var btn = document.getElementById('Btn');
 
 			function count() {
 				if (+time.innerHTML > 0) {
 					time.innerHTML--;
 				} else {
-					clearInterval();
-					sendStats();
+					clearInterval(timer);
+					jump();
 				}
 			}
-			setInterval(count, !!$delay*1000!!);
+			var timer = setInterval(count, !!$delay * 1000!!);
 
 			btn.onclick = function() {
-				sendStats();
+				jump();
 			};
 		</script>
 	</body>

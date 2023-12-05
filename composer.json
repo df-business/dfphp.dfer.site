@@ -11,7 +11,8 @@
 	"require": {
 		"php": ">=8.0",
 		"dfer/tools": "^1.0.0",
-		"dfer/df-php-core": "^1.0.0"
+		"dfer/df-php-core": "^1.0.0",
+		"dfer/df-php-root": "^1.0.0"
 	},
 	"keywords": ["df", "dfer.site"],
 	"autoload": {
@@ -22,5 +23,10 @@
 			"": "extend/"
 		},
 		"classmap": ["extend/"]
+	},
+	"config": {
+		"allow-plugins": {
+			"dfer/df-php-root": true
+		}
 	}
 }
