@@ -41,7 +41,8 @@ echo;
 echo **********************  一键发布 END  **********************
 echo ********************** 同步root START **********************
 php df dev:root
-../df-php-root/p.bat
+cd ../df-php-root
+p.bat
 echo **********************  同步root END  **********************
 pause
 exit
