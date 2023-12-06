@@ -16,11 +16,11 @@ if exist %cache% (
 		set /a a=%%a,b=%%b,c=%%c
 	)
 	:: ########### 生成新版本号 ###########
-	set /a ver_int=!a!*100+!b!*10+!c!+1  
+	set /a ver_int=!a!*100+!b!*10+!c!+1
 	set aa=!ver_int:~0,1!
 	set bb=!ver_int:~1,1!
 	set cc=!ver_int:~2,1!
-	set "ver=!aa!.!bb!.!cc!"	
+	set "ver=!aa!.!bb!.!cc!"
 ) else (
 	:: ########### 默认版本号 ###########
 	set ver_str=0.0.0
@@ -39,6 +39,12 @@ echo;
 echo *********** !ver_str! ^> %ver% ***********
 echo;
 echo **********************  一键发布 END  **********************
+
+echo ********************** 同步root START **********************
+php df dev:root
+../df-php-root/p.bat
+echo **********************  同步root END  **********************
+
 pause
 exit
 endlocal
