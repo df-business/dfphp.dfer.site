@@ -21,7 +21,7 @@ if exist %cache% (
 	set bb=!ver_int:~1,1!
 	set cc=!ver_int:~2,1!
 	set "ver=!aa!.!bb!.!cc!"
-) else (file:///F:/Users/dfer/Documents/dfer/Project/dfphp.dfer.site/publish - 副本.bat
+) else (
 	:: ########### 默认版本号 ###########
 	set ver_str=0.0.0
 	set ver=1.0.0
