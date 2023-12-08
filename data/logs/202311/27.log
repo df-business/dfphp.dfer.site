@@ -29,42 +29,42 @@ select * from `message` where 1=1 and `status`='0'
 2023-11-27 15:56:38
 
 ********************** DEBUG START **********************
-select * from menu where parent=0 and (1) order by orderNum asc
+select * from menu where parent=0 and (1) order by order_num asc
 **********************  DEBUG END  **********************
 2023-11-27 15:56:38
 
 ********************** DEBUG START **********************
-select * from menu where parent=25 and (1) order by orderNum asc
+select * from menu where parent=25 and (1) order by order_num asc
 **********************  DEBUG END  **********************
 2023-11-27 15:56:38
 
 ********************** DEBUG START **********************
-select * from menu where parent=26 and (1) order by orderNum asc
+select * from menu where parent=26 and (1) order by order_num asc
 **********************  DEBUG END  **********************
 2023-11-27 15:56:38
 
 ********************** DEBUG START **********************
-select * from menu where parent=27 and (1) order by orderNum asc
+select * from menu where parent=27 and (1) order by order_num asc
 **********************  DEBUG END  **********************
 2023-11-27 15:56:38
 
 ********************** DEBUG START **********************
-select * from menu where parent=2 and (1) order by orderNum asc
+select * from menu where parent=2 and (1) order by order_num asc
 **********************  DEBUG END  **********************
 2023-11-27 15:56:38
 
 ********************** DEBUG START **********************
-select * from menu where parent=3 and (1) order by orderNum asc
+select * from menu where parent=3 and (1) order by order_num asc
 **********************  DEBUG END  **********************
 2023-11-27 15:56:38
 
 ********************** DEBUG START **********************
-select * from menu where parent=24 and (1) order by orderNum asc
+select * from menu where parent=24 and (1) order by order_num asc
 **********************  DEBUG END  **********************
 2023-11-27 15:56:38
 
 ********************** DEBUG START **********************
-select * from menu where parent=4 and (1) order by orderNum asc
+select * from menu where parent=4 and (1) order by order_num asc
 **********************  DEBUG END  **********************
 2023-11-27 15:56:38
 
@@ -174,42 +174,42 @@ select * from `message` where 1=1 and `status`='0'
 2023-11-27 16:26:12
 
 ********************** DEBUG START **********************
-select * from menu where parent=0 and (1) order by orderNum asc
+select * from menu where parent=0 and (1) order by order_num asc
 **********************  DEBUG END  **********************
 2023-11-27 16:26:12
 
 ********************** DEBUG START **********************
-select * from menu where parent=25 and (1) order by orderNum asc
+select * from menu where parent=25 and (1) order by order_num asc
 **********************  DEBUG END  **********************
 2023-11-27 16:26:12
 
 ********************** DEBUG START **********************
-select * from menu where parent=26 and (1) order by orderNum asc
+select * from menu where parent=26 and (1) order by order_num asc
 **********************  DEBUG END  **********************
 2023-11-27 16:26:12
 
 ********************** DEBUG START **********************
-select * from menu where parent=27 and (1) order by orderNum asc
+select * from menu where parent=27 and (1) order by order_num asc
 **********************  DEBUG END  **********************
 2023-11-27 16:26:12
 
 ********************** DEBUG START **********************
-select * from menu where parent=2 and (1) order by orderNum asc
+select * from menu where parent=2 and (1) order by order_num asc
 **********************  DEBUG END  **********************
 2023-11-27 16:26:12
 
 ********************** DEBUG START **********************
-select * from menu where parent=3 and (1) order by orderNum asc
+select * from menu where parent=3 and (1) order by order_num asc
 **********************  DEBUG END  **********************
 2023-11-27 16:26:12
 
 ********************** DEBUG START **********************
-select * from menu where parent=24 and (1) order by orderNum asc
+select * from menu where parent=24 and (1) order by order_num asc
 **********************  DEBUG END  **********************
 2023-11-27 16:26:12
 
 ********************** DEBUG START **********************
-select * from menu where parent=4 and (1) order by orderNum asc
+select * from menu where parent=4 and (1) order by order_num asc
 **********************  DEBUG END  **********************
 2023-11-27 16:26:12
 
@@ -359,42 +359,42 @@ select * from `message` where 1=1 and `status`='0'
 2023-11-27 16:27:54
 
 ********************** DEBUG START **********************
-select * from menu where parent=0 and (1) order by orderNum asc
+select * from menu where parent=0 and (1) order by order_num asc
 **********************  DEBUG END  **********************
 2023-11-27 16:27:54
 
 ********************** DEBUG START **********************
-select * from menu where parent=25 and (1) order by orderNum asc
+select * from menu where parent=25 and (1) order by order_num asc
 **********************  DEBUG END  **********************
 2023-11-27 16:27:54
 
 ********************** DEBUG START **********************
-select * from menu where parent=26 and (1) order by orderNum asc
+select * from menu where parent=26 and (1) order by order_num asc
 **********************  DEBUG END  **********************
 2023-11-27 16:27:54
 
 ********************** DEBUG START **********************
-select * from menu where parent=27 and (1) order by orderNum asc
+select * from menu where parent=27 and (1) order by order_num asc
 **********************  DEBUG END  **********************
 2023-11-27 16:27:54
 
 ********************** DEBUG START **********************
-select * from menu where parent=2 and (1) order by orderNum asc
+select * from menu where parent=2 and (1) order by order_num asc
 **********************  DEBUG END  **********************
 2023-11-27 16:27:54
 
 ********************** DEBUG START **********************
-select * from menu where parent=3 and (1) order by orderNum asc
+select * from menu where parent=3 and (1) order by order_num asc
 **********************  DEBUG END  **********************
 2023-11-27 16:27:54
 
 ********************** DEBUG START **********************
-select * from menu where parent=24 and (1) order by orderNum asc
+select * from menu where parent=24 and (1) order by order_num asc
 **********************  DEBUG END  **********************
 2023-11-27 16:27:54
 
 ********************** DEBUG START **********************
-select * from menu where parent=4 and (1) order by orderNum asc
+select * from menu where parent=4 and (1) order by order_num asc
 **********************  DEBUG END  **********************
 2023-11-27 16:27:54
 
