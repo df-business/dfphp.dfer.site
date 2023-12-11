@@ -27,11 +27,7 @@ composer create-project dfer/df-php
 - php8
 - 服务器最低配置：1cpu、1G、1Mbps
 
-# 开发模式
-**/share/config.php**
-```
-$dev=true;	#开发模式开关
-```
+
 # 伪静态
 *nginx*
 ```
@@ -55,69 +51,6 @@ RewriteRule ^(.*)$ index.php?s=$1
 
 
 # 项目详情
-~~~
-.
-├── Areas
-│   ├── admin
-│   └── homepage
-├── cache
-│   ├── Areas
-│   └── share
-├── assets
-│   ├── 404
-│   ├── admin
-│   ├── fontFamily
-│   ├── loaders
-│   ├── siteCloud
-│   ├── dataTables
-│   ├── homepage
-│   ├── jqTemplate
-│   ├── layui
-│   ├── mui
-│   ├── requireJs
-│   ├── umeditor
-│   ├── webuploader
-│   ├── df.js
-│   ├── df.png
-│   ├── jquery.ext.js
-│   └── jquery.min.js
-├── data
-│   ├── hbuilder
-│   ├── sql
-│   └── create.php
-├── img
-│   ├── bg.jpg
-│   ├── loading-1.gif
-│   ├── logo.ico
-│   ├── logo.png
-│   └── qq.png
-├── module
-│   ├── functions.php
-│   └── model.php
-├── share
-│   ├── backShare.htm
-│   ├── config.php
-│   ├── homeShare.htm
-│   ├── iconShare.htm
-│   ├── message.htm
-│   ├── pureShare.htm
-│   ├── share.php
-│   ├── share_origin.htm
-│   └── share_rJs.htm
-├── upload
-│   └── pics
-├── 403.html
-├── 404.html
-├── error.html
-├── favicon.ico
-├── favicon.png
-├── faviconMix.ico
-├── htaccess -> .htaccess
-├── index.php
-└── readme.md
-
-28 directories, 30 files
-~~~
 - 需要添加目录权限    #chmod -R 777 *
 - 默认开启ssl，升级https之后降级，需要重启浏览器才能生效
 - 有时候网页ico不加载，只是浏览器短时间故障，重启浏览器等待一下即可
@@ -129,7 +62,10 @@ RewriteRule ^(.*)$ index.php?s=$1
 - linux、php、ftp这种老外发明的东西对中文兼容依然不够好，尽量用英文来表示文件名
 - 添加了云数据和安全机制
 
-
+# 命令行
+```
+php df
+```
 
 # 关键字说明
 ```
