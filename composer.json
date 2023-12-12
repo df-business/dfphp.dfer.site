@@ -20,7 +20,7 @@
 			"areas\\": "areas"
 		},
 		"psr-0": {
-			"": "extend/"
+			"": "extend"
 		}
 	},
 	"config": {
