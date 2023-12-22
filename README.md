@@ -115,7 +115,7 @@ d*/
 
 **数据库更新**
 ```
-https://api.dfer.site/admin/home/createDb
+http://dfphp.dfer.site/admin/home/createDb
 ```
 **查询**
 ```
