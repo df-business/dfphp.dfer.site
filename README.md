@@ -112,6 +112,11 @@ d*/
 
 
 # 数据库操作
+
+**数据库更新**
+```
+https://api.dfer.site/admin/home/createDb
+```
 **查询**
 ```
 
