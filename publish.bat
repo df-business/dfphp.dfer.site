@@ -4,6 +4,7 @@ chcp 65001
 @echo off
 :: ########### 实时更新变量 ###########
 setlocal enabledelayedexpansion
+
 echo ********************** 一键发布 START **********************
 echo;
 set cache=version
@@ -39,13 +40,15 @@ echo;
 echo *********** !ver_str! ^> %ver% ***********
 echo;
 echo **********************  一键发布 END  **********************
+
 echo ********************** 同步root START **********************
-:: 将项目里的`df-php-root`同步至组件库
+:: 将项目的基础源码同步至`df-php-root`
 php df dev:root
 echo **********************  同步root END  **********************
 echo ********************** 更新composer START **********************
 composer update
 echo **********************  更新composer END  **********************
+
 pause
 exit
 endlocal
