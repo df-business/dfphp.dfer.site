@@ -64,7 +64,12 @@ RewriteRule ^(.*)$ index.php?s=$1
 
 # 命令行
 ```
+:: 基础命令
 php df
+:: 将项目的基础源码同步至`df-php-root`项目
+php df dev:root
+:: 将项目的`df-php-core`源码同步至`df-php-core`项目
+php df dev:core
 ```
 
 # 关键字说明

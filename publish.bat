@@ -41,14 +41,6 @@ echo *********** !ver_str! ^> %ver% ***********
 echo;
 echo **********************  一键发布 END  **********************
 
-echo ********************** 同步root START **********************
-:: 将项目的基础源码同步至`df-php-root`
-php df dev:root
-echo **********************  同步root END  **********************
-echo ********************** 更新composer START **********************
-composer update
-echo **********************  更新composer END  **********************
-
 pause
 exit
 endlocal
