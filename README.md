@@ -120,7 +120,7 @@ d*/
 
 **数据库更新**
 ```
-http://dfphp.dfer.site/admin/home/createDb
+http://dfphp.dfer.site/admin/login/create_db
 ```
 **查询**
 ```
