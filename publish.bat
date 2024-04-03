@@ -1,10 +1,9 @@
-:: 自动生成新的版本号，然后发布
-:: 65001 Unicode (UTF-8)
+::自动生成新的版本号，然后发布
+::65001 Unicode (UTF-8)
 chcp 65001
 @echo off
 :: ########### 实时更新变量 ###########
 setlocal enabledelayedexpansion
-
 echo ********************** 一键发布 START **********************
 echo;
 set cache=version
@@ -25,22 +24,26 @@ if exist %cache% (
 ) else (
 	:: ########### 默认版本号 ###########
 	set ver_str=0.0.0
-	set ver=1.0.0
+	set aa=1
+	set bb=0
+	set cc=0
+	set "ver=!aa!.!bb!.!cc!"
 )
 :: ########### 保存版本号 ###########
 echo !ver!>!cache!
 
+:: ########### 文件区分大小写 ###########
+git config core.ignorecase false
 :: ########### 提交git ###########
 git add *
 git commit -m !ver!
-git push
+git push origin !aa!.x
 git tag !ver!
 git push --tag
 echo;
 echo *********** !ver_str! ^> %ver% ***********
 echo;
 echo **********************  一键发布 END  **********************
-
 pause
 exit
 endlocal
