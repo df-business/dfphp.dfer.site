@@ -74,44 +74,50 @@ php df dev:core
 
 # 关键字说明
 ```
- //布局
- <df-html/>
- <df-header/>
- <df-body/>
- <df-footer/>
- <df-header></df-header>
- <df-body></df-body>
- <df-footer></df-footer>
+<!-- 布局 -->
+<df-html>
+</df-html>
+<df-header>
+</df-header>
+<df-body>
+</df-body>
+<df-footer>
+</df-footer>
 
- //打印参数
- <df-print value="">
- !!$str!!
+<df-html/>
+<df-header/>
+<df-body/>
+<df-footer/>
 
+<!-- 遍历数组，来循环显示多条数据 -->
+<df-each $list>
+	<df-val-cache value="name"/>
+	{:::name}
+</df-each>
 
- //执行php代码
- <df-code>
- !{}!
+<df-each-cache $list>
+	<df-val value="name"/>
+	{::name}
+</df-each-cache>
 
- //遍历数组，来循环显示多条数据
- <df-each $0>
- <df-val value=""/>
- !``
- </df-each>
+<!-- 条件语句-->
+<df-if $type==1>
+<df-elif $type==2>
+<df-else>
+</df-if>
 
-//这里放关键字，防止整理代码格式的时候关键字被破坏
-/*d
-d*/
+<!-- 执行php代码 -->
+<df-code>
+</df-code>
 
- //if语句
- <df-if $0>
- <df-elif $1>
- <df-else>
- </df-if>
+<!-- 打印参数 -->
+<df-print value="$str" />
+{:$str}
+{str}
 
- !{if true}
- !{elif false}
- !{else}
- !{/else}
+<!-- js防止格式化 -->
+/*code
+code*/
 
 ```
 
@@ -122,41 +128,59 @@ d*/
 ```
 http://dfphp.dfer.site/admin/login/create_db
 ```
+**引用模型**
+```
+use areas\admin\model\{ConfigModel,LayoutImgModel,ArticleModel,LinkModel,MusicModel,MessageModel,NotepadModel};
+```
 **查询**
 ```
 
+<!-- 列表 -->
+$output = MusicModel::select();
+$output = ArticleModel::order('asc')->select();
+$output = NotepadModel::order(['time', 'desc'])->select();
+$output = MusicModel::where(3)->select();
+$output = MusicModel::where(["id" => 3])->select();
 
-//有多行就输出数组，否则返回单个list（有些情况必须返回数组，就添加order）
-show('df',1,'type',' ');
-// 根据字符串进行查询
-show('df','谷雨光影','subs');
-// 按id降序输出全表
-show('df',-1,'id','desc');
-//输出type为1的特定数目的数据
-show('df',1,'type','limit 0,5');
-//输出type为1的数据并进行排序
-show('df',1,'type','order by id desc');
-//执行sql语句
-show('select * from df',0);
-//按条件输出全表
-show("menu",$param,'parent','order by oderNum desc');
-//分页查询(页数,行数)
-show_page(self::$db_d,$page,$rows);
+
+<!-- 读取第一条数据,不满足条件则返回空 -->
+$output = ArticleModel::where(3)->find();
+<!-- 始终读取第一条数据 -->
+$output = NotepadModel::where(["id" => 3])->first();
+
+<!-- 直接生成dataTable的接口数据 -->
+NotepadModel::showPage(str("admin/column/{0}_ss",[NotepadModel::getName()]));
+
+<!-- 读取第一条数据的某个值 -->
+$layout = ConfigModel::where(['key' => 'layout'])->value('val');
+
+
 ```
-**新增、修改**
+**新增**
 ```
-//新增数据，之后不进行任何操作
-update('df',$arr)
-//根据id新增、修改数据，之后进行页面跳转
-update(self::$db_hc,$dt,$id,("homepage/column/".self::$db_hc));
+$ret = ConfigModel::insert(['val'=>123]);
+$ret = LinkModel::update($dt);
+$ret = LinkModel::where(null)->update($dt);
+$ret = LinkModel::where([])->update($dt);
+```
+
+**修改**
+```
+$ret = LinkModel::where(3)->update($dt);
+$ret = ConfigModel::where(['key' => 'layout'])->update(['val'=>$dt]);
 ```
 
 **删除**
 ```
-//根据id进行删除
-del('db',3);
-//清空表
-clear('db')
+<!-- 根据id删除 -->
+ArticleModel::where(3)->del();
+
+<!-- 根据条件删除 -->
+ArticleModel::where(['type'=>3])->del();
+
+<!-- 清空表 -->
+ArticleModel::del();
+
 ```
 
 
