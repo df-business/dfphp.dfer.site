@@ -91,13 +91,13 @@ php df dev:core
 
 <!-- 遍历数组，来循环显示多条数据 -->
 <df-each $list>
-	<df-val-cache value="name"/>
-	{:::name}
+	<df-val value="name"/>
+	{::name}
 </df-each>
 
 <df-each-cache $list>
-	<df-val value="name"/>
-	{::name}
+	<df-val-cache value="name"/>
+	{:::name}
 </df-each-cache>
 
 <!-- 条件语句-->
@@ -113,7 +113,7 @@ php df dev:core
 <!-- 打印参数 -->
 <df-print value="$str" />
 {:$str}
-{str}
+{$str}
 
 <!-- js防止格式化 -->
 /*code
