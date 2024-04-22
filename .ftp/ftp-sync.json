@@ -6,5 +6,5 @@
     "username": "dfphp_dfer_site",
     "password": "666",
     "remotePath": "/dfphp.dfer.site",
-    "uploadOnSave": false
+    "uploadOnSave": true
 }
