@@ -5,3 +5,4 @@
 /public/upload/
 
 *.lock
+/.env
