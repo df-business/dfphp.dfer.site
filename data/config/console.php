@@ -5,6 +5,7 @@
 return [
     // 指令定义
     'commands' => [
-        'dfer:console_create' => 'Dfer\Tools\TpConsole\Create'
+        'dfer:console_create' => 'Dfer\Tools\TpConsole\Create',
+          'dfer:a' => 'app\command\A'
     ],
 ];

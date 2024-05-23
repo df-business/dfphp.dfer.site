@@ -30,17 +30,40 @@ composer create-project dfer/df-php
 
 
 # 伪静态
-*nginx*
+*/www/server/panel/rewrite/nginx/DfPHP.conf*
 ```
- location / {
-            index  index.php index.html index.htm;
-             #如果请求既不是一个文件，也不是一个目录，则执行一下重写规则
-             if (!-e $request_filename)
-             {
-                #地址作为参数rewrite到index.php上
-                rewrite ^/(.*)$ /index.php?s=$1;
-             }
-        }
+location / {
+    index  index.php index.html index.htm;
+     #如果请求既不是一个文件，也不是一个目录，则执行一下重写规则
+     if (!-e $request_filename)
+     {
+        #地址作为参数rewrite到index.php上
+        rewrite ^/(.*)$ /index.php?s=$1;
+     }
+}
+location /api/ {
+	index  index.php index.html index.htm;
+	 #如果请求既不是一个文件，也不是一个目录，则执行一下重写规则
+	 if (!-e $request_filename)
+	 {
+		#若是子目录则使用下面这句，将subdir改成目录名称即可。
+		rewrite ^/api/(.*)$ /api.php?s=$1;
+	 }
+}
+
+location ~ .*\.(gif|jpg|jpeg|png|bmp|swf)$
+{
+	expires      30d;
+	error_log /dev/null;
+	access_log /dev/null;
+}
+
+location ~ .*\.(js|css)?$
+{
+	expires      1h;
+	error_log /dev/null;
+	access_log /dev/null;
+}
 ```
 *apache*
 ```
