@@ -1,0 +1,10 @@
+  /*雪花会导致滚动条被反复触发，影响美观，所以要隐藏滚动条*/
+  ::-webkit-scrollbar {
+  	display: none;
+  }
+  
+  .xue {
+  	z-index: 1;
+  	position: absolute;
+  	color: grey;
+  }

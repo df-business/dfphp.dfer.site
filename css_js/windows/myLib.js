@@ -1,0 +1,8 @@
+var myLib={NS:function(ns){if(!ns||!ns.length){return null;}
+var levels=ns.split(".");var nsobj=myLib;for(var i=(levels[0]=="myLib")?1:0;i<levels.length;++i){nsobj[levels[i]]=nsobj[levels[i]]||{};nsobj=nsobj[levels[i]];}
+return nsobj;},_loadJs:function(path,callback){callback=!(typeof(callback)=="undefined")?callback:function(){};var oHead=document.getElementsByTagName('HEAD').item(0);var script=document.createElement("script")
+script.type="text/javascript";if(script.readyState){script.onreadystatechange=function(){if(script.readyState=="loaded"||script.readyState=="complete"){script.onreadystatechange=null;callback();}};}else{script.onload=function(){callback();};}
+script.src=path+".js";oHead.appendChild(script);},_loadCss:function(path){if(!path||path.length===0){throw new Error('argument "path" is required !');}
+var head=document.getElementsByTagName('head')[0];var links=document.createElement('link');links.href=path+".css";links.rel='stylesheet';links.type='text/css';head.appendChild(links);},_getType:function(object){return Object.prototype.toString.call(object).match(/^\[object\s(.*)\]$/)[1];},_is:function(object,typeStr){return this._getType(object)==typeStr;},_import:function(path,fileType){var loadfun;switch(fileType){case "js":loadfun=this._loadJs;break;case "css":loadfun=this._loadCss;break;default:alert("请检查文件类型");}
+if(this._is(path,"String")){if(path.indexOf(",")>=0){path=path.split(",");}else{path=[path];}}
+for(var i=0;i<path.length;i++){loadfun(path[i]);}}}

@@ -1,0 +1,45 @@
+ !{ global $m,$_df; $home_layout = show("home_layout",1); }!
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+	<head>
+		<title>!!$home_layout['title']!!</title>
+		<meta name="author" content="Df" />
+		<meta name="keywords" content="!!$home_layout['keywords']!!" />
+		<meta name="description" content="!!$home_layout['description']!!" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+		<meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width" />
+		<!--页面尺寸-->
+		<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+		<!--手机状态栏的颜色-->
+		<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+		<!--作为独立的网页，进行全屏显示-->
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<link rel="shortcut icon" href="/favicon.ico" />
+		<link rel="apple-touch-icon" href="/favicon.png" />
+		<!--=========自定义alert=========-->
+		<link rel="stylesheet" type="text/css" href="/css_js/sweetalert/sweetalert.css">
+		<script type="text/javascript" src="/css_js/sweetalert/sweetalert-dev.js"></script>
+		<!--=========引用=========-->
+		<df-code>			 
+			include view('share','share_origin','','');			
+			$m->ie_notice();
+		</df-code>
+
+		<df-header/>
+		<style>
+			html,
+			body {
+				height: 100%;
+			}
+		</style>
+	</head>
+
+	<df-body/>
+
+	<df-footer/>
+
+	
+
+</html>
