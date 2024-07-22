@@ -1,5 +1,5 @@
 # DfPHP
-> 考虑到thinkphp的优越性，且实际市场应用度极广，为了适应大环境需求，就有了tp版的DfPHP框架，后续会根据tp的版本进行迭代Z
+> 考虑到thinkphp的优越性，且实际市场应用度极广，为了适应大环境需求，就有了tp版的DfPHP框架，后续会根据tp的版本进行迭代
 
 # 项目介绍
 - [gitcode](https://gitcode.net/dofun333/dfphp.dfer.site)
