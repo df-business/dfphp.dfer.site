@@ -1,9 +1,7 @@
 *.lock
 /.env
 /vendor/
-/data/cache/
-/data/logs/
-/public/static_pages/
-/public/upload/
-/public/*.ini
 /data/runtime/
+/data/runtime_cli/
+/data/logs/
+/public/upload/
