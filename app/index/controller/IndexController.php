@@ -3,12 +3,12 @@
 namespace app\index\controller;
 
 use dfer\controller\BaseController;
-
-class IndexController extends BaseController
+use dfer\controller\HomeBaseController;
+class IndexController extends HomeBaseController
 {
     public function index()
     {
-        return '<style>*{ padding: 0; margin: 0; }</style><iframe src="https://www.thinkphp.cn/welcome?version=' . \think\facade\App::version() . '" width="100%" height="100%" frameborder="0" scrolling="auto"></iframe>';
+     return $this->fetch();
     }
 
     public function hello($name = 'ThinkPHP8')

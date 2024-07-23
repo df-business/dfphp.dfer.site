@@ -7,26 +7,7 @@
     <meta name="renderer" content="webkit|ie-comp|ie-stand">
     <meta name="robots" content="noindex,nofollow">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <!-- HTML5 shim for IE8 support of HTML5 elements -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <![endif]-->
-    <link href="__TMPL__/public/assets/themes/{:dfer_get_admin_style('arcoadmin')}/bootstrap.min.css" rel="stylesheet">
-    <link href="__TMPL__/public/assets/fontawesome/css/all.min.css" rel="stylesheet" type="text/css">
-    <link href="__TMPL__/public/assets/fontawesome/css/v4-shims.min.css" rel="stylesheet" type="text/css">
-    <link href="__TMPL__/public/assets/themes/{:dfer_get_admin_style('arcoadmin')}/login.css" rel="stylesheet">
-    <!--[if lt IE 9]>
-    <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-    <script>
-        if (window.parent !== window.self) {
-            document.write              = '';
-            window.parent.location.href = window.self.location.href;
-            setTimeout(function () {
-                document.body.innerHTML = '';
-            }, 0);
-        }
-    </script>
+
 </head>
 <body>
 <div class="wrap">
@@ -69,34 +50,6 @@
 
     </div>
 </div>
-<php>$_static_version='1.0.4';</php>
-<script type="text/javascript">
-    //全局变量
-    var GV = {
-        ROOT: "__ROOT__/",
-        WEB_ROOT: "__WEB_ROOT__/",
-        JS_ROOT: "static/js/",
-        APP: ''/*当前应用名*/
-    };
-</script>
-<script src="__TMPL__/public/assets/js/jquery-1.10.2.min.js?v={$_static_version}"></script>
-<script src="__STATIC__/js/wind.js?v={$_static_version}"></script>
-<script>
-    Wind.alias({noty:'__TMPL__/public/assets/js/noty-2.4.1.js'})
-</script>
-<script src="__STATIC__/js/admin.js?v={$_static_version}"></script>
-<script>
-    (function () {
-        document.getElementById('input_username').focus();
-    })();
 
-    function  successRefreshCallback(data, statusText, xhr, $form){
-        localStorage.setItem('token', data.data.token);
-        if (data.url) {
-            //返回带跳转地址
-            window.location.href = data.url;
-        }
-    }
-</script>
 </body>
 </html>

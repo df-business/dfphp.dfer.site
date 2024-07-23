@@ -17,21 +17,3 @@ foreach ($apps as $app) {
         include_once $routeFile;
     }
 }
-
-$coreApps = dfer_scan_dir(DFER_ROOT . 'vendor/thinkcmf/cmf-api/src/*', GLOB_ONLYDIR);
-
-foreach ($coreApps as $app) {
-    $routeFile = DFER_ROOT . 'vendor/thinkcmf/cmf-api/src/' . $app . '/route.php';
-
-    if (file_exists($routeFile)) {
-        include_once $routeFile;
-    }
-}
-
-//if (file_exists(CMF_DATA . "conf/route.php")) {
-//    $runtimeRoutes = include CMF_DATA . "conf/route.php";
-//} else {
-//    $runtimeRoutes = [];
-//}
-
-//return $runtimeRoutes;

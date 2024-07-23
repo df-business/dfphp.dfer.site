@@ -18,8 +18,6 @@ class PublicController extends AdminBaseController
 {
     public function initialize()
     {
-        // 监听admin_init
-        hook('admin_init');
     }
 
     /**
@@ -29,12 +27,12 @@ class PublicController extends AdminBaseController
     {
         $loginAllowed = session("__LOGIN_BY_CMF_ADMIN_PW__");
         if (empty($loginAllowed)) {
-            //$this->error('非法登录!', dfer_get_root() . '/');
-            return redirect(dfer_get_root() . "/");
+            $this->error('非法登录!', dfer_get_root() . '/');
         }
 
         $admin_id = session('ADMIN_ID');
-        if (!empty($admin_id)) {//已经登录
+        if (!empty($admin_id)) {
+            //已经登录
             return redirect(url("admin/Index/index"));
         } else {
             session("__SP_ADMIN_LOGIN_PAGE_SHOWED_SUCCESS__", true);
@@ -110,11 +108,7 @@ class PublicController extends AdminBaseController
                 UserModel::where('id', $result['id'])->update($data);
                 cookie("admin_username", $name, 3600 * 24 * 30);
                 session("__LOGIN_BY_CMF_ADMIN_PW__", null);
-                $this->success(lang('LOGIN_SUCCESS'), url("admin/Index/index"), ['token' => $token, 'user' => [
-                    'id'            => $result['id'],
-                    'user_login'    => $result['user_login'],
-                    'user_nickname' => $result['user_nickname'],
-                ]]);
+                $this->success(lang('LOGIN_SUCCESS'), url("admin/Index/index"), ['token' => $token]);
             } else {
                 $this->error(lang('PASSWORD_NOT_RIGHT'));
             }
@@ -129,10 +123,6 @@ class PublicController extends AdminBaseController
     public function logout()
     {
         session('ADMIN_ID', null);
-        if ($this->request->isAjax()) {
-            $this->success('退出成功！');
-        } else {
-            return redirect(url('/', [], false, true));
-        }
+        return redirect(url('/', [], false, true));
     }
 }
