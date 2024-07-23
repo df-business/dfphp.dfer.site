@@ -40,17 +40,17 @@
         },
         {
             "name": "dfer/topthink",
-            "version": "1.0.3",
-            "version_normalized": "1.0.3.0",
+            "version": "1.0.4",
+            "version_normalized": "1.0.4.0",
             "source": {
                 "type": "git",
                 "url": "https://gitcode.net/dofun333/dfer-topthink",
-                "reference": "a96f0835497f8ff540767e5c73461422f756deb5"
+                "reference": "14a5afe4ea51b1d461f05c4bcd6c9f9f54c17dd5"
             },
             "require": {
                 "topthink/framework": "~8.0.0"
             },
-            "time": "2024-07-23T07:50:55+00:00",
+            "time": "2024-07-23T08:52:02+00:00",
             "type": "library",
             "installation-source": "source",
             "autoload": {
