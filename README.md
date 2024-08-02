@@ -3,8 +3,8 @@
 
 
 ## 项目介绍
-- [gitcode](https://gitcode.net/dofun333/dfphp.dfer.site)
-
+- [gitcode](https://gitcode.net/dofun333/dfphp.dfer.site/-/tree/6.x)
+- `6.x`是Df独立框架的最后一个分支，除了bug修复之外，将减少更新频率，且不再作为主流框架，从`7.x`开始将以基于tp的开发为主
 
 ### 使用
 ```
