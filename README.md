@@ -15,6 +15,7 @@ composer create-project dfer/df-php
 # 框架介绍
 - DfPHP
 - 轻量级PHP开发框架
+- 包含了独立的`DfPHP`框架，以及第三方框架`ThinkPHP`
 - [dfphp.dfer.site](http://dfphp.dfer.site)
 - 由于df在做项目的过程中越来越习惯基于tp和vue的前后端分离写法，此框架将不再作为开发的首选方案，将减缓更新频率，仅作为老系统的过渡方案
 - 工作QQ：3504725309
@@ -27,23 +28,42 @@ composer create-project dfer/df-php
 - php8
 - 服务器最低配置：1cpu、1G、1Mbps
 
-# 开发模式
-**/share/config.php**
-```
-$dev=true;	#开发模式开关
-```
+
 # 伪静态
-*nginx*
+*/www/server/panel/rewrite/nginx/DfPHP.conf*
 ```
- location / {
-            index  index.php index.html index.htm;
-             #如果请求既不是一个文件，也不是一个目录，则执行一下重写规则
-             if (!-e $request_filename)
-             {
-                #地址作为参数rewrite到index.php上
-                rewrite ^/(.*)$ /index.php?s=$1;
-             }
-        }
+location / {
+    index  index.php index.html index.htm;
+     #如果请求既不是一个文件，也不是一个目录，则执行一下重写规则
+     if (!-e $request_filename)
+     {
+        #地址作为参数rewrite到index.php上
+        rewrite ^/(.*)$ /index.php?s=$1;
+     }
+}
+location /api/ {
+	index  index.php index.html index.htm;
+	 #如果请求既不是一个文件，也不是一个目录，则执行一下重写规则
+	 if (!-e $request_filename)
+	 {
+		#若是子目录则使用下面这句，将subdir改成目录名称即可。
+		rewrite ^/api/(.*)$ /api.php?s=$1;
+	 }
+}
+
+location ~ .*\.(gif|jpg|jpeg|png|bmp|swf)$
+{
+	expires      30d;
+	error_log /dev/null;
+	access_log /dev/null;
+}
+
+location ~ .*\.(js|css)?$
+{
+	expires      1h;
+	error_log /dev/null;
+	access_log /dev/null;
+}
 ```
 *apache*
 ```
@@ -55,69 +75,6 @@ RewriteRule ^(.*)$ index.php?s=$1
 
 
 # 项目详情
-~~~
-.
-├── Areas
-│   ├── admin
-│   └── homepage
-├── cache
-│   ├── Areas
-│   └── share
-├── assets
-│   ├── 404
-│   ├── admin
-│   ├── fontFamily
-│   ├── loaders
-│   ├── siteCloud
-│   ├── dataTables
-│   ├── homepage
-│   ├── jqTemplate
-│   ├── layui
-│   ├── mui
-│   ├── requireJs
-│   ├── umeditor
-│   ├── webuploader
-│   ├── df.js
-│   ├── df.png
-│   ├── jquery.ext.js
-│   └── jquery.min.js
-├── data
-│   ├── hbuilder
-│   ├── sql
-│   └── create.php
-├── img
-│   ├── bg.jpg
-│   ├── loading-1.gif
-│   ├── logo.ico
-│   ├── logo.png
-│   └── qq.png
-├── module
-│   ├── functions.php
-│   └── model.php
-├── share
-│   ├── backShare.htm
-│   ├── config.php
-│   ├── homeShare.htm
-│   ├── iconShare.htm
-│   ├── message.htm
-│   ├── pureShare.htm
-│   ├── share.php
-│   ├── share_origin.htm
-│   └── share_rJs.htm
-├── upload
-│   └── pics
-├── 403.html
-├── 404.html
-├── error.html
-├── favicon.ico
-├── favicon.png
-├── faviconMix.ico
-├── htaccess -> .htaccess
-├── index.php
-└── readme.md
-
-28 directories, 30 files
-~~~
 - 需要添加目录权限    #chmod -R 777 *
 - 默认开启ssl，升级https之后降级，需要重启浏览器才能生效
 - 有时候网页ico不加载，只是浏览器短时间故障，重启浏览器等待一下即可
@@ -129,88 +86,125 @@ RewriteRule ^(.*)$ index.php?s=$1
 - linux、php、ftp这种老外发明的东西对中文兼容依然不够好，尽量用英文来表示文件名
 - 添加了云数据和安全机制
 
-
+# 命令行
+```
+:: 基础命令
+php df
+:: 将项目的基础源码同步至`df-php-root`项目
+php df dev:root
+:: 将项目的`df-php-core`源码同步至`df-php-core`项目
+php df dev:core
+```
 
 # 关键字说明
 ```
- //布局
- <df-html/>
- <df-header/>
- <df-body/>
- <df-footer/>
- <df-header></df-header>
- <df-body></df-body>
- <df-footer></df-footer>
+<!-- 布局 -->
+<df-html>
+</df-html>
+<df-header>
+</df-header>
+<df-body>
+</df-body>
+<df-footer>
+</df-footer>
 
- //打印参数
- <df-print value="">
- !!$str!!
+<df-html/>
+<df-header/>
+<df-body/>
+<df-footer/>
 
+<!-- 遍历数组，来循环显示多条数据 -->
+<df-each $list>
+	<df-val value="name"/>
+	{::name}
+</df-each>
 
- //执行php代码
- <df-code>
- !{}!
+<df-each-cache $list>
+	<df-val-cache value="name"/>
+	{:::name}
+</df-each-cache>
 
- //遍历数组，来循环显示多条数据
- <df-each $0>
- <df-val value=""/>
- !``
- </df-each>
+<!-- 条件语句-->
+<df-if $type==1>
+<df-elif $type==2>
+<df-else>
+</df-if>
 
-//这里放关键字，防止整理代码格式的时候关键字被破坏
-/*d
-d*/
+<!-- 执行php代码 -->
+<df-code>
+</df-code>
 
- //if语句
- <df-if $0>
- <df-elif $1>
- <df-else>
- </df-if>
+<!-- 打印参数 -->
+<df-print value="$str" />
+{:$str}
+{$str}
 
- !{if true}
- !{elif false}
- !{else}
- !{/else}
+<!-- js防止格式化 -->
+/*code
+code*/
 
 ```
 
 
 # 数据库操作
+
+**数据库更新**
+```
+http://dfphp.dfer.site/admin/login/create_db
+```
+**引用模型**
+```
+use areas\admin\model\{ConfigModel,LayoutImgModel,ArticleModel,LinkModel,MusicModel,MessageModel,NotepadModel};
+```
 **查询**
 ```
 
+<!-- 列表 -->
+$output = MusicModel::select();
+$output = ArticleModel::order('asc')->select();
+$output = NotepadModel::order(['time', 'desc'])->select();
+$output = MusicModel::where(3)->select();
+$output = MusicModel::where(["id" => 3])->select();
 
-//有多行就输出数组，否则返回单个list（有些情况必须返回数组，就添加order）
-show('df',1,'type',' ');
-// 根据字符串进行查询
-show('df','谷雨光影','subs');
-// 按id降序输出全表
-show('df',-1,'id','desc');
-//输出type为1的特定数目的数据
-show('df',1,'type','limit 0,5');
-//输出type为1的数据并进行排序
-show('df',1,'type','order by id desc');
-//执行sql语句
-show('select * from df',0);
-//按条件输出全表
-show("menu",$param,'parent','order by oderNum desc');
-//分页查询(页数,行数)
-show_page(self::$db_d,$page,$rows);
+
+<!-- 读取第一条数据,不满足条件则返回空 -->
+$output = ArticleModel::where(3)->find();
+<!-- 始终读取第一条数据 -->
+$output = NotepadModel::where(["id" => 3])->first();
+
+<!-- 直接生成dataTable的接口数据 -->
+NotepadModel::showPage(str("admin/column/{0}_ss",[NotepadModel::getName()]));
+
+<!-- 读取第一条数据的某个值 -->
+$layout = ConfigModel::where(['key' => 'layout'])->value('val');
+
+
 ```
-**新增、修改**
+**新增**
 ```
-//新增数据，之后不进行任何操作
-update('df',$arr)
-//根据id新增、修改数据，之后进行页面跳转
-update(self::$db_hc,$dt,$id,("homepage/column/".self::$db_hc));
+$ret = ConfigModel::insert(['val'=>123]);
+$ret = LinkModel::update($dt);
+$ret = LinkModel::where(null)->update($dt);
+$ret = LinkModel::where([])->update($dt);
+```
+
+**修改**
+```
+$ret = LinkModel::where(3)->update($dt);
+$ret = ConfigModel::where(['key' => 'layout'])->update(['val'=>$dt]);
 ```
 
 **删除**
 ```
-//根据id进行删除
-del('db',3);
-//清空表
-clear('db')
+<!-- 根据id删除 -->
+ArticleModel::where(3)->del();
+
+<!-- 根据条件删除 -->
+ArticleModel::where(['type'=>3])->del();
+
+<!-- 清空表 -->
+ArticleModel::del();
+
 ```
 
 
@@ -228,6 +222,6 @@ clear('db')
 
 
 ---
-***(c) Copyright 2020-2023 Df. All Rights Reserved.***
+©2017-2023 Dfer.Site
 
 
