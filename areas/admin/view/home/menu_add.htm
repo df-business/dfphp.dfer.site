@@ -4,13 +4,13 @@
 		<div class="col-sm-12">
 			<div class="ibox float-e-margins">
 				<div class="ibox-title">
-					<h5>!!set_val(show_first('menu',str_replace(',','',$parent))['title'],"")!!>>>!!$output[0]!!</h5>
+					<h5>!!setVal(showFirst('menu',str_replace(',','',$parent))['title'],"")!!>>>!!$output[0]!!</h5>
 				</div>
 				<div class="ibox-content">
-					<form method="post" action='!!SplitUrl(sprintf("admin/home/%supdate",self::$db_menu))!!'>
+					<form method="post" action='!!splitUrl(sprintf("admin/home/%s_update",self::$db_menu))!!'>
 						<input name="id" value="!!$output[0]!!" hidden/>
-						<input name="data[parent]" value="!!set_val($output['parent'],$parent_id)!!" hidden/>
-						<input name="parent" value="!!set_val($parent,0)!!" hidden/>
+						<input name="data[parent]" value="!!setVal($output['parent'],$parent_id)!!" hidden/>
+						<input name="parent" value="!!setVal($parent,0)!!" hidden/>
 
 						<div class="form-horizontal m-t">
 							<div class="form-group">

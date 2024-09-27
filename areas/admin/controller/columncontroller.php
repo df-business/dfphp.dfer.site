@@ -1,27 +1,25 @@
 <?php
 
-require "web.config.php";
+use Dfer\Tools\Files;
+class ColumnController {
 
-class columnController {
 
-	//----------------后台
-	//--------------------------------栏目
+	// ********************** 栏目管理 START **********************
+
 	static $db_hc = 'home_column';
-	function home_column($param) {
+	function homeColumn($param) {
 		global $m;
-		$output = show_list(self::$db_hc, [],'asc');
-		include  view_back();
-		//加载视图
+		$output = showList(self::$db_hc, [],'asc');
+		include  viewBack();
 	}
 
-	function home_columnadd($param) {
+	function homeColumnAdd($param) {
 		global $m;
-		$output = show_first(self::$db_hc, $param);
-		include  view_back();
-		//加载视图
+		$output = showFirst(self::$db_hc, $param);
+		include  viewBack();
 	}
 
-	function home_columnupdate() {
+	function homeColumnUpdate() {
 		global $m;
 		$dt = $_POST['data'];
 		$id = $_POST['id'];
@@ -29,59 +27,74 @@ class columnController {
 		$myValue = update(self::$db_hc, $dt, $id, ("admin/column/" . self::$db_hc));
 	}
 
-	//删除
-	function home_columndel($id) {
-		global $m;
+	/**
+		* 删除
+		* @param {Object} $id
+		*/
+	function homeColumnDel($id) {
 		$myValue = del(self::$db_hc, $id, "admin/column/" . self::$db_hc);
 	}
 
-	//富文本上传组件
-	function home_columnEditUp($name) {
-		global $m;
-		$myValue = upload_file($name, 0, 1);
+	/**
+		* 富文本上传组件
+		* @param {Object} $name
+		*/
+	function homeColumnEditUp($name) {
+		global $files,$common;
+		$common->showJsonBase($files->uploadFile(Files::UPLOAD_UMEDITOR_EDITOR));
 	}
 
-	//单文件上传组件
-	function home_columnUp($name) {
-		global $m;
-		$myValue = upload_file($name);
+	/**
+		* 单文件上传组件
+		* @param {Object} $name
+		*/
+	function homeColumnUp($name) {
+		global $files,$common;
+		$common->showJsonBase($files->uploadFile(Files::UPLOAD_WEB_UPLOADER));
 	}
 
-	//--------------------------------留言板
+	// **********************  栏目管理 END  **********************
+
+	// ********************** 留言管理 START **********************
+
 	static $db_mes = 'message';
 	public function message($param) {
 		global $m;
-		$output = show_list(self::$db_mes,[], ["time"=>'desc']);
-		include  view_back();
-		//加载视图
+		$output = showList(self::$db_mes,[], ["time"=>'desc']);
+		include  viewBack();
 	}
 
-	//预览
-	function messageview($param) {
+	/**
+		* 预览
+		* @param {Object} $param
+		*/
+	function messageView($param) {
 
-		$output = show_first(self::$db_mes, $param);
+		$output = showFirst(self::$db_mes, $param);
 		update(self::$db_mes, ["status"=>true],$param);
-		include  view_back();
-		//加载视图
+		include  viewBack();
 	}
 
-	//--------------------------------链接
+	// **********************  留言管理 END  **********************
+
+
+	// ********************** 链接管理 START **********************
+
 	static $db_hl = 'home_link';
-	public function home_link($param) {
+	public function homeLink($param) {
 		global $m;
-		$output = show_list(self::$db_hl);
+		$output = showList(self::$db_hl);
 
-		include  view_back();
-		//加载视图
+		include  viewBack();
 	}
 
-	function home_linkadd($param) {
+	function homeLinkAdd($param) {
 		global $m;
-		$output = show_first(self::$db_hl, $param);
-		include  view_back();
+		$output = showFirst(self::$db_hl, $param);
+		include  viewBack();
 	}
 
-	function home_linkupdate() {
+	function homeLinkUpdate() {
 
 		global $m;
 		$dt = $_POST['data'];
@@ -90,31 +103,36 @@ class columnController {
 		$myValue = update(self::$db_hl, $dt, $id, ("admin/column/" . self::$db_hl));
 	}
 
-	//删除
-	function home_linkdel($id) {
+	/**
+		* 删除
+		* @param {Object} $id
+		*/
+	function homeLinkDel($id) {
 		global $m;
 		$myValue = del(self::$db_hl, $id, "admin/column/" . self::$db_hl);
 	}
 
-	//--------------------------------音乐
+	// **********************  链接管理 END  **********************
+
+
+	// ********************** 音乐管理 START **********************
+
 	static $db_hm = 'home_music';
-	public function home_music($param) {
+	public function homeMusic($param) {
 
 		global $m;
-		$output = show_list(self::$db_hm);
-		include  view_back();
-		//加载视图
+		$output = showList(self::$db_hm);
+		include  viewBack();
 	}
 
-	function home_musicadd($param) {
+	function homeMusicAdd($param) {
 		global $m;
 
-		$output = $param != 0 ? show_first(self::$db_hm, $param) : "";
-		include  view_back();
-		//加载视图
+		$output = $param != 0 ? showFirst(self::$db_hm, $param) : "";
+		include  viewBack();
 	}
 
-	function home_musicupdate() {
+	function homeMusicUpdate() {
 
 		global $m;
 		$dt = $_POST['data'];
@@ -123,66 +141,76 @@ class columnController {
 		$myValue = update(self::$db_hm, $dt, $id, ("admin/column/" . self::$db_hm));
 	}
 
-	//删除
-	function home_musicdel($id) {
+	/**
+		* 删除
+		* @param {Object} $id
+		*/
+	function homeMusicDel($id) {
 		global $m;
 		$myValue = del(self::$db_hm, $id, "admin/column/" . self::$db_hm);
 	}
 
-	//上传组件
-	function home_musicUp($name) {
-		global $m;
-		$myValue = upload_file($name);
+	/**
+		* 上传组件
+		* @param {Object} $name
+		*/
+	function homeMusicUp($name) {
+		global $files,$common;
+		$common->showJsonBase($files->uploadFile(Files::UPLOAD_WEB_UPLOADER));
 	}
 
-	//--------------------------------布局
+	// **********************  音乐管理 END  **********************
+
+
+	// ********************** 布局 START **********************
+
 	static $db_hlo = 'home_layout';
 	static $db_hli = 'home_layout_img';
-	function home_layout($param = 1) {
-		global $m;
-		$output = show_first(self::$db_hlo, $param);
-		$img = show_list(self::$db_hli);
+	function homeLayout($param = 1) {
+		$output = showFirst(self::$db_hlo, $param);
+		$img = showList(self::$db_hli);
 		//var_dump($img);
-		include  view_back();
-		//加载视图
+		include  viewBack();
 	}
 
-	function home_layoutupdate() {
-
-		global $m;
+	function homeLayoutUpdate() {
 		$dt = $_POST['data'];
 		$id = $_POST['id'];
 
 		$myValue = update(self::$db_hlo, $dt, $id, sprintf("admin/column/%s/1", self::$db_hlo));
 	}
 
-	//上传组件
-	//主页背景图
-	function home_layoutPicUp($name) {
-		global $m;
-		//$myValue =upload_file($name,"1920*1280");
-		//不限制尺寸
-		$myValue = upload_file($name);
-		$dt['img'] = $myValue;
+	/**
+		* 主页背景图
+		* @param {Object} $name
+		*/
+	function homeLayoutPicUp($name) {
+		global $files,$common;
+		$dt['img'] = $files->uploadFile(Files::UPLOAD_WEB_UPLOADER);
 		insert(self::$db_hli, $dt);
-
+		//不限制尺寸
+		$common->showJsonBase($dt['img']);
 	}
 
-	function home_layoutUp($name) {
-		global $m;
-		$myValue = upload_file($name);
-
+	function homeLayoutUp($name) {
+		global $common;
+		$common->showJsonBase($files->uploadFile(Files::UPLOAD_WEB_UPLOADER));
 	}
 
-	//图片删除
-	function home_layoutPicDel($name) {
-		global $_gp, $m;
+	/**
+		* 图片删除
+		* @param {Object} $name
+		*/
+	function homeLayoutPicDel($name) {
+		global $_gp, $files,$common;
 		$id = $_gp['id'];
-		$img = show_first(self::$db_hli, $id);
+		$img = showFirst(self::$db_hli, $id);
 		$rt = del(self::$db_hli, $id) . ',';
-		$rt .= $m -> delfile($img['img']);
-		show_json(1, $rt);
+		$rt .= $files -> delFile($img['img']);
+		$common->showJson(1, $rt);
 	}
+
+	// **********************  布局 END  **********************
 
 }
 ?>

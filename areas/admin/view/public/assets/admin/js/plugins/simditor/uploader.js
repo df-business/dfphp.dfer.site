@@ -34,7 +34,7 @@ Uploader = (function(_super) {
   Uploader.prototype.opts = {
     url: '',
     params: null,
-    fileKey: 'upload_file',
+    fileKey: '$files->uploadFile',
     connectionCount: 3
   };
 

@@ -1,6 +1,6 @@
 <df-header>
 	<df-code>
-$is_df=$m->VerifyLogin('all')[1]=='df'?true:false;
+$is_df=$m->verifyLogin('all')[1]=='df'?true:false;
 </df-code>
 </df-header>
 
@@ -10,20 +10,20 @@ $is_df=$m->VerifyLogin('all')[1]=='df'?true:false;
 		<div class="col-sm-12">
 			<div class="ibox float-e-margins">
 				<div class="ibox-title">
-					<h5>!!$l_parent_id?show_first('menu',$l_parent_id)['title']:''!!>>!!$param?show_first('menu',$param)['title']:''!!</h5> 
+					<h5>!!$l_parent_id?showFirst('menu',$l_parent_id)['title']:''!!>>!!$param?showFirst('menu',$param)['title']:''!!</h5>
 				</div>
 				<div class="ibox-content">
 					<div class="row form-horizontal form-group">
 						<div class="col-sm-1">
-							<a href='!!SplitUrl(sprintf("admin/home/%sadd",self::$db_menu),array("parent_id"=>$param,"parent"=>$parent))!!' class="btn btn-primary btn-sm"><i class="fa fa-plus"></i>&nbsp;添加</a>
+							<a href='!!url("admin","home",self::$db_menu."Add",null,array("parent_id"=>$param,"parent"=>$parent))!!' class="btn btn-primary btn-sm"><i class="fa fa-plus"></i>&nbsp;添加</a>
 						</div>
 
 						<df-if $param>
 							<div class="col-sm-1">
-								<a href='!!SplitUrl(sprintf("admin/home/%s/%s",self::$db_menu,$l_parent_id),array("parent"=>$l_parent))!!' class="btn btn-primary btn-sm"><i class="fa fa-backward"></i>&nbsp;返回</a>
+								<a href='!!url("admin","home",self::$db_menu,$l_parent_id,array("parent"=>$l_parent))!!' class="btn btn-primary btn-sm"><i class="fa fa-backward"></i>&nbsp;返回</a>
 							</div>
 							<div class="col-sm-1">
-								<a href='!!SplitUrl(sprintf("admin/home/%s",self::$db_menu))!!' class="btn btn-primary btn-sm"><i class="fa fa-home"></i>&nbsp;主菜单</a>
+								<a href='!!url("admin","home",self::$db_menu)!!' class="btn btn-primary btn-sm"><i class="fa fa-home"></i>&nbsp;主菜单</a>
 							</div>
 						</df-if>
 
@@ -49,10 +49,10 @@ $is_df=$m->VerifyLogin('all')[1]=='df'?true:false;
 									<td>!!urldecode($v['src'])!!</td>
 									<td>!`orderNum`</td>
 									<td class='center'>
-										<a !!empty($v[ 'src'])? '': 'hidden'!! href='!!SplitUrl(sprintf("admin/home/%s/{$v[0]}",self::$db_menu),array("parent"=>$parent.",".$param))!!'>[下级]</a>
-										<a href='!!SplitUrl(sprintf("admin/home/%sadd/{$v[0]}",self::$db_menu),array("parent_id"=>$param,"parent"=>$parent))!!'>[编辑]</a>
+										<a !!empty($v[ 'src'])? '': 'hidden'!! href='!!url("admin","home",self::$db_menu,$v[0],array("parent"=>$parent.",".$param))!!'>[下级]</a>
+										<a href='!!url("admin","home",self::$db_menu."Add",$v[0],array("parent_id"=>$param,"parent"=>$parent))!!'>[编辑]</a>
 										<df-if $_df[ 'admin']||$is_df>
-											<a href='!!SplitUrl("admin/home/menudel/{$v[0]}",array("parent_id"=>$param,"parent"=>$parent))!!' onclick='return confirm("您确认要删除吗？")'>[删除]</a>
+											<a href='!!url("admin","home",self::$db_menu."Del",$v[0],array("parent_id"=>$param,"parent"=>$parent))!!' onclick='return confirm("您确认要删除吗？")'>[删除]</a>
 										</df-if>
 									</td>
 								</tr>

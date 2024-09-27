@@ -22,7 +22,7 @@
 					btn: ['是', '否'] //按钮
 				}, function() {
 					//         location.reload();
-					post('!!SplitUrl("admin/home/FreshCache")!!', "",
+					post('!!splitUrl("admin/home/fresh_cache")!!', "",
 						function(x) {
 							if(x.status)
 								layer.msg(x.msg);
@@ -86,15 +86,15 @@
 								</a>
 								<ul class="dropdown-menu  m-t-xs">
 									<li>
-										<a class="J_menuItem" href='!!SplitUrl("admin/login/changepic")!!'> 更换头像</a>
+										<a class="J_menuItem" href='!!splitUrl("admin/login/change_pic")!!'> 更换头像</a>
 									</li>
 									<li class="divider"></li>
 									<li>
-										<a class="J_menuItem" href='!!SplitUrl("admin/login/setpwd")!!'>修改密码</a>
+										<a class="J_menuItem" href='!!splitUrl("admin/login/set_pwd")!!'>修改密码</a>
 									</li>
 									<li class="divider"></li>
 									<li>
-										<a href="!!SplitUrl('admin/home/ext')!!">安全退出</a>
+										<a href="!!splitUrl('admin/home/ext')!!">安全退出</a>
 									</li>
 								</ul>
 							</div>
@@ -126,7 +126,7 @@ EOT;
 	$src='onclick="'.str_replace('js:','',$v['src']).'"';
 	else if(strpos($v['src'],'url:')!==false)
 	$src='href="'.str_replace('url:','',$v['src']).'"';
-	else $src='href="'.SplitUrl($v['src']).'"';
+	else $src='href="'.splitUrl($v['src']).'"';
 echo <<<EOT
 	<li>
 	<a {$src} class="J_menuItem">
@@ -170,7 +170,7 @@ Tree($menu,$where);
 								</li>
 
 								<li class="dropdown  m-l-xl">
-									<a class="dropdown-toggle count-info J_menuItem" href="!!SplitUrl('homepage/column/message/')!!">
+									<a class="dropdown-toggle count-info J_menuItem" href="!!splitUrl('admin/column/message/')!!">
 										<i class="fa fa-envelope"></i> <span class="label label-warning">!!count($message)!!条消息</span>
 									</a>
 
@@ -191,7 +191,7 @@ Tree($menu,$where);
                 </button>
 					<nav class="page-tabs J_menuTabs">
 						<div class="page-tabs-content">
-							<a href="javascript:;" class="active J_menuTab" data-id="!!SplitUrl('admin/home/desktop')!!">起始页</a>
+							<a href="javascript:;" class="active J_menuTab" data-id="!!splitUrl('admin/home/desktop')!!">起始页</a>
 						</div>
 					</nav>
 					<button class="roll-nav roll-right J_tabRight">
@@ -220,18 +220,18 @@ Tree($menu,$where);
 						</ul>
 					</div>
 
-					<a href="!!SplitUrl('admin/home/ext')!!" class="roll-nav roll-right J_tabExit"><i class="fa  fa-sign-out"></i> 退出</a>
+					<a href="!!splitUrl('admin/home/ext')!!" class="roll-nav roll-right J_tabExit"><i class="fa  fa-sign-out"></i> 退出</a>
 				</div>
 				<!--内嵌框架-->
 				<div class="row J_mainContent" id="content-main">
-					<iframe class="J_iframe" name="iframe0" width="100%" height="100%" src="!!SplitUrl('admin/home/desktop')!!" frameborder="0" data-id="!!SplitUrl('admin/home/desktop')!!"></iframe>
+					<iframe class="J_iframe" name="iframe0" width="100%" height="100%" src="!!splitUrl('admin/home/desktop')!!" frameborder="0" data-id="!!splitUrl('admin/home/desktop')!!"></iframe>
 				</div>
 				<div class="footer">
 					<div style="float: left;margin-right: 3%;">
 						!!date("Y-m-d H:i:s A")!!
 					</div>
 					<div style="float: left;margin-right: 3%;">
-						!!$m->getBrowser()!!
+						!!$common->getBrowser()!!
 					</div>
 					<div onclick="changeSSL()" style="!!SSL_STATE?'color: red;':''!!float: left;margin-right: 3%;">!!SSL_STATE?"ssl开启":"ssl关闭"!!</div>
 					<div class="pull-right">

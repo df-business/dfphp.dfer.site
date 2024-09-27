@@ -228,6 +228,6 @@ clear('db')
 
 
 ---
-***(c) Copyright 2020-2023 Df. All Rights Reserved.***
+©2017~2023 Dfer.Site
 
 

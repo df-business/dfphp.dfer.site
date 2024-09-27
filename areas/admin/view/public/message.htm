@@ -1,49 +1,93 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=7" />
-    <title>===提示===</title>
-    <style type="text/css" media="screen">
-    *{margin:0;padding:0;font-family:arial,sans-serif;font-size:14px;}
-    body,html{height:100%;}
-    body{background:#e9eaef;}
-    .wrapper{margin: 0 auto;background:#fff;width:587px;height:196px; padding:80px 0 0 80px; top:50%; margin-top:-150px;position:relative;}
-    h1{font-weight:700;font-size:26px;color:darkcyan}
-    .tm{padding-top:24px;}
-    .tm span{color:#e10602;padding:0 5px;font-weight:700;}
-    .btn{padding-top:14px;}
-    .btn a{display:block;width:150px;height:0;padding-top:30px;color:black;}
-    </style>
-  </head>
-  <body>
-      <div class="wrapper">
-          <h1>!!$msg!!</h1>
-          <p class="tm">跳转倒计时——<span id="time">0</span>秒</p>
-          <p class="btn"><a id="Btn" href="javascript:">立即跳转</a></p>
-      </div>
-      <script type="text/javascript">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=7" />
+		<title>===提示===</title>
+		<style type="text/css" media="screen">
+			* {
+				margin: 0;
+				padding: 0;
+				font-family: arial, sans-serif;
+				font-size: 14px;
+			}
 
-var url='!!$redirect!!';
-function sendStats(){
-    location.href = url;
-}
+			body,
+			html {
+				height: 100%;
+			}
 
-var time = document.getElementById('time');
-var btn = document.getElementById('Btn');
-function count(){
-    if( +time.innerHTML > 0 ){
-        time.innerHTML--;
-    }else{
-        sendStats();
-    }
-}
-setInterval(count , 1000);
+			body {
+				background: #e9eaef;
+			}
 
-btn.onclick = function(){
-    sendStats();
-};
+			.wrapper {
+				margin: 0 auto;
+				background: #fff;
+				width: 587px;
+				height: 196px;
+				padding: 80px 0 0 80px;
+				top: 50%;
+				margin-top: -150px;
+				position: relative;
+			}
 
-      </script>
-  </body>
-</html>                                                                          
+			h1 {
+				font-weight: 700;
+				font-size: 26px;
+				color: darkcyan
+			}
+
+			.tm {
+				padding-top: 24px;
+			}
+
+			.tm span {
+				color: #e10602;
+				padding: 0 5px;
+				font-weight: 700;
+			}
+
+			.btn {
+				padding-top: 14px;
+			}
+
+			.btn a {
+				display: block;
+				width: 150px;
+				height: 0;
+				padding-top: 30px;
+				color: black;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="wrapper">
+			<h1>!!$msg!!</h1>
+			<p class="tm">跳转倒计时——<span id="time">!!$delay!!</span>秒</p>
+			<p class="btn"><a id="Btn" href="javascript:">立即跳转</a></p>
+		</div>
+		<script type="text/javascript">
+			function sendStats() {
+				!!$script!!
+			}
+
+			var time = document.getElementById('time');
+			var btn = document.getElementById('Btn');
+
+			function count() {
+				if (+time.innerHTML > 0) {
+					time.innerHTML--;
+				} else {
+					clearInterval();
+					sendStats();
+				}
+			}
+			setInterval(count, !!$delay*1000!!);
+
+			btn.onclick = function() {
+				sendStats();
+			};
+		</script>
+	</body>
+</html>

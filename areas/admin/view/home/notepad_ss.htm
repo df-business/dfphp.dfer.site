@@ -1,7 +1,5 @@
 <df-body>
 
-
-
 	<div class="row">
 		<div class="col-sm-12">
 			<div class="ibox float-e-margins">
@@ -11,7 +9,7 @@
 				<div class="ibox-content">
 					<div class="row form-horizontal form-group">
 						<div class="col-sm-1">
-							<a href='!!SplitUrl(sprintf("admin/home/%sadd",self::$db_N))!!'
+							<a href='!!splitUrl(str("admin/home/{0}_ss_add",[self::$db_n]))!!'
 								class="btn btn-primary btn-sm"><i class="fa fa-plus"></i>&nbsp;添加</a>
 						</div>
 
@@ -55,13 +53,14 @@
 					},
 					{
 						data: "time"
-					},					
+					},
 					{
 						data: "opt",
 						orderable: false,
 						searchable: false
 					}
 				],
+				order: [[ 0, 'desc' ], [ 1, 'asc' ]],
 				processing: true,
 				serverSide: true,
 				ajax: {

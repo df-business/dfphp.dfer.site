@@ -18,37 +18,36 @@
 		<meta name="apple-mobile-web-app-capable" content="yes" />
 		<link rel="shortcut icon" href="!!THEME_HOMEPAGE_ASSETS!!/img/favicon.ico" />
 		<link rel="apple-touch-icon" href="!!THEME_HOMEPAGE_ASSETS!!/img/favicon.png" />
-		<!--=========自定义alert=========-->
-		<link rel="stylesheet" type="text/css" href="/assets/sweetalert/sweetalert.css">
-		<script type="text/javascript" src="/assets/sweetalert/sweetalert-dev.js"></script>
+
 		<!--=========引用=========-->
 		<!-- ********************** jq START ********************** -->
-		<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-		<script src="/assets/jquery.ext.js"></script>
+		<script src="https://api.dfer.site/gitcode/github_dfer/jquery/3.7.1/dist/jquery.min.js"></script>
+		<script src="!!THEME_HOMEPAGE_ASSETS!!/jquery.ext.js"></script>
 		<!-- **********************  jq END  ********************** -->
-		
-		<script src="/assets/df.js"></script>
-		
+
+		<script src="!!THEME_HOMEPAGE_ASSETS!!/df.js"></script>
+
 		<!-- ********************** mui START ********************** -->
-		<script src="https://cdn.jsdelivr.net/gh/df-business/mui/dist/js/mui.min.js"></script>
-		<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/df-business/mui/dist/css/mui.min.css" />
+		<!-- <script src="https://cdn.jsdelivr.net/gh/df-business/mui/dist/js/mui.min.js"></script>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/df-business/mui/dist/css/mui.min.css" /> -->
+		<link rel="stylesheet" href="https://api.dfer.site/gitcode/github_dfer/mui/master/dist/css/mui.min.css" />
+		<script src="https://api.dfer.site/gitcode/github_dfer/mui/master/dist/js/mui.min.js"></script>
 		<!-- **********************  mui END  ********************** -->
-		
+
 		<!-- ********************** layui START ********************** -->
-		<link href="//unpkg.com/layui@2.8.15/dist/css/layui.css" rel="stylesheet">
-		<script src="//unpkg.com/layui@2.8.15/dist/layui.js"></script>
+		<!-- <link href="//unpkg.com/layui@2.8.15/dist/css/layui.css" rel="stylesheet">
+		<script src="//unpkg.com/layui@2.8.15/dist/layui.js"></script> -->
+		<link href="https://api.dfer.site/gitcode/github_dfer/layui/main/dist/css/layui.css" rel="stylesheet">
+		<script src="https://api.dfer.site/gitcode/github_dfer/layui/main/dist/layui.js"></script>
 		<!-- **********************  layui END  ********************** -->
-		
+
 		<!-- ********************** loader START ********************** -->
-		<script src="/assets/loaders/main.js"></script>
-		<link rel="stylesheet" href="/assets/loaders/main.css" />
+		<link rel="stylesheet" href="!!THEME_HOMEPAGE_ASSETS!!/loaders/main.css" />
+		<script src="!!THEME_HOMEPAGE_ASSETS!!/loaders/main.js"></script>
 		<!-- **********************  loader END  ********************** -->
-		
+		<link rel="stylesheet" href="!!THEME_HOMEPAGE_ASSETS!!/homepage/css/init.css" />
 		<!--<script src="/assets/fontFamily/init.js"></script>-->
-		
-		<link rel="stylesheet" href="../assets/homepage/css/home.css" />
-		
-		
+
 		<style>
 			.mui-content,.mui-scalable {
 				background-color: transparent !important;
@@ -58,7 +57,7 @@
 		<script>
 			//所有资源加载完成则执行
 			function loaded() {
-		
+
 				$('#first_loading').remove(); //在js加载前添加loading效果，增加页面友好度，加载完成则删除
 				//如果有调用字体
 				if($('script[src$="fontFamily/init.js"]').length > 0) {
@@ -67,11 +66,11 @@
 					).appendTo("head");
 					log('自定义字体加载完成')
 				}
-		
+
 				loading(2);
 				log('web complete');
 			}
-		
+
 			//dom加载完毕
 			function ready() {
 				//		$.ProtectPage();
@@ -84,20 +83,20 @@
 			}
 		function resized(){
 		//	location.reload()
-		
-		
+
+
 		}
-		
-		
+
+
 			//只能识别执行到此加载的元素，故而放在网页尾部（识别出整个网页已加载完毕）
 			$(ready);
 			$(window).on('load', loaded);
 			$(window).on('resize', resized);
-		
-		
+
+
 		</script>
-		
-		
+
+
 
 		<df-header/>
 		<style>
@@ -106,7 +105,8 @@
 				height: 100%;
 			}
 
-			body {
+
+			#body {
 				background: url(!!$home_layout['img1']!!) no-repeat;
 				background-size: 100% 100%;
 			}
@@ -114,7 +114,7 @@
 	</head>
 
 	<body>
-		<div hidden="" id="first_loading" style="z-index:66666;position: fixed;left: 49%;top: 45%;"><img src="/assets/img/loading-1.gif"></div>
+		<div hidden="" id="first_loading" style="z-index:66666;position: fixed;left: 49%;top: 45%;"><img src="!!THEME_HOMEPAGE_ASSETS!!/img/loading-1.gif"></div>
 		<div hidden="" id="body">
 			<df-body/>
 		</div>
