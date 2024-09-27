@@ -1,38 +1,33 @@
-> dfer学习php时，自己架构的框架，项目结构采用了作者习惯的c#的dotNetMvc，借鉴了微擎、thinkPHP，以及网上的一些零散的写法，整体框架设计和优化为df独立完成。
-此框架以实用为出发点，使开发者能够以最高效率完成业务需求，在前后端分离和主流框架盛行的大环境下，依然能适应小型网站、接口的快速开发。
-
-# 项目介绍
-- [gitcode](https://gitcode.net/dofun333/dfphp.dfer.site)
-
-
-### 使用
-```
-composer create-project dfer/df-php
-```
-- 会创建`df-php`文件夹，其中包含了整个项目源码
-
-
-# 框架介绍
+#项目介绍#
 - DfPHP
 - 轻量级PHP开发框架
-- [dfphp.dfer.site](http://dfphp.dfer.site)
-- 由于df在做项目的过程中越来越习惯基于tp和vue的前后端分离写法，此框架将不再作为开发的首选方案，将减缓更新频率，仅作为老系统的过渡方案
-- 工作QQ：3504725309
-- 网站：www.dfer.site
+ 
+
+
+#框架介绍#
+- 由Df打造的php版的Mvc框架，结构简洁，使用方便
+- 可以在此框架的基础上开发出各种各样的网站
+- 有很好的拓展性，可以不断增加新的功能
+- 为“湖北谷雨网络”提供技术支撑
+- 此项目将不断完善
+- 工作QQ：3504725309      
+- 个人网站：df.dfer.top
+- 官网：www.grain-rain.com 
 - QQ群：76673820
-
-
-
-# 运行环境
-- php8
+ 
+ 
+ 
+ 
+#运行环境#
+- 项目php版本为7.2
 - 服务器最低配置：1cpu、1G、1Mbps
 
-# 开发模式
+#开发模式#
 **/share/config.php**
 ```
 $dev=true;	#开发模式开关
 ```
-# 伪静态
+#伪静态#
 *nginx*
 ```
  location / {
@@ -41,34 +36,34 @@ $dev=true;	#开发模式开关
              if (!-e $request_filename)
              {
                 #地址作为参数rewrite到index.php上
-                rewrite ^/(.*)$ /index.php?s=$1;
+                rewrite ^/(.*)$ /index.php?s=$1;               
              }
         }
-```
+``` 
 *apache*
 ```
 RewriteEngine on
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f
-RewriteRule ^(.*)$ index.php?s=$1
+RewriteRule ^(.*)$ index.php?s=$1 
 ```
 
-
-# 项目详情
+ 
+#项目详情#
 ~~~
 .
 ├── Areas
-│   ├── admin
+│   ├── admin		
 │   └── homepage
 ├── cache
 │   ├── Areas
 │   └── share
-├── assets
+├── css_js
 │   ├── 404
-│   ├── admin
-│   ├── fontFamily
-│   ├── loaders
-│   ├── siteCloud
+│   ├── AdminFrame
+│   ├── FontFamily
+│   ├── Loaders
+│   ├── SiteCloud
 │   ├── dataTables
 │   ├── homepage
 │   ├── jqTemplate
@@ -131,67 +126,67 @@ RewriteRule ^(.*)$ index.php?s=$1
 
 
 
-# 关键字说明
+#关键字说明#
 ```
  //布局
  <df-html/>
  <df-header/>
  <df-body/>
- <df-footer/>
+ <df-footer/> 
  <df-header></df-header>
  <df-body></df-body>
  <df-footer></df-footer>
-
+ 
  //打印参数
  <df-print value="">
  !!$str!!
-
-
+ 
+ 
  //执行php代码
  <df-code>
  !{}!
-
+ 
  //遍历数组，来循环显示多条数据
  <df-each $0>
  <df-val value=""/>
  !``
  </df-each>
-
+ 
 //这里放关键字，防止整理代码格式的时候关键字被破坏
-/*d
+/*d	
 d*/
-
+ 
  //if语句
  <df-if $0>
  <df-elif $1>
  <df-else>
  </df-if>
-
+ 
  !{if true}
  !{elif false}
  !{else}
  !{/else}
-
+ 
 ```
 
 
-# 数据库操作
+##数据库操作
 **查询**
 ```
 
 
 //有多行就输出数组，否则返回单个list（有些情况必须返回数组，就添加order）
-show('df',1,'type',' ');
+show('df',1,'type',' ');    
 // 根据字符串进行查询
-show('df','谷雨光影','subs');
-// 按id降序输出全表
-show('df',-1,'id','desc');
+show('df','谷雨光影','subs'); 
+// 按id降序输出全表  
+show('df',-1,'id','desc');	
 //输出type为1的特定数目的数据
-show('df',1,'type','limit 0,5');
+show('df',1,'type','limit 0,5');	
 //输出type为1的数据并进行排序
 show('df',1,'type','order by id desc');
-//执行sql语句
-show('select * from df',0);
+//执行sql语句	
+show('select * from df',0);	
 //按条件输出全表
 show("menu",$param,'parent','order by oderNum desc');
 //分页查询(页数,行数)
@@ -200,9 +195,9 @@ show_page(self::$db_d,$page,$rows);
 **新增、修改**
 ```
 //新增数据，之后不进行任何操作
-update('df',$arr)
+update('df',$arr)		
 //根据id新增、修改数据，之后进行页面跳转
-update(self::$db_hc,$dt,$id,("homepage/column/".self::$db_hc));
+update(self::$db_hc,$dt,$id,("homepage/column/".self::$db_hc));	
 ```
 
 **删除**
@@ -213,10 +208,25 @@ del('db',3);
 clear('db')
 ```
 
+**数据库操作返回json**
+```
+#查询返回json数据
+//根据id查询
+tableToJson('df','id','desc',1);
+//根据time降序排列 
+tableToJson('df','time'); 
+//根据time升序排列
+tableToJson('df','time','asc');
+//自定义sql查询
+tableToJson('sql','select * from df');
+#更新返回json
+jsonUpdate('db',array('nm'=>'123'),3);
+#清空
+jsonClear('db')
+```
 
 
-
-# 注意事项
+#注意事项#
 - 页首添加多行脚本的时候不要添加注释，以免整理代码格式之后破坏php结构
 - 上传到服务器之后要给所有文件添加访问权限
 - 此版本保持最新状态，其余的项目都是由此延伸出去
@@ -228,6 +238,6 @@ clear('db')
 
 
 ---
-***(c) Copyright 2020-2023 Df. All Rights Reserved.***
+***(c) Copyright 2020 Df. All Rights Reserved.***   
 
 

@@ -1,0 +1,105 @@
+<df-header>
+
+	<!--
+    The Story Theme
+    http://www.templatemo.com/tm-480-story
+    -->
+	<!-- load stylesheets -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="/css_js/windows/pages_css/bootstrap.min.css">
+	<!-- Bootstrap style -->
+	<link rel="stylesheet" href="/css_js/windows/pages_css/flexslider.css">
+	<!-- Flexslider style -->
+	<link rel="stylesheet" href="/css_js/windows/pages_css/templatemo-style.css">
+	<!-- Templatemo style -->
+	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+	<!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+	<style>
+		body,
+		html {
+			margin: 0 !important;
+			padding: 0 !important
+		}
+		
+		body {
+			/*background-image: url(/img/status2.gif);
+            background-repeat: no-repeat;
+            background-position: center;*/
+			background-color: #000000;
+		}
+	</style>
+	<script>
+		var autoplay = Boolean(!!$home_layout["musicPlay"] !!),
+			vol = 100;
+		random = 1;
+	</script>
+</df-header>
+
+<df-body>
+
+	<body class="page">
+
+		<!-- site Menu -->
+		<div class="container-fluid">
+			<div class="row">
+
+				<!-- site column -->
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg- col-xl-">
+					<div class="content-wrapper js-content-wrapper">
+
+						<section data-page-id="page-5" class="content js-content">
+
+							<header class="box box-black margin-b-20">
+								<h2 class="box-text page-title-text">!!$home_column['title']!!</h2>
+							</header>
+
+							<div class="content-text" style="background-color: rgba(0, 0, 0,0);">
+								<p style="color: rgba(236, 238, 239, 0.54);">
+									!!$home_column['describe']!!
+								</p>
+
+								<!-- Music -->
+								<!-- Insert to your webpage where you want to display the audio player -->
+								<div id="amazingaudioplayer-1" style="display:block;position:relative;width:100%;height:auto;margin:0px auto 0px;">
+									<ul class="amazingaudioplayer-audios" style="display:none;">
+
+										<df-each $home_music>
+											<li data-artist="" data-title="!`title`" data-album="" data-info="" data-image="/favicon.png" data-duration="0">
+												<div class="amazingaudioplayer-source" data-src="!`src`" data-type="audio/mpeg" />
+											</li>
+										</df-each>
+
+									</ul>
+								</div>
+								<!-- End of body section HTML codes -->
+
+							</div>
+						</section>
+
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+		<!-- /#preloader -->
+		<!-- Insert to your webpage before the </head> -->
+
+		<script src="/css_js/AmazingAudio/audioplayerengine/amazingaudioplayer.js"></script>
+		<link rel="stylesheet" type="text/css" href="/css_js/AmazingAudio/audioplayerengine/initaudioplayer-1.css">
+		<script src="/css_js/AmazingAudio/audioplayerengine/initaudioplayer-1.js"></script>
+		<!-- End of head section HTML codes -->
+
+	</body>
+
+	</body>
+</df-body>
+
+<df-footer>
+
+</df-footer>

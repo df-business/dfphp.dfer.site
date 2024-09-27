@@ -1,0 +1,115 @@
+<df-header>
+<script src="/css_js/jquery.min.js"></script>
+	<!--
+    The Story Theme
+    http://www.templatemo.com/tm-480-story
+    -->
+	<!-- load stylesheets -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="/css_js/windows/pages_css/bootstrap.min.css">
+	<!-- Bootstrap style -->
+	<link rel="stylesheet" href="/css_js/windows/pages_css/flexslider.css">
+	<!-- Flexslider style -->
+	<link rel="stylesheet" href="/css_js/windows/pages_css/templatemo-style.css">
+	<!-- Templatemo style -->
+	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+	<!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+	<style>
+		body,
+		html {
+			margin: 0 !important;
+			padding: 0 !important
+		}
+		
+		body {
+			/*background-image: url(/img/status2.gif);
+            background-repeat: no-repeat;
+            background-position: center;*/
+			background-color: #000000;
+		}
+		
+		
+	</style>
+
+</df-header>
+
+<df-body>
+
+	<body class="page">
+
+		<!-- site Menu -->
+		<div class="container-fluid">
+			<div class="row">
+
+				<!-- site column -->
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg- col-xl-">
+					<div class="content-wrapper js-content-wrapper">
+
+						<section data-page-id="page-1" class="content content-gallery- js-content">
+
+							<header class="box box-black margin-b-20" hidden>
+								<h2 class="box-text page-title-text">照片</h2>
+							</header>
+
+							<div class="content-text content-text-gallery">
+
+								<!-- <p>Credits go to <a rel="nofollow" href="http://unsplash.com">Unsplash</a> for images.</p> -->
+								<div class="flexslider-wrapper">
+									<div id="slider" class="flexslider">
+										<ul class="slides">
+											<df-each $img>
+												<li><img src="!`img`" alt="Slide !`Id`" class="pic_show"/></li>
+											</df-each>
+
+										</ul>
+									</div>
+									<!-- #slider -->
+
+									<div id="carousel" class="flexslider">
+										<ul class="slides">
+											<df-each $img>
+												<li><img src="!`img`" alt="Thumbnail !`Id`" /></li>
+											</df-each>
+										</ul>
+									</div>
+									<!-- #carousel -->
+								</div>
+
+							</div>
+						</section>
+
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+		<!-- /#preloader -->
+		<!-- load JS files -->
+		<script src="/css_js/homepage/js/jquery-1.11.3.min.js"></script>
+		<!-- jQuery -->
+		<script src="/css_js/homepage/js/jquery.flexslider-min.js"></script>
+		<!-- Flex Slider -->
+		<script src="/css_js/homepage/js/templatemo-script.js"></script>
+		<!-- Templatemo scripts -->
+
+		<script src="/css_js/df.js"></script>
+		<script src="/css_js/layui/layer/layer.js"></script>
+
+		<script>
+			$(function() {
+	
+			})
+		</script>
+
+	</body>
+</df-body>
+
+<df-footer>
+
+</df-footer>
