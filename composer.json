@@ -10,10 +10,8 @@
 	"homepage": "http://dfphp.dfer.site",
     "keywords": ["df", "dfer.site"],
 	"require": {
-		"php": ">=8.0",
-		"dfer/tools": "^1.0.0",
-		"dfer/df-php-core": "^1.0.0",
-		"dfer/df-php-root": "^1.0.0"
+		"dfer/df-php-core": ">=1.0.0",
+		"dfer/df-php-root": ">=1.0.0"
 	},
 	"autoload": {
 		"psr-4": {
