@@ -58,7 +58,7 @@ if exist %cache% (
 	set "ver=!aa!.!bb!.!cc!"
 )
 :::::::::::::::::::: 保存版本号 ::::::::::::::::::::
-echo !ver!>!cache!
+powershell -Command "Write-Output '!ver!' | Out-File -FilePath !cache! -NoNewline -Encoding utf8"
 
 :::::::::::::::::::: 文件区分大小写 ::::::::::::::::::::
 git config core.ignorecase false
