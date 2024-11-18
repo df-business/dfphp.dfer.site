@@ -1,4 +1,7 @@
-/cache/
-/vendor/
 *.lock
-
+/.env
+/vendor/
+/data/runtime/
+/data/runtime_cli/
+/data/logs/
+/public/upload/

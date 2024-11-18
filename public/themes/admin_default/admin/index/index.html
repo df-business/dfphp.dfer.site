@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="zh_CN" style="overflow: hidden;">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <!-- Set render engine for 360 browser -->
+    <meta name="renderer" content="webkit">
+    <meta charset="utf-8">
+    <title>ThinkCMF {:lang('ADMIN_CENTER')}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+    </style>
+
+</head>
+<php>$is_mobile=dfer_is_mobile();</php>
+<body style="min-width:{$is_mobile?'auto':'900px'};overflow: hidden;">
+{:lang("Account cannot be empty")}
+{:lang("Sort update successful")}
+</body>
+</html>

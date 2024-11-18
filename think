@@ -1,0 +1,14 @@
+#!/usr/bin/env php
+<?php
+namespace think;
+
+// 命令行入口文件
+
+// 定义缓存目录
+define('RUNTIME_PATH', __DIR__ . '/data/runtime_cli/');
+
+// 加载基础文件
+require __DIR__ . '/vendor/autoload.php';
+
+// 应用初始化
+(new App())->console->run();
