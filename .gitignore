@@ -1,4 +1,9 @@
-/cache/
-/vendor/
 *.lock
-
+/.env
+/vendor/
+/data/cache/
+/data/logs/
+/public/static_pages/
+/public/upload/
+/public/*.ini
+/data/runtime/
