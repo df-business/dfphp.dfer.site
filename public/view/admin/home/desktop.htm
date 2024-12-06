@@ -89,7 +89,7 @@
         脚本运行占用最大内存：{:get_cfg_var("memory_limit")?get_cfg_var("memory_limit"):"无"}<br>
         PHP版本：{:PHP_VERSION} <br>
         PHP路径：{:DEFAULT_INCLUDE_PATH} <br>
-        网站根目录：{:getenv('DOCUMENT_ROOT')} <br>
+        网站根目录：{:$_SERVER['DOCUMENT_ROOT']} <br>
         服务器外网IP：{:GetHostByName($_SERVER['SERVER_NAME'])} <br>
         服务器内网IP：{:$_SERVER['SERVER_ADDR']} <br>
         客户端IP：{:$_SERVER['REMOTE_ADDR'] } <br>
