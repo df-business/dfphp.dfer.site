@@ -6,4 +6,6 @@
 /public/static_pages/
 /public/upload/
 /public/*.ini
+/public/*.json
 /data/runtime/
+
