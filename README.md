@@ -37,6 +37,9 @@ if ($http_accept ~* "^$|^\*/\*$") {
 if ($http_user_agent ~* "aliyun-oss|baiduspider|360spider|sogou|yisouspider|googlebot|bingbot|yahoo|applebot|seznambot|mail.ru_bot|bytespider|petalbot") {
     set $block 0;
 }
+if ($request_uri ~* "^/view/|^/node_modules/") {
+    set $block 0;
+}
 if ($block = 1) {
     return 403;
 }
