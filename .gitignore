@@ -3,9 +3,11 @@
 /vendor/
 /data/cache/
 /data/logs/
+/data/runtime/
+/data/session/
 /public/static_pages/
 /public/upload/
 /public/*.ini
 /public/*.json
-/data/runtime/
+
 
