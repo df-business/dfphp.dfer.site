@@ -34,7 +34,7 @@ composer create-project dfer/df-php
 if ($http_accept ~* "^$|^\*/\*$") {
     set $block 1;
 }
-if ($http_user_agent ~* "aliyun-oss|baiduspider|360spider|sogou|yisouspider|googlebot|bingbot|yahoo|applebot|seznambot|mail.ru_bot|bytespider|petalbot") {
+if ($http_user_agent ~* "aliyun-oss|baiduspider|360spider|sogou|yisouspider|petalbot|bytespider|googlebot|mediapartners-google|applebot|bingbot|yahoo|mail.ru_bot|seznambot") {
     set $block 0;
 }
 if ($request_uri ~* "^/view/|^/node_modules/") {
