@@ -43,7 +43,6 @@ if ($request_uri ~* "^/view/|^/node_modules/") {
 if ($block = 1) {
     return 403;
 }
-
 location / {
     index  index.php index.html index.htm;
      if (!-e $request_filename)
