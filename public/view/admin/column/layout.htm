@@ -1,0 +1,96 @@
+<df-body>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5></h5>
+                </div>
+                <div class="ibox-content">
+                    <form method="post" action='{:split_url(str("admin/column/%s_update",["layout"]))}'
+                        class="layui-form">
+                        <input name="id" value="{:$output[0]??'0'}" hidden />
+                        <input name='data[color]' value="{:$output['color']??''}" hidden />
+                        <div class="form-horizontal m-t">
+                            <div class="form-group">
+                                <label class="col-sm-1 control-label">主题：</label>
+                                <div class="col-sm-2">
+                                    <input class="form-control" name="data[title]" size="10" type="text"
+                                        value="{:$output['title']??''}" />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-1 control-label">关键字：</label>
+                                <div class="col-sm-10">
+                                    <input class="form-control" name="data[keywords]" size="10" type="text"
+                                        value="{:$output['keywords']??''}" />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-1 control-label">描述：</label>
+                                <div class="col-sm-10">
+                                    <input class="form-control" name="data[description]" size="10" type="text"
+                                        value="{:$output['description']??''}" />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-1 control-label">落款：</label>
+                                <div class="col-sm-5">
+                                    <input class="form-control" name="data[inscribe]" size="10" type="text"
+                                        value="{:$output['inscribe']??''}" />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-1 control-label">主体文字颜色：</label>
+                                <div class="col-sm-4">
+                                    <div id="color"></div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-sm-2 col-sm-offset-1">
+                                    <button class="btn btn-primary" onclick="return submit_form()">保存</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</df-body>
+<df-footer>
+    <script type="text/javascript">
+        layui.use(['form', 'colorpicker'], function() {
+            var $ = layui.$;
+            layer = layui.layer;
+            var form = layui.form,
+                colorpicker = layui.colorpicker;
+
+            colorpicker.render({
+                elem: '#color',
+                change: function(color) {
+                    layer.tips('选择了：' + color, this.elem, {
+                        tips: 1
+                    });
+                },
+                color: $('[name="data[color]"]').val(),
+                done: function(color) {
+                    $('[name="data[color]"]').val(color);
+                }
+            });
+        });
+
+        function submit_form() {
+            if ($.formVerifyEmpty('data[title]', '请输入标题')) {
+                return false;
+            }
+            return true;
+        }
+    </script>
+
+</df-footer>

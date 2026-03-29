@@ -1,0 +1,94 @@
+<df-code>
+    use Dfer\Tools\Statics\Common;
+</df-code>
+<html>
+    <head>
+        <meta name="author" content="Df" />
+        <meta name="keywords" content="{:$layout['keywords']}" />
+        <meta name="description" content="{:$layout['description']}" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width" />
+        <!--页面尺寸-->
+        <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+        <!--手机状态栏的颜色-->
+        <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+        <!--作为独立的网页，进行全屏显示-->
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <link rel="shortcut icon" href="{:DEFAULT_ADMIN_ASSETS}/img/favicon.ico" />
+        <link rel="apple-touch-icon" href="{:DEFAULT_ADMIN_ASSETS}/img/favicon.png" />
+
+        <!-- ********************** jq START ********************** -->
+        <script src="https://oss.dfer.site/jquery/3.7.1/jquery.min.js"></script>
+        <!-- **********************  jq END  ********************** -->
+
+        <!-- ********************** layui START ********************** -->
+        <link href="https://oss.dfer.site/layui/v2.9.8/css/layui.css" rel="stylesheet">
+        <script src="https://oss.dfer.site/layui/v2.9.8/layui.js"></script>
+        <!-- **********************  layui END  ********************** -->
+
+        <!-- ********************** bootstrap START ********************** -->
+        <link href="https://oss.dfer.site/bootstrap/v5.3.3/css/bootstrap.min.css" rel="stylesheet">
+        <script src="https://oss.dfer.site/bootstrap/v5.3.3/js/bootstrap.min.js"></script>
+        <!-- **********************  bootstrap END  ********************** -->
+
+        <!-- ********************** dfer-tools-js START ********************** -->
+        <script src="/node_modules/@df_business/tools-js/extends/js.ext.js"></script>
+        <script src="/node_modules/@df_business/tools-js/extends/jquery.ext.js"></script>
+        <script src="/node_modules/@df_business/tools-js/class/Common.js"></script>
+        <script>
+            var df_tools_common = new Common();
+        </script>
+        <!-- **********************  dfer-tools-js END  ********************** -->
+
+        <script>
+            function dom_complete() {
+                $('#body').removeAttr('hidden')
+                df_tools_common.protectPage();
+                df_tools_common.log('布局加载完成');
+            }
+
+            function resource_complete() {
+                $('#loading').remove();
+                df_tools_common.log('资源加载完成');
+            }
+
+            // dom加载完毕
+            document.addEventListener('DOMContentLoaded', function() {
+                dom_complete();
+            });
+
+            // 所有资源加载完成则执行
+            window.addEventListener('load', function() {
+                resource_complete();
+            });
+        </script>
+
+
+        <df-header />
+        <style>
+            html,
+            body {
+                height: 100%;
+
+            }
+
+            body {
+                background:
+                /*code {$layout['color']} code*/
+                ;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div id="loading" style="z-index:66666;position: fixed;left: 49%;top: 45%;"><img
+                src="{:DEFAULT_ADMIN_ASSETS}/img/loading-1.gif"></div>
+        <div id="body" hidden>
+            <df-body />
+        </div>
+    </body>
+
+    <df-footer />
+
+</html>
