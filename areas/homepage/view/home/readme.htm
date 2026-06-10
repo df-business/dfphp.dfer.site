@@ -1,0 +1,95 @@
+<df-header>
+    <title>DfPHP 开发文档</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css">
+    <style>
+        .doc-content pre {
+            background: #0f172a;
+            color: #e2e8f0;
+            padding: 14px 16px;
+            border-radius: 8px;
+            font-size: 13px;
+            line-height: 1.7;
+            overflow-x: auto;
+            margin: 10px 0;
+            white-space: pre-wrap;
+            word-break: break-all;
+        }
+        .doc-content code {
+            background: #f1f5f9;
+            color: #4338ca;
+            padding: 1px 6px;
+            border-radius: 4px;
+            font-size: 12.5px;
+        }
+        .doc-content pre code {
+            background: none;
+            color: inherit;
+            padding: 0;
+        }
+        .doc-content table { width: 100%; border-collapse: collapse; }
+        .doc-content td, .doc-content th { border: 1px solid #e2e8f0; padding: 6px 12px; font-size: 13px; }
+        .doc-content th { background: #f8fafc; }
+        .doc-content ul { padding-left: 1.4em; }
+        .doc-content li { margin: 4px 0; font-size: 14px; line-height: 1.8; }
+        .doc-content p { font-size: 14px; line-height: 1.7; color: #475569; }
+        .doc-item { border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden; }
+        .doc-toggle { cursor: pointer; user-select: none; }
+        .doc-toggle:hover { background: #f8fafc; }
+        .doc-body { display: none; }
+        .doc-body.open { display: block; }
+        .doc-arrow { transition: transform .2s; }
+        .doc-arrow.open { transform: rotate(90deg); }
+    </style>
+</df-header>
+
+<df-body>
+<div style="max-width:860px;margin:0 auto;padding:32px 16px">
+    <!-- 页头 -->
+    <div style="text-align:center;margin-bottom:36px">
+        <div style="display:inline-flex;align-items:center;justify-content:center;width:56px;height:56px;border-radius:14px;background:linear-gradient(135deg,#6366f1,#8b5cf6);color:#fff;font-size:22px;font-weight:800;margin-bottom:12px">Df</div>
+        <h1 style="font-size:24px;font-weight:700;color:#1e293b;margin:0 0 6px">DfPHP 开发文档</h1>
+        <p style="font-size:14px;color:#94a3b8;margin:0">轻量级 PHP MVC 框架 · 8.x</p>
+    </div>
+
+    <!-- 文档列表 -->
+    <div style="display:flex;flex-direction:column;gap:10px">
+
+        <df-each $output>
+        <div class="doc-item" id="doc-{::id}">
+            <div class="doc-toggle" onclick="toggleDoc({::id})" style="display:flex;align-items:center;gap:12px;padding:16px 20px;background:#fff">
+                <div style="width:32px;height:32px;border-radius:8px;background:#eef2ff;display:flex;align-items:center;justify-content:center;flex-shrink:0">
+                    <span style="font-size:13px;font-weight:700;color:#4f46e5">{::id}</span>
+                </div>
+                <div style="flex:1">
+                    <div style="font-size:15px;font-weight:600;color:#1e293b">{::title}</div>
+                    <div style="font-size:12px;color:#94a3b8;margin-top:2px">{::describe}</div>
+                </div>
+                <i class="fa-solid fa-chevron-right doc-arrow" id="arrow-{::id}" style="color:#cbd5e1;font-size:12px"></i>
+            </div>
+            <div class="doc-body" id="body-{::id}" style="padding:0 20px 20px;background:#fafafa;border-top:1px solid #f1f5f9">
+                <div class="doc-content" style="margin-top:16px">{::content}</div>
+            </div>
+        </div>
+        </df-each>
+
+    </div>
+
+    <div style="text-align:center;margin-top:40px;font-size:12px;color:#cbd5e1">
+        ©2017–{:date('Y')} Dfer.Site
+    </div>
+</div>
+
+<script>
+function toggleDoc(id) {
+    var body  = document.getElementById('body-' + id);
+    var arrow = document.getElementById('arrow-' + id);
+    var isOpen = body.classList.contains('open');
+    body.classList.toggle('open', !isOpen);
+    arrow.classList.toggle('open', !isOpen);
+}
+// 默认展开第一项
+document.addEventListener('DOMContentLoaded', function() { toggleDoc(1); });
+</script>
+
+</df-body>

@@ -1,0 +1,78 @@
+<df-header>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('layout-form').addEventListener('submit', function(e) {
+        var title = document.querySelector('[name="data[title]"]').value.trim();
+        if (!title) { e.preventDefault(); alert('请输入主题'); }
+    });
+});
+</script>
+</df-header>
+
+<df-body>
+<div class="space-y-4">
+    <div class="flex items-center justify-between">
+        <h2 class="text-base font-semibold text-slate-800 flex items-center gap-2">
+            <i class="fa-solid fa-palette text-indigo-500"></i>布局设置
+        </h2>
+    </div>
+
+    <div class="bg-white rounded-xl border border-slate-200 shadow-sm">
+        <form method="post" action="{:split_url(str('admin/column/%s_update',['layout']))}" id="layout-form">
+            <input name="id" value="{:$output[0]??'0'}" type="hidden">
+            <div class="divide-y divide-slate-100">
+                <div class="flex items-start gap-4 px-6 py-4">
+                    <label class="w-28 pt-2 text-sm font-medium text-slate-600 shrink-0 text-right">
+                        主题<span class="text-red-500 ml-0.5">*</span>
+                    </label>
+                    <div class="flex-1">
+                        <input type="text" name="data[title]" value="{:$output['title']??''}"
+                               class="w-full max-w-lg px-3 py-2 text-sm border border-slate-200 rounded-lg bg-slate-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-transparent transition-shadow">
+                    </div>
+                </div>
+
+                <div class="flex items-start gap-4 px-6 py-4">
+                    <label class="w-28 pt-2 text-sm font-medium text-slate-600 shrink-0 text-right">关键字</label>
+                    <div class="flex-1">
+                        <input type="text" name="data[keywords]" value="{:$output['keywords']??''}"
+                               placeholder="多个关键字用英文逗号分隔"
+                               class="w-full max-w-lg px-3 py-2 text-sm border border-slate-200 rounded-lg bg-slate-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-transparent transition-shadow">
+                    </div>
+                </div>
+
+                <div class="flex items-start gap-4 px-6 py-4">
+                    <label class="w-28 pt-2 text-sm font-medium text-slate-600 shrink-0 text-right">描述</label>
+                    <div class="flex-1">
+                        <input type="text" name="data[description]" value="{:$output['description']??''}"
+                               class="w-full max-w-lg px-3 py-2 text-sm border border-slate-200 rounded-lg bg-slate-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-transparent transition-shadow">
+                    </div>
+                </div>
+
+                <div class="flex items-start gap-4 px-6 py-4">
+                    <label class="w-28 pt-2 text-sm font-medium text-slate-600 shrink-0 text-right">落款</label>
+                    <div class="flex-1">
+                        <input type="text" name="data[inscribe]" value="{:$output['inscribe']??''}"
+                               class="w-full max-w-sm px-3 py-2 text-sm border border-slate-200 rounded-lg bg-slate-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-transparent transition-shadow">
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-4 px-6 py-4">
+                    <label class="w-28 text-sm font-medium text-slate-600 shrink-0 text-right">主体文字颜色</label>
+                    <div class="flex items-center gap-3">
+                        <input type="color" name="data[color]" value="{:$output['color']??'#333333'}"
+                               class="w-10 h-10 rounded-lg border border-slate-200 cursor-pointer p-0.5 bg-slate-50">
+                        <span class="text-xs text-slate-400">点击色块选择颜色</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-3 px-6 py-4 bg-slate-50 rounded-b-xl border-t border-slate-100">
+                <button type="submit"
+                        class="inline-flex items-center gap-2 px-6 py-2 text-sm font-medium rounded-lg bg-indigo-600 text-white hover:bg-indigo-700 transition-colors shadow-sm">
+                    <i class="fa-solid fa-floppy-disk"></i>保存
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+</df-body>

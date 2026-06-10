@@ -1,0 +1,73 @@
+<df-header>
+<df-code>
+    use areas\admin\model\{RolesModel};
+    $roleName = $output['nm'] === 'df' ? '超级管理员' : (RolesModel::where($output['role'])->value('nm') ?? '-');
+</df-code>
+</df-header>
+
+<df-body>
+<div class="space-y-4">
+    <div class="flex items-center justify-between">
+        <h2 class="text-base font-semibold text-slate-800 flex items-center gap-2">
+            <i class="fa-solid fa-user text-indigo-500"></i>用户详情
+        </h2>
+        <a href="{:split_url(str('admin/home/%s',[table_name('UserModel')]))}"
+           class="inline-flex items-center gap-1.5 px-4 py-2 text-sm rounded-lg border border-slate-200 bg-white text-slate-600 hover:bg-slate-50 transition-colors">
+            <i class="fa-solid fa-chevron-left text-xs"></i>返回列表
+        </a>
+    </div>
+
+    <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
+        <!-- 头像区 -->
+        <div class="flex items-center gap-4 px-6 py-5 border-b border-slate-100 bg-slate-50">
+            <div class="w-14 h-14 rounded-full overflow-hidden bg-indigo-100 flex items-center justify-center shrink-0">
+                <df-if $output['pic']>
+                    <img src="{$output['pic']}" alt="avatar" class="w-full h-full object-cover">
+                <df-else>
+                    <i class="fa-solid fa-user text-indigo-400 text-xl"></i>
+                </df-if>
+            </div>
+            <div>
+                <div class="text-base font-semibold text-slate-800">{$output['nm']}</div>
+                <div class="text-xs text-slate-400 mt-0.5">{:$roleName}</div>
+            </div>
+        </div>
+
+        <!-- 字段列表 -->
+        <div class="divide-y divide-slate-100">
+            <div class="flex items-center gap-4 px-6 py-4">
+                <span class="w-24 text-sm font-medium text-slate-500 text-right shrink-0">用户 ID</span>
+                <span class="text-sm text-slate-800">{$output['id']}</span>
+            </div>
+            <div class="flex items-center gap-4 px-6 py-4">
+                <span class="w-24 text-sm font-medium text-slate-500 text-right shrink-0">账号</span>
+                <span class="text-sm text-slate-800">{$output['nm']}</span>
+            </div>
+            <div class="flex items-center gap-4 px-6 py-4">
+                <span class="w-24 text-sm font-medium text-slate-500 text-right shrink-0">角色</span>
+                <span class="text-sm text-slate-800">{:$roleName}</span>
+            </div>
+            <div class="flex items-center gap-4 px-6 py-4">
+                <span class="w-24 text-sm font-medium text-slate-500 text-right shrink-0">注册时间</span>
+                <span class="text-sm text-slate-800">{$output['create_time']}</span>
+            </div>
+            <div class="flex items-center gap-4 px-6 py-4">
+                <span class="w-24 text-sm font-medium text-slate-500 text-right shrink-0">最后登录</span>
+                <span class="text-sm text-slate-800">{$output['last_login_time']}</span>
+            </div>
+        </div>
+
+        <!-- 操作栏 -->
+        <div class="flex items-center gap-3 px-6 py-4 bg-slate-50 border-t border-slate-100">
+            <a href="{:split_url(str('admin/home/%s_add/',[table_name('UserModel')]).$output['id'])}"
+               class="inline-flex items-center gap-2 px-5 py-2 text-sm font-medium rounded-lg bg-indigo-600 text-white hover:bg-indigo-700 transition-colors shadow-sm">
+                <i class="fa-solid fa-pen-to-square text-xs"></i>编辑
+            </a>
+            <a href="{:split_url(str('admin/home/%s',[table_name('UserModel')]))}"
+               class="inline-flex items-center gap-1.5 px-4 py-2 text-sm rounded-lg border border-slate-200 bg-white text-slate-600 hover:bg-slate-50 transition-colors">
+                返回
+            </a>
+        </div>
+    </div>
+</div>
+</df-body>

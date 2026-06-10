@@ -1,0 +1,77 @@
+<df-header>
+    <df-code>
+    ob_start();
+    </df-code>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>后台登录 - DfPHP v{:VERSION}</title>
+    <script>
+        if(window.top !== window.self) { window.top.location = window.location; }
+    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+        }
+        input:-webkit-autofill,
+        input:-webkit-autofill:hover,
+        input:-webkit-autofill:focus {
+            -webkit-box-shadow: 0 0 0 1000px #fff inset !important;
+            -webkit-text-fill-color: #1e293b !important;
+            caret-color: #1e293b;
+        }
+        .login-input {
+            background: #fff;
+            border: 1px solid rgba(255,255,255,0.2);
+            color: #1e293b !important;
+            transition: border-color .2s, box-shadow .2s;
+        }
+        .login-input::placeholder { color: #475569; }
+        .login-input:focus {
+            outline: none;
+            border-color: rgba(99,102,241,0.7);
+            box-shadow: 0 0 0 3px rgba(99,102,241,0.2);
+        }
+    </style>
+</df-header>
+
+<df-body>
+    <div class="min-h-screen flex items-center justify-center px-4">
+        <div class="w-full max-w-sm">
+            <div class="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl shadow-2xl px-10 py-12">
+                <!-- Brand -->
+                <div class="text-center mb-9">
+                    <div class="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-indigo-400 to-purple-600 shadow-lg shadow-indigo-500/40 text-white font-extrabold text-2xl mb-4">Df</div>
+                    <h1 class="text-xl font-bold text-white mb-1">DfPHP 管理后台</h1>
+                    <p class="text-xs text-white/40">v{:VERSION} · 请输入账号密码登录</p>
+                </div>
+                <!-- Form -->
+                <form method="post" class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-medium text-white/50 mb-1.5 tracking-wide">账号</label>
+                        <div class="relative">
+                            <i class="fa-solid fa-user absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-sm pointer-events-none"></i>
+                            <input autocomplete="off" name="data[nm]" placeholder="请输入用户名" type="text"
+                                   class="login-input w-full pl-10 pr-4 py-3 rounded-xl text-sm">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-medium text-white/50 mb-1.5 tracking-wide">密码</label>
+                        <div class="relative">
+                            <i class="fa-solid fa-lock absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-sm pointer-events-none"></i>
+                            <input autocomplete="off" name="data[pw]" placeholder="请输入密码" type="password"
+                                   class="login-input w-full pl-10 pr-4 py-3 rounded-xl text-sm">
+                        </div>
+                    </div>
+                    <button type="submit"
+                            class="w-full mt-2 py-3 rounded-xl bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-semibold text-sm shadow-lg shadow-indigo-500/40 hover:opacity-90 active:scale-[.98] transition-all">
+                        登 录
+                    </button>
+                </form>
+                <p class="text-center text-xs text-white/20 mt-8">© 2023–{:date('Y')} DfPHP · Powered by Dfer.Site</p>
+            </div>
+        </div>
+    </div>
+    <df-code></df-code>
+</df-body>
