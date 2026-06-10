@@ -1,78 +1,66 @@
-<df-body>
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="ibox float-e-margins">
-                <div class="ibox-title">
-                    <h5>>></h5>
-                </div>
-                <div class="ibox-content">
+<df-header>
+<script>
+var _msgData  = {:json_encode(array_values($output ?: []))};
+var _viewUrl  = '{:split_url(str("admin/column/%s_view",[table_name("MessageModel")]))}';
+var _delUrl   = '{:split_url(str("admin/column/%s_del",[areas\admin\model\MessageModel::getName()]))}';
 
-                    <table class="table table-striped table-bordered table-hover" id="tableOne">
-                        <thead>
-                            <tr>
-                                <th width="50">编号</th>
-                                <th width="100">姓名</th>
-                                <th width="100">联系方式</th>
-                                <th width="100">内容</th>
-                                <th width="100">阅读状态</th>
-                                <th width="150">时间</th>
-                                <th width="150">操作</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <df-each $output>
-                                <tr>
-                                    <td>{$index}</td>
-                                    <td><a
-                                            href='{:split_url(str("admin/column/%s_view",[table_name("MessageModel")]),$value[0])}'>{::name}</a>
-                                    </td>
-                                    <td>
-                                        <a target="_blank"
-                                            href='mailto:{:Common::findStr($value["e_mail"],"@")?$value["e_mail"]:$value["e_mail"]."@qq.com"}?subject={::content}'>{::e_mail}</a>
-                                    </td>
-                                    <td>{::content}</td>
-                                    <td>{:$value['status']?'已读':'未读'}</td>
-                                    <td>{::time}</td>
-                                    <td class='center'>
-                                        <a href='{:split_url(str("admin/column/%s_del",[areas\admin\model\MessageModel::getName()]),$value[0])}'
-                                            onclick='return confirm("您确认要删除《{::content}》吗？")'>[删除]</a>
-                                    </td>
-                                </tr>
-                            </df-each>
-                        </tbody>
-                    </table>
-                </div>
+document.addEventListener('DOMContentLoaded', function() {
+    var table = new Tabulator('#message-table', {
+        data: _msgData, layout: 'fitColumns',
+        pagination: 'local', paginationSize: 10,
+        paginationSizeSelector: [10, 25, 50, 100],
+        langs: TABULATOR_ZH, locale: 'zh',
+        initialSort: [{column: 'id', dir: 'desc'}],
+        columns: [
+            {title: '#', field: 'id', width: 60, hozAlign: 'center', headerFilter: false},
+            {title: '姓名', field: 'name', width: 100, headerFilter: 'input', formatter: function(cell) {
+                var d = cell.getRow().getData();
+                return '<a href="'+_viewUrl+'/'+d.id+'" class="text-indigo-600 hover:underline">'+cell.getValue()+'</a>';
+            }},
+            {title: '联系方式', field: 'e_mail', width: 140, headerFilter: 'input'},
+            {title: '内容摘要', field: 'content', minWidth: 200, headerFilter: 'input', formatter: 'textarea'},
+            {title: '状态', field: 'status', width: 80, hozAlign: 'center', headerFilter: false, formatter: function(cell) {
+                return cell.getValue() ? '<span class="inline-block px-2 py-0.5 rounded text-xs bg-emerald-50 text-emerald-700">已读</span>'
+                                       : '<span class="inline-block px-2 py-0.5 rounded text-xs bg-amber-50 text-amber-700">未读</span>';
+            }},
+            {title: '时间', field: 'time', width: 150},
+            {
+                title: '操作', width: 180, hozAlign: 'center', headerSort: false, headerFilter: false,
+                formatter: function(cell) {
+                    var d = cell.getRow().getData();
+                    var t = (d.content || '').replace(/'/g, "\'").replace(/"/g, '&quot;').substring(0,20);
+                    return '<a href="'+_viewUrl+'/'+d.id+'" class="df-btn df-btn-view"><i class="fa fa-eye"></i> 查看</a>'
+                         + '<button onclick="dfDel(\''+_delUrl+'/'+d.id+'\',\''+t+'\')" class="df-btn df-btn-del"><i class="fa fa-trash"></i> 删除</button>';
+                }
+            }
+        ]
+    });
+    document.getElementById('message-search').addEventListener('input', function() {
+        var v = this.value;
+        if (v) { table.setFilter([[{field:'name',type:'like',value:v},{field:'content',type:'like',value:v},{field:'e_mail',type:'like',value:v}]]); }
+        else { table.clearFilter(); }
+    });
+});
+</script>
+</df-header>
+
+<df-body>
+<div class="space-y-4">
+    <div class="flex items-center justify-between">
+        <h2 class="text-base font-semibold text-slate-800 flex items-center gap-2">
+            <i class="fa-solid fa-envelope text-indigo-500"></i>留言管理
+        </h2>
+        <span class="text-sm text-slate-500">共 {:count($output)} 条留言</span>
+    </div>
+    <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
+        <div class="flex items-center gap-3 px-4 py-3 border-b border-slate-100 bg-slate-50">
+            <div class="relative">
+                <i class="fa-solid fa-magnifying-glass absolute left-2.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs pointer-events-none"></i>
+                <input id="message-search" type="text" placeholder="搜索姓名 / 内容 / 联系方式..."
+                       class="pl-8 pr-3 py-1.5 text-sm border border-slate-200 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-transparent w-64 transition-shadow">
             </div>
         </div>
+        <div id="message-table"></div>
     </div>
+</div>
 </df-body>
-
-<df-footer>
-
-
-    <!-- ********************** DATATABLE START ********************** -->
-    <link rel="stylesheet" href="https://oss.dfer.site/datatables/2.0.5/css/dataTables.dataTables.min.css" />
-    <script src="https://oss.dfer.site/datatables/2.0.5/js/dataTables.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            new DataTable('#tableOne', {
-                language: {
-                    url: 'https://oss.dfer.site/datatables/2.0.5/i18n/zh.json'
-                },
-                aLengthMenu: [10, 50, 100],
-                iDisplayLength: 10
-            });
-        });
-    </script>
-    <!-- **********************  DATATABLE END  ********************** -->
-
-    <script>
-        //pc端发送QQ信息
-        QQ_msg = function(qqN) {
-
-            window.open('http://wpa.qq.com/msgrd?v=3&site=qq&menu=yes&uin=' + qqN, '_blank',
-                'height=1024,toolbar=no,scrollbars=no,menubar=no,status=no');
-
-        }
-    </script>
-</df-footer>

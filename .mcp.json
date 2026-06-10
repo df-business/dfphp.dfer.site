@@ -1,0 +1,35 @@
+{
+  "mcpServers": {
+    "mysql-nodejs": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "@benborla29/mcp-server-mysql"
+      ],
+      "env": {
+        "MYSQL_HOST": "127.0.0.1",
+        "MYSQL_PORT": "3306",
+        "MYSQL_USER": "root",
+        "MYSQL_PASS": "123456",
+        "MYSQL_POOL_SIZE": "10",
+        "MYSQL_QUERY_TIMEOUT": "6000000",
+        "MYSQL_DISABLE_READ_ONLY_TRANSACTIONS": "true",
+        "ALLOW_INSERT_OPERATION": "true",
+        "ALLOW_UPDATE_OPERATION": "true",
+        "ALLOW_DELETE_OPERATION": "true",
+        "ALLOW_DDL_OPERATION": "true"
+      }
+    },
+    "redis": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "@pickstar-2002/redis-mcp@latest",
+        "--host", "localhost",
+        "--port", "6379",
+        "--password", "123456",
+        "--db", "0"
+      ]
+    }
+  }
+}

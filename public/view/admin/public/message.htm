@@ -1,94 +1,75 @@
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=7" />
-        <title>===提示===</title>
-        <style type="text/css" media="screen">
-            * {
-                margin: 0;
-                padding: 0;
-                font-family: arial, sans-serif;
-                font-size: 14px;
-            }
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>操作提示</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-50 min-h-screen flex items-center justify-center p-4">
 
-            body,
-            html {
-                height: 100%;
-            }
+    <div class="bg-white rounded-2xl shadow-sm border border-slate-200 w-full max-w-sm text-center overflow-hidden">
 
-            body {
-                background: #e9eaef;
-            }
+        <!-- 顶部色条 -->
+        <div class="h-1 {:$status ? 'bg-emerald-500' : 'bg-red-500'}"></div>
 
-            .wrapper {
-                margin: 0 auto;
-                background: #fff;
-                width: 587px;
-                height: 196px;
-                padding: 80px 0 0 80px;
-                top: 50%;
-                margin-top: -150px;
-                position: relative;
-            }
+        <div class="px-8 py-10 space-y-5">
 
-            h1 {
-                font-weight: 700;
-                font-size: 26px;
-                color: darkcyan
-            }
+            <!-- 图标 -->
+            <div class="flex justify-center">
+                <df-if $status>
+                <div class="w-16 h-16 rounded-full bg-emerald-50 flex items-center justify-center">
+                    <svg class="w-8 h-8 text-emerald-500" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/>
+                    </svg>
+                </div>
+                <df-else>
+                <div class="w-16 h-16 rounded-full bg-red-50 flex items-center justify-center">
+                    <svg class="w-8 h-8 text-red-500" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                </div>
+                </df-if>
+            </div>
 
-            .tm {
-                padding-top: 24px;
-            }
+            <!-- 标题 -->
+            <div>
+                <p class="text-lg font-semibold {:$status ? 'text-slate-800' : 'text-red-600'}">{:$msg}</p>
+                <p class="mt-1.5 text-sm text-slate-400">
+                    <span id="df-timer">{:$delay}</span> 秒后自动跳转
+                </p>
+            </div>
 
-            .tm span {
-                color: #e10602;
-                padding: 0 5px;
-                font-weight: 700;
-            }
+            <!-- 立即跳转按钮 -->
+            <button id="df-btn"
+                    class="w-full py-2.5 text-sm font-medium rounded-xl {:$status ? 'bg-indigo-600 hover:bg-indigo-700' : 'bg-red-600 hover:bg-red-700'} text-white transition-colors shadow-sm">
+                立即跳转
+            </button>
 
-            .btn {
-                padding-top: 14px;
-            }
-
-            .btn a {
-                display: block;
-                width: 150px;
-                height: 0;
-                padding-top: 30px;
-                color: black;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="wrapper">
-            <h1>{:$msg}</h1>
-            <p class="tm">跳转倒计时——<span id="Time">{:$delay}</span>秒</p>
-            <p class="btn"><a id="Btn" href="javascript:">立即跳转</a></p>
         </div>
-        <script type="text/javascript">
-            function jump() {
-                /*code
-                {:$script}
-                code*/
-            }
+    </div>
 
-            var time = document.getElementById('Time');
-            var btn = document.getElementById('Btn');
+    <script>
+    function jump() {
+        /*code {:$script} code*/
+    }
 
-            function count() {
-                if (+time.innerHTML > 0) {
-                    time.innerHTML--;
-                } else {
-                    clearInterval(timer);
-                    jump();
-                }
-            }
-            var timer = setInterval(count, /*code{:$delay * 1000}code*/ );
+    var _el    = document.getElementById('df-timer');
+    var _timer = setInterval(function() {
+        var t = parseInt(_el.textContent, 10);
+        if (t > 1) {
+            _el.textContent = t - 1;
+        } else {
+            clearInterval(_timer);
+            jump();
+        }
+    }, /*code{:$delay * 1000}code*/);
 
-            btn.onclick = function() {
-                jump();
-            };
-        </script>
-    </body>
+    document.getElementById('df-btn').onclick = function() {
+        clearInterval(_timer);
+        jump();
+    };
+    </script>
+
+</body>
 </html>

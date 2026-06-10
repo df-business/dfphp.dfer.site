@@ -1,49 +1,95 @@
 <df-header>
     <df-code>
-    ob_start();//解决cookie的使用限制
+    ob_start();
     </df-code>
-
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Df后台管理系统 - DfPHP v{:VERSION}</title>
-    <meta name="keywords" content="管理后台">
-    <meta name="description" content="管理后台">
-    <link href="{:VIEW_ASSETS}/admin/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
-    <link href="{:VIEW_ASSETS}/admin/css/font-awesome.css?v=4.4.0" rel="stylesheet">
-    <link href="{:VIEW_ASSETS}/admin/css/style.css?v=4.1.0" rel="stylesheet">
+    <title>后台登录 - DfPHP v{:VERSION}</title>
     <script>
-        if(window.top !== window.self) {
-            window.top.location = window.location;
-        }
+        if(window.top !== window.self) { window.top.location = window.location; }
     </script>
-
+    <style>
+        *{box-sizing:border-box;margin:0;padding:0}
+        body{
+            min-height:100vh;display:flex;align-items:center;justify-content:center;
+            background:linear-gradient(135deg,#1a1a2e 0%,#16213e 50%,#0f3460 100%);
+            font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC',sans-serif;
+        }
+        .card{
+            background:rgba(255,255,255,.06);
+            border:1px solid rgba(255,255,255,.12);
+            border-radius:20px;
+            padding:48px 44px;
+            width:100%;max-width:400px;
+            backdrop-filter:blur(20px);
+            box-shadow:0 24px 64px rgba(0,0,0,.4);
+        }
+        .brand{text-align:center;margin-bottom:36px}
+        .brand-icon{
+            width:64px;height:64px;border-radius:16px;
+            background:linear-gradient(135deg,#667eea,#764ba2);
+            display:inline-flex;align-items:center;justify-content:center;
+            font-size:28px;font-weight:800;color:#fff;
+            margin-bottom:14px;box-shadow:0 8px 24px rgba(102,126,234,.4);
+        }
+        .brand h1{font-size:22px;font-weight:700;color:#fff;margin-bottom:4px}
+        .brand p{font-size:13px;color:rgba(255,255,255,.45)}
+        .form-item{margin-bottom:16px;position:relative}
+        .form-item label{
+            display:block;font-size:12px;font-weight:500;
+            color:rgba(255,255,255,.55);margin-bottom:7px;letter-spacing:.04em;
+        }
+        .form-item input{
+            width:100%;padding:12px 16px 12px 44px;
+            background:rgba(255,255,255,.08);
+            border:1px solid rgba(255,255,255,.12);
+            border-radius:10px;font-size:14px;color:#fff;
+            outline:none;transition:border-color .2s,background .2s;
+        }
+        .form-item input::placeholder{color:rgba(255,255,255,.3)}
+        .form-item input:focus{
+            border-color:rgba(102,126,234,.7);
+            background:rgba(255,255,255,.12);
+        }
+        .form-item .icon{
+            position:absolute;left:14px;bottom:13px;
+            color:rgba(255,255,255,.35);font-size:15px;pointer-events:none;
+        }
+        .btn-login{
+            width:100%;padding:13px;margin-top:8px;
+            background:linear-gradient(135deg,#667eea,#764ba2);
+            border:none;border-radius:10px;font-size:15px;font-weight:600;
+            color:#fff;cursor:pointer;
+            box-shadow:0 4px 16px rgba(102,126,234,.45);
+            transition:opacity .2s,transform .1s;
+        }
+        .btn-login:hover{opacity:.9}
+        .btn-login:active{transform:scale(.98)}
+        .footer{text-align:center;margin-top:28px;font-size:12px;color:rgba(255,255,255,.25)}
+    </style>
 </df-header>
 
 <df-body>
-
-    <body class="gray-bg">
-        <div class="middle-box text-center loginscreen">
-            <div>
-                <div>
-                    <h1 class="logo-name">Df</h1>
-                </div>
-                <form method="post">
-                    <div class="text-left m-t">
-                        <div class="form-group">
-                            <input autocomplete="off" class="form-control" data-val="true" data-val-required="账号不能为空" name="data[nm]" placeholder="用户名" size="32" type="text" value="">
-                        </div>
-                        <div class="form-group">
-                            <input autocomplete="off" class="form-control" data-val="true" data-val-required="密码不能为空" name="data[pw]" placeholder="密码" size="32" type="password">
-                        </div>
-                        <button type="submit" class="btn btn-primary full-width">登 录</button>
-                    </div>
-                </form>
-            </div>
+    <div class="card">
+        <div class="brand">
+            <div class="brand-icon">Df</div>
+            <h1>DfPHP 管理后台</h1>
+            <p>v{:VERSION} · 请输入账号密码登录</p>
         </div>
-
-    </body>
-    <df-code>
-
-</df-code>
-
+        <form method="post">
+            <div class="form-item">
+                <label>账号</label>
+                <span class="icon">👤</span>
+                <input autocomplete="off" name="data[nm]" placeholder="请输入用户名" type="text">
+            </div>
+            <div class="form-item">
+                <label>密码</label>
+                <span class="icon">🔒</span>
+                <input autocomplete="off" name="data[pw]" placeholder="请输入密码" type="password">
+            </div>
+            <button type="submit" class="btn-login">登 录</button>
+        </form>
+        <div class="footer">© 2023–{:date('Y')} DfPHP · Powered by Dfer.Site</div>
+    </div>
+    <df-code></df-code>
 </df-body>

@@ -1,55 +1,37 @@
 <df-header>
-    <title>日志</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-        }
-
-        button {
-            width: 10%;
-            position: fixed;
-            top: 1px;
-            right: 1px;
-        }
-
-        #main {
-            /*width: 100px;*/
-            word-break: break-all;
-        }
-    </style>
+<style>
+    .log-entry { border-bottom: 1px solid #f1f5f9; padding: 12px 0; }
+    .log-entry:last-child { border-bottom: none; }
+</style>
 </df-header>
 
 <df-body>
-
-    <div>
-        <button onclick="clear_log()">清空</button>
+<div class="space-y-4">
+    <div class="flex items-center justify-between">
+        <h2 class="text-base font-semibold text-slate-800 flex items-center gap-2">
+            <i class="fa-solid fa-scroll text-indigo-500"></i>数据日志
+        </h2>
+        <button onclick="clearLog()"
+                class="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm rounded-lg border border-red-200 bg-white text-red-600 hover:bg-red-50 transition-colors">
+            <i class="fa-solid fa-trash text-xs"></i>清空日志
+        </button>
     </div>
-    <div id="main">
-        <h1>数据日志</h1>
-
+    <div class="bg-white rounded-xl border border-slate-200 shadow-sm px-6 py-2">
         <df-each $output>
-            {::str}<br>
-            <div style="color: red;">{::time}</div>
-            <line style='background: darkgray;height: 1px;'></line>
+        <div class="log-entry">
+            <p class="text-sm text-slate-700 break-all">{::str}</p>
+            <p class="mt-1 text-xs text-red-400">{::time}</p>
+        </div>
         </df-each>
     </div>
-
-
-
+</div>
 </df-body>
 
-
 <df-footer>
-    <script>
-        function clear_log() {
-            df_tools_common.post('', {
-                clear: true
-            }, function() {
-                location.reload()
-            }, true);
-
-        }
-    </script>
-
+<script>
+function clearLog() {
+    if (!confirm('确认清空所有日志？')) return;
+    df_tools_common.post('', {clear: true}, function() { location.reload(); }, true);
+}
+</script>
 </df-footer>

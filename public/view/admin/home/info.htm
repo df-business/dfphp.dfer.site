@@ -1,39 +1,23 @@
-<df-html>
-    <!-- ********************** layui START ********************** -->
-    <link href="https://oss.dfer.site/layui/v2.9.8/css/layui.css" rel="stylesheet" />
-    <script src="https://oss.dfer.site/layui/v2.9.8/layui.js"></script>
-    <!-- **********************  layui END  ********************** -->
-
-    <table class="layui-table" style="width: 50%;">
-        <colgroup>
-            <col width="35%">
-            <col width="65%">
-        </colgroup>
-        <thead>
-            <tr>
-                <th colspan="2">框架信息</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>php 当前版本</td>
-                <td>{:PHP_VERSION}</td>
-            </tr>
-            <tr>
-                <td>php 需求版本</td>
-                <td>{:PHP_VERSION_MIN}</td>
-            </tr>
-            <tr>
-                <td>DfPHP 当前版本</td>
-                <td>{:VERSION}</td>
-            </tr>
-
-            <tr>
-                <td>php 环境</td>
-                <td>{:$_SERVER['SERVER_SOFTWARE']}</td>
-            </tr>
-
-        </tbody>
-    </table>
-
-</df-html>
+<df-body>
+<div class="space-y-4">
+    <div class="flex items-center gap-2">
+        <h2 class="text-base font-semibold text-slate-800"><i class="fa-solid fa-circle-info text-indigo-500"></i> 框架信息</h2>
+    </div>
+    <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden max-w-xl">
+        <table class="w-full text-sm">
+            <thead>
+                <tr class="bg-slate-50 border-b border-slate-200">
+                    <th class="px-5 py-3 text-left text-xs font-semibold text-slate-500 w-2/5">项目</th>
+                    <th class="px-5 py-3 text-left text-xs font-semibold text-slate-500">值</th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100">
+                <tr class="hover:bg-slate-50"><td class="px-5 py-3 text-slate-500">PHP 当前版本</td><td class="px-5 py-3 text-slate-800">{:PHP_VERSION}</td></tr>
+                <tr class="hover:bg-slate-50"><td class="px-5 py-3 text-slate-500">PHP 需求版本</td><td class="px-5 py-3 text-slate-800">{:PHP_VERSION_MIN}</td></tr>
+                <tr class="hover:bg-slate-50"><td class="px-5 py-3 text-slate-500">DfPHP 当前版本</td><td class="px-5 py-3 text-slate-800">{:VERSION}</td></tr>
+                <tr class="hover:bg-slate-50"><td class="px-5 py-3 text-slate-500">PHP 环境</td><td class="px-5 py-3 text-slate-800">{:$_SERVER['SERVER_SOFTWARE']}</td></tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</df-body>

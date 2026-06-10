@@ -1,60 +1,31 @@
-<df-header>
-    <style>
-        table td {
-            border-bottom: 1px dashed rgba(0, 0, 0, .1);
-            padding: 1rem;
-        }
-
-        table {
-            width: 100%
-        }
-
-        img {
-            width: 30%
-        }
-    </style>
-</df-header>
 <df-body>
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="ibox float-e-margins">
-                <div class="ibox-title">
-                    <h5></h5>
-                </div>
-                <div class="ibox-content">
-
-                    <div class="form-horizontal m-t">
-                        <table>
-                            <tr>
-                                <td>
-                                    <div class="form-group">
-                                        <div class="col-sm-5">
-                                            {$output['title']}
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="form-group">
-                                        <div class="col-sm-11">
-                                            {$output['content']}
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                        </table>
-
-                        <div class="form-group">
-                            <div class="col-sm-2 col-sm-offset-1">
-                                <a href='{:split_url(str("admin/column/%s",[areas\admin\model\MessageModel::getName()]))}'
-                                    class="btn btn-sm btn-white"> 返 回 </a>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
+<div class="space-y-4">
+    <div class="flex items-center justify-between">
+        <h2 class="text-base font-semibold text-slate-800 flex items-center gap-2">
+            <i class="fa-solid fa-envelope-open text-indigo-500"></i>留言详情
+        </h2>
+        <a href="{:split_url(str('admin/column/%s',[areas\admin\model\MessageModel::getName()]))}"
+           class="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm rounded-lg border border-slate-200 bg-white text-slate-600 hover:bg-slate-50 transition-colors">
+            <i class="fa-solid fa-arrow-left text-xs"></i>返回列表
+        </a>
+    </div>
+    <div class="bg-white rounded-xl border border-slate-200 shadow-sm divide-y divide-slate-100">
+        <div class="flex gap-4 px-6 py-4">
+            <span class="w-24 text-sm font-medium text-slate-500 shrink-0 text-right">姓名</span>
+            <span class="text-sm text-slate-800">{:htmlspecialchars($output['name']??'')}</span>
+        </div>
+        <div class="flex gap-4 px-6 py-4">
+            <span class="w-24 text-sm font-medium text-slate-500 shrink-0 text-right">联系方式</span>
+            <span class="text-sm text-slate-800">{:htmlspecialchars($output['e_mail']??'')}</span>
+        </div>
+        <div class="flex gap-4 px-6 py-4">
+            <span class="w-24 text-sm font-medium text-slate-500 shrink-0 text-right">时间</span>
+            <span class="text-sm text-slate-800">{:$output['time']??''}</span>
+        </div>
+        <div class="flex gap-4 px-6 py-4">
+            <span class="w-24 text-sm font-medium text-slate-500 shrink-0 text-right pt-0.5">留言内容</span>
+            <div class="text-sm text-slate-800 leading-relaxed flex-1">{:nl2br(htmlspecialchars($output['content']??''))}</div>
         </div>
     </div>
+</div>
 </df-body>

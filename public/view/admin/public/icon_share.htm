@@ -1,35 +1,40 @@
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <link rel="shortcut icon" href="{:DEFAULT_ADMIN_ASSETS}/img/favicon.ico" />
-        <!--safari icon-->
-        <link rel="apple-touch-icon" href="{:DEFAULT_ADMIN_ASSETS}/img/favicon.png" />
-        <!--页面尺寸-->
-        <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
-        <!--手机状态栏的颜色-->
-        <meta name="apple-mobile-web-app-status-bar-style" content="black">
-        <!--作为独立的网页，进行全屏显示-->
-        <meta name="apple-mobile-web-app-capable" content="yes">
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="shortcut icon" href="{:DEFAULT_ADMIN_ASSETS}/img/favicon.ico">
+    <link rel="apple-touch-icon" href="{:DEFAULT_ADMIN_ASSETS}/img/favicon.png">
 
-        <!-- ********************** jq START ********************** -->
-        <script src="https://oss.dfer.site/jquery/3.7.1/jquery.min.js"></script>
-        <!-- **********************  jq END  ********************** -->
+    <!-- Tailwind CSS Play CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
 
-        <!-- ********************** dfer-tools-js START ********************** -->
-        <script src="/node_modules/@df_business/tools-js/extends/js.ext.js"></script>
-        <script src="/node_modules/@df_business/tools-js/extends/jquery.ext.js"></script>
-        <script src="/node_modules/@df_business/tools-js/class/Common.js"></script>
-        <script>
-            var df_tools_common = new Common();
-        </script>
-        <!-- **********************  dfer-tools-js END  ********************** -->
+    <!-- Alpine.js -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.5/dist/cdn.min.js"></script>
 
-        <df-header />
-    </head>
+    <!-- Font Awesome 6 Free -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css">
 
-    <body>
-        <df-body />
-    </body>
+    <!-- jQuery -->
+    <script src="https://oss.dfer.site/jquery/3.7.1/jquery.min.js"></script>
 
+    <!-- dfer-tools-js -->
+    <script src="/node_modules/@df_business/tools-js/extends/js.ext.js"></script>
+    <script src="/node_modules/@df_business/tools-js/extends/jquery.ext.js"></script>
+    <script src="/node_modules/@df_business/tools-js/class/Common.js"></script>
+    <script>var df_tools_common = new Common();</script>
+
+    <!-- layer.js 弹窗 -->
+    <script src="{:DEFAULT_ADMIN_ASSETS}/admin/js/plugins/layer/layer.min.js"></script>
+
+    <!-- js.ext.js 将 Array.prototype.toString 默认分隔符改为 '\n'，会破坏 Alpine.js 的
+         new AsyncFunction 参数列表构建，此处在 Alpine defer 运行前恢复原生行为 -->
+    <script>Array.prototype.toString = function() { return Array.prototype.join.call(this, ','); };</script>
+
+    <df-header />
+</head>
+<body>
+    <df-body />
     <df-footer />
+</body>
 </html>

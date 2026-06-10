@@ -1,105 +1,196 @@
 <df-code>
     use Dfer\Tools\Statics\{Common};
 </df-code>
-<html>
-    <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
 
-        <!-- ********************** layui START ********************** -->
-        <link href="https://oss.dfer.site/layui/v2.9.8/css/layui.css" rel="stylesheet">
-        <script src="https://oss.dfer.site/layui/v2.9.8/layui.js"></script>
-        <!-- **********************  layui END  ********************** -->
+    <!-- Tailwind CSS Play CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
 
-        <!-- ********************** bootstrap START ********************** -->
-        <link href="https://oss.dfer.site/bootstrap/v5.3.3/css/bootstrap.min.css" rel="stylesheet">
-        <script src="https://oss.dfer.site/bootstrap/v5.3.3/js/bootstrap.min.js"></script>
-        <!-- **********************  bootstrap END  ********************** -->
+    <!-- Alpine.js -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.5/dist/cdn.min.js"></script>
 
-        <!-- ********************** fontawesome START ********************** -->
-        <link href="https://oss.dfer.site/fontawesome/v5.15.4/css/all.css" rel="stylesheet" type="text/css">
-        <!-- **********************  fontawesome END  ********************** -->
+    <!-- Font Awesome 6 Free -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css">
 
-        <!-- ********************** jq START ********************** -->
-        <script src="https://oss.dfer.site/jquery/3.7.1/jquery.min.js"></script>
-        <!-- **********************  jq END  ********************** -->
+    <!-- Tabulator 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/tabulator-tables@5.5.4/dist/css/tabulator.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/tabulator-tables@5.5.4/dist/js/tabulator.min.js"></script>
 
-        <!-- ********************** dfer-tools-js START ********************** -->
-        <script src="/node_modules/@df_business/tools-js/extends/js.ext.js"></script>
-        <script src="/node_modules/@df_business/tools-js/extends/jquery.ext.js"></script>
-        <script src="/node_modules/@df_business/tools-js/class/Common.js"></script>
-        <script>
-            var df_tools_common = new Common();
-        </script>
-        <!-- **********************  dfer-tools-js END  ********************** -->
+    <!-- jQuery -->
+    <script src="https://oss.dfer.site/jquery/3.7.1/jquery.min.js"></script>
 
-        <link href="{:DEFAULT_ADMIN_ASSETS}/admin/css/style.css?v=4.1.0" rel="stylesheet">
-        <script src="{:DEFAULT_ADMIN_ASSETS}/admin/js/content.js?v=1.0.0"></script>
-        <df-header />
-    </head>
+    <!-- dfer-tools-js -->
+    <script src="/node_modules/@df_business/tools-js/extends/js.ext.js"></script>
+    <script src="/node_modules/@df_business/tools-js/extends/jquery.ext.js"></script>
+    <script src="/node_modules/@df_business/tools-js/class/Common.js"></script>
+    <script>var df_tools_common = new Common();</script>
 
-    <body class="gray-bg">
-        <div class="wrapper wrapper-content">
-            <df-body />
-        </div>
-    </body>
+    <!-- layer.js 弹窗 -->
+    <script src="{:DEFAULT_ADMIN_ASSETS}/admin/js/plugins/layer/layer.min.js"></script>
 
+    <!-- 修复 js.ext.js 覆盖 Array.prototype.toString 导致 Alpine 报错的问题 -->
+    <script>Array.prototype.toString = function() { return Array.prototype.join.call(this, ','); };</script>
+
+    <style>
+        /* ── Tabulator 全局重置 ── */
+        .tabulator {
+            border: none !important;
+            background: transparent !important;
+            font-size: 13px !important;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', sans-serif !important;
+            color: #334155 !important;
+        }
+        /* 表头 */
+        .tabulator .tabulator-header {
+            background: #f8fafc !important;
+            border-bottom: 1px solid #e2e8f0 !important;
+        }
+        .tabulator .tabulator-header .tabulator-col {
+            background: #f8fafc !important;
+            border-right: 1px solid #e8edf3 !important;
+            color: #475569 !important;
+            font-weight: 600 !important;
+            font-size: 12px !important;
+        }
+        .tabulator .tabulator-header .tabulator-col:hover { background: #f1f5f9 !important; }
+        .tabulator .tabulator-header .tabulator-col .tabulator-col-title { color: #475569 !important; }
+        /* 排序箭头 */
+        .tabulator .tabulator-header .tabulator-col.tabulator-sortable .tabulator-col-title { padding-right: 20px; }
+        /* 行 */
+        .tabulator-row {
+            border-bottom: 1px solid #f1f5f9 !important;
+            color: #334155 !important;
+            font-size: 13px !important;
+        }
+        .tabulator-row .tabulator-cell { color: #334155 !important; padding: 10px 12px !important; overflow: visible !important; white-space: nowrap !important; }
+        .tabulator-row .tabulator-cell .df-btn { vertical-align: middle; }
+        .tabulator-row:hover,
+        .tabulator-row.tabulator-row-odd:hover,
+        .tabulator-row.tabulator-row-even:hover { background: #f8fafc !important; }
+        .tabulator-row.tabulator-row-even { background: #fff !important; }
+        .tabulator-row.tabulator-row-odd  { background: #fff !important; }
+        /* 列头筛选框 */
+        .tabulator-header-filter input {
+            border: 1px solid #e2e8f0 !important;
+            border-radius: 5px !important;
+            padding: 3px 7px !important;
+            font-size: 12px !important;
+            color: #334155 !important;
+            background: #fff !important;
+            width: 100% !important;
+        }
+        .tabulator-header-filter input:focus { outline: none !important; border-color: #6366f1 !important; }
+        /* 底部分页区 */
+        .tabulator .tabulator-footer {
+            background: #f8fafc !important;
+            border-top: 1px solid #e2e8f0 !important;
+            padding: 8px 12px !important;
+        }
+        .tabulator .tabulator-footer .tabulator-footer-contents { justify-content: flex-end; }
+        .tabulator .tabulator-footer .tabulator-paginator { color: #64748b !important; font-size: 13px !important; }
+        /* 翻页按钮通用 */
+        .tabulator .tabulator-footer .tabulator-page {
+            border: 1px solid #e2e8f0 !important;
+            border-radius: 6px !important;
+            padding: 4px 10px !important;
+            font-size: 12px !important;
+            color: #475569 !important;         /* 明确字色 */
+            background: #fff !important;
+            margin: 0 2px !important;
+            cursor: pointer !important;
+            transition: background .15s, color .15s !important;
+        }
+        /* 禁用态 */
+        .tabulator .tabulator-footer .tabulator-page[disabled] {
+            color: #cbd5e1 !important;
+            cursor: not-allowed !important;
+        }
+        /* 当前页 */
+        .tabulator .tabulator-footer .tabulator-page.active {
+            background: #4f46e5 !important;
+            border-color: #4f46e5 !important;
+            color: #fff !important;
+        }
+        /* hover：背景变浅，字色保持深色 */
+        .tabulator .tabulator-footer .tabulator-page:not([disabled]):not(.active):hover {
+            background: #eef2ff !important;
+            border-color: #c7d2fe !important;
+            color: #4338ca !important;
+        }
+        /* 每页条数下拉 */
+        .tabulator .tabulator-footer select {
+            border: 1px solid #e2e8f0 !important;
+            border-radius: 6px !important;
+            padding: 3px 6px !important;
+            font-size: 12px !important;
+            color: #475569 !important;
+            background: #fff !important;
+        }
+        /* ── 通用操作按钮 ── */
+        .df-btn { display:inline-flex; align-items:center; gap:4px; padding:3px 10px; border-radius:5px; font-size:12px; cursor:pointer; border:none; text-decoration:none; margin:0 2px; transition:background .15s; }
+        .df-btn-edit  { background:#eef2ff; color:#4338ca !important; }
+        .df-btn-edit:hover  { background:#e0e7ff; color:#3730a3 !important; }
+        .df-btn-del   { background:#fef2f2; color:#dc2626 !important; }
+        .df-btn-del:hover   { background:#fee2e2; color:#b91c1c !important; }
+        .df-btn-view  { background:#f0fdf4; color:#16a34a !important; }
+        .df-btn-view:hover  { background:#dcfce7; color:#15803d !important; }
+        .df-btn-add   { background:#eff6ff; color:#2563eb !important; }
+        .df-btn-add:hover   { background:#dbeafe; color:#1d4ed8 !important; }
+    </style>
+
+    <df-header />
+</head>
+<body class="bg-slate-50 min-h-screen text-slate-700 text-sm">
+    <div class="p-5">
+        <df-body />
+    </div>
     <df-footer />
 
     <script>
-        const UPLOAD_API = {
-            UEDITOR: '/admin/upload/ueditor_upload',
-            WEB_UPLOADER: '/admin/upload/web_upload'
-        };
-        //上传
-        function upload(trigger_obj, preview_obj, input_obj, upload_api = UPLOAD_API.UEDITOR) {
+    const UPLOAD_API = {
+        UEDITOR: '/admin/upload/ueditor_upload',
+        WEB_UPLOADER: '/admin/upload/web_upload'
+    };
 
-            var uploader = WebUploader.create({
-                auto: true,
-                pick: trigger_obj,
-                server: upload_api,
-                method: 'POST'
-            });
+    function upload(trigger_obj, preview_obj, input_obj, upload_api) {
+        upload_api = upload_api || UPLOAD_API.UEDITOR;
+        input_obj  = input_obj  || '#input_obj';
+        var uploader = WebUploader.create({ auto: true, pick: trigger_obj, server: upload_api, method: 'POST' });
+        uploader.on('uploadSuccess', function(file, response) {
+            if (!response.status) {
+                $(preview_obj).html(response.msg);
+            } else {
+                var url = response.data.url;
+                $(preview_obj).html(response.data.type === 'img' ? '<img src="' + url + '">' : '<div>' + url + '</div>');
+                $(input_obj).val(url);
+            }
+        });
+        uploader.on('uploadError', function() { $(preview_obj).html('上传失败'); });
+    }
 
-            var input_obj = input_obj ?? '#input_obj';
-            uploader.on('uploadBeforeSend', function() {
-                console.log('uploadBeforeSend')
-                $(preview_obj).after(`
-				<div class="layui-progress layui-progress-big" lay-showpercent="true" lay-filter="${input_obj.replace('#', '')}">
-					<div class="layui-progress-bar layui-bg-red" lay-percent="0%"></div>
-				</div>
-				`);
-            });
-
-            uploader.on('uploadProgress', function(file, percentage) {
-                per = Math.round(percentage * 100)
-                layui.use('element', function() {
-                    var element = layui.element;
-                    console.log(input_obj.replace('#', ''), `${per}%`);
-                    element.progress(input_obj.replace('#', ''), `${per}%`)
-                })
-            });
-
-            uploader.on('uploadSuccess', function(file, response) {
-                if (response.status == false)
-                    $(preview_obj).html(response.msg);
-                else {
-                    //获取原始数据
-                    var type = response.data.type;
-                    var url = response.data.url;
-                    if (type == 'img')
-                        $(preview_obj).html(`<img src="${url}" />`);
-                    else
-                        $(preview_obj).append(`<div>${url}</div>`);
-                    $(input_obj).val(url);
-                }
-            });
-
-            uploader.on('uploadError', function(file) {
-                $(preview_obj).html("上传失败");
-            });
-
+    /* 通用删除确认 */
+    function dfDel(url, title) {
+        if (confirm('确认删除《' + (title || '该条记录') + '》？此操作不可恢复')) {
+            location.href = url;
         }
-    </script>
+    }
 
+    /* 通用 Tabulator 中文分页语言 */
+    var TABULATOR_ZH = {
+        zh: {
+            pagination: {
+                first: '首页', first_title: '首页',
+                last:  '末页', last_title:  '末页',
+                prev:  '上页', prev_title:  '上页',
+                next:  '下页', next_title:  '下页',
+                page_size: '条/页', page_title: '页码', all: '全部'
+            }
+        }
+    };
+    </script>
+</body>
 </html>

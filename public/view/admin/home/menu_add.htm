@@ -1,81 +1,78 @@
 <df-header>
 </df-header>
+
 <df-body>
-
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="ibox float-e-margins">
-                <div class="ibox-title">
-                    <h5>{$title}
-                    </h5>
+<div class="space-y-4">
+    <div class="flex items-center justify-between">
+        <h2 class="text-base font-semibold text-slate-800 flex items-center gap-2">
+            <i class="fa-solid fa-sitemap text-indigo-500"></i>{$title}
+        </h2>
+        <a href="javascript:history.back()"
+           class="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm rounded-lg border border-slate-200 bg-white text-slate-600 hover:bg-slate-50 transition-colors">
+            <i class="fa-solid fa-arrow-left text-xs"></i>返回
+        </a>
+    </div>
+    <div class="bg-white rounded-xl border border-slate-200 shadow-sm">
+        <form method="post" action="{:split_url(sprintf('admin/home/%s_update',table_name('MenuModel')))}" id="menu-form">
+            <input name="id" value="{:$output[0]}" type="hidden">
+            <input name="data[parent]" value="{:Common::setVal($output['parent'],$parent_id)}" type="hidden">
+            <input name="parent" value="{:Common::setVal($parent,0)}" type="hidden">
+            <div class="divide-y divide-slate-100">
+                <div class="flex items-start gap-4 px-6 py-4">
+                    <label class="w-24 pt-2 text-sm font-medium text-slate-600 shrink-0 text-right">标题<span class="text-red-500 ml-0.5">*</span></label>
+                    <div class="flex-1">
+                        <input type="text" name="data[title]" value="{:$output['title']}" placeholder="菜单标题"
+                               class="w-full max-w-lg px-3 py-2 text-sm border border-slate-200 rounded-lg bg-slate-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-transparent transition-shadow">
+                    </div>
                 </div>
-                <div class="ibox-content">
-                    <form method="post" action='{:split_url(sprintf("admin/home/%s_update",table_name("MenuModel")))}'>
-                        <input name="id" value="{:$output[0]}" hidden />
-                        <input name="data[parent]" value="{:Common::setVal($output['parent'],$parent_id)}" hidden />
-                        <input name="parent" value="{:Common::setVal($parent,0)}" hidden />
-
-                        <div class="form-horizontal m-t">
-                            <div class="form-group">
-                                <label class="col-sm-1 control-label">标题：</label>
-                                <div class="col-sm-5">
-                                    <input class="form-control" name="data[title]" size="10" type="text"
-                                        value="{:$output['title']}" />
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="col-sm-1 control-label">路径：</label>
-                                <div class="col-sm-5">
-                                    <input class="form-control" name="data[src]" size="10" type="text"
-                                        value="{:$output['src']}" />
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="col-sm-1 control-label">排序编号：</label>
-                                <div class="col-sm-5">
-                                    <input class="form-control" name="data[order_num]" size="10" type="text"
-                                        value="{:$output['order_num']}" />
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="col-sm-1 control-label">类型：</label>
-                                <div class="col-sm-8">
-                                    <select class="site-select-tem" name="data[type]">
-                                        <df-each $type>
-                                            <option value="{$value}" {:$value==$output["type"]? "selected" : "" }>{$key}
-                                            </option>
-                                        </df-each>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <div class="col-sm-2 col-sm-offset-1">
-                                    <button class="btn btn-primary" onclick="return submit_form()">保存</button>
-                                    <a href="javascript:history.back()" class="btn btn-sm btn-white"> 返 回 </a>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
+                <div class="flex items-start gap-4 px-6 py-4">
+                    <label class="w-24 pt-2 text-sm font-medium text-slate-600 shrink-0 text-right">路径</label>
+                    <div class="flex-1">
+                        <input type="text" name="data[src]" value="{:$output['src']}" placeholder="留空为父级菜单"
+                               class="w-full max-w-lg px-3 py-2 text-sm border border-slate-200 rounded-lg bg-slate-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-transparent transition-shadow">
+                        <p class="mt-1 text-xs text-slate-400">支持：url:admin/xxx、js:funcName()、或直接填路径</p>
+                    </div>
+                </div>
+                <div class="flex items-start gap-4 px-6 py-4">
+                    <label class="w-24 pt-2 text-sm font-medium text-slate-600 shrink-0 text-right">排序编号</label>
+                    <div class="flex-1">
+                        <input type="text" name="data[order_num]" value="{:$output['order_num']}" placeholder="数字越小越靠前"
+                               class="w-48 px-3 py-2 text-sm border border-slate-200 rounded-lg bg-slate-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-transparent transition-shadow">
+                    </div>
+                </div>
+                <div class="flex items-start gap-4 px-6 py-4">
+                    <label class="w-24 pt-2 text-sm font-medium text-slate-600 shrink-0 text-right">图标类型</label>
+                    <div class="flex-1">
+                        <select name="data[type]"
+                                class="px-3 py-2 text-sm border border-slate-200 rounded-lg bg-slate-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-transparent transition-shadow">
+                            <df-each $type>
+                            <option value="{$value}" {:$value==$output["type"]? 'selected' : ''}>{$key}</option>
+                            </df-each>
+                        </select>
+                    </div>
                 </div>
             </div>
-        </div>
+            <div class="flex items-center gap-3 px-6 py-4 bg-slate-50 rounded-b-xl border-t border-slate-100">
+                <button type="button" onclick="submitMenu()"
+                        class="inline-flex items-center gap-2 px-6 py-2 text-sm font-medium rounded-lg bg-indigo-600 text-white hover:bg-indigo-700 transition-colors shadow-sm">
+                    <i class="fa-solid fa-floppy-disk"></i>保存
+                </button>
+                <a href="javascript:history.back()"
+                   class="inline-flex items-center gap-1.5 px-4 py-2 text-sm rounded-lg border border-slate-200 bg-white text-slate-600 hover:bg-slate-50 transition-colors">
+                    取消
+                </a>
+            </div>
+        </form>
     </div>
-
+</div>
 </df-body>
 
 <df-footer>
-
-    <script type="text/javascript">
-        function submit_form() {
-            if ($.formVerifyEmpty('data[title]', '请输入标题')) {
-                return false;
-            }
-            return true;
-        }
-    </script>
-
+<script>
+function submitMenu() {
+    var t = $('[name="data[title]"]').val().trim();
+    if (!t) { alert('请输入菜单标题'); $('[name="data[title]"]').focus(); return; }
+    $('#menu-form').submit();
+}
+</script>
 </df-footer>

@@ -1,122 +1,156 @@
 <df-header>
     <style>
-        .data {
-            color: rgb(243, 243, 244);
+        /* ---- 统计卡片 ---- */
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 18px;
+            margin-bottom: 24px;
         }
+        .stat-card {
+            background: #fff;
+            border-radius: 12px;
+            padding: 20px 22px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            box-shadow: 0 2px 12px rgba(0,0,0,.06);
+            transition: transform .18s, box-shadow .18s;
+            cursor: default;
+        }
+        .stat-card:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(0,0,0,.10); }
+        .stat-icon {
+            width: 52px; height: 52px;
+            border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 22px; color: #fff; flex-shrink: 0;
+        }
+        .stat-icon.purple { background: linear-gradient(135deg,#667eea,#764ba2); }
+        .stat-icon.blue   { background: linear-gradient(135deg,#4facfe,#00f2fe); }
+        .stat-icon.green  { background: linear-gradient(135deg,#43e97b,#38f9d7); }
+        .stat-icon.orange { background: linear-gradient(135deg,#fa8231,#f7b731); }
+        .stat-label { font-size: 12px; color: #999; margin-bottom: 4px; }
+        .stat-value { font-size: 16px; font-weight: 700; color: #222; word-break: break-all; }
 
-        div {
-            /*让div的内容无法选中*/
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
+        /* ---- 服务器信息卡片 ---- */
+        .info-card {
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,.06);
+            overflow: hidden;
+            margin-bottom: 24px;
         }
+        .info-card-header {
+            padding: 14px 22px;
+            border-bottom: 1px solid #f0f2f5;
+            font-size: 14px; font-weight: 600; color: #333;
+            display: flex; align-items: center; gap: 8px;
+        }
+        .info-card-header .dot {
+            width: 8px; height: 8px; border-radius: 50%;
+            background: linear-gradient(135deg,#667eea,#764ba2);
+            display: inline-block;
+        }
+        .info-table { width: 100%; border-collapse: collapse; }
+        .info-table tr { border-bottom: 1px solid #f5f7fa; }
+        .info-table tr:last-child { border-bottom: none; }
+        .info-table td {
+            padding: 10px 22px;
+            font-size: 13px;
+            vertical-align: top;
+        }
+        .info-table td:first-child {
+            color: #888; white-space: nowrap; width: 160px;
+        }
+        .info-table td:last-child { color: #333; word-break: break-all; }
+        .info-table tr:hover td { background: #fafbff; }
+
+        /* ---- 隐藏切换 ---- */
+        .toggle-btn {
+            font-size: 12px; color: #667eea; cursor: pointer;
+            background: none; border: none; padding: 0;
+        }
+        .toggle-btn:hover { text-decoration: underline; }
+        .hidden-row { display: none; }
     </style>
 </df-header>
 
 <df-body>
+    <div class="wrapper-content">
 
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="row">
-                <div class="col-sm-5" onclick="showData()" style="cursor: pointer;">
-                    <div class="widget style1 navy-bg">
-                        <div class="row">
-                            <div class="col-xs-4">
-                                <i class="fa fa-server fa-5x"></i>
-                            </div>
-                            <div class="col-xs-8 text-right">
-                                <span> 操作系统 </span>
-                                <h2 class="font-bold">{:PHP_OS}</h2>
-                            </div>
-                        </div>
-                    </div>
+        <!-- ============ 统计卡片 ============ -->
+        <div class="stat-grid">
+            <div class="stat-card">
+                <div class="stat-icon purple"><i class="fa fa-server"></i></div>
+                <div>
+                    <div class="stat-label">操作系统</div>
+                    <div class="stat-value">{:PHP_OS}</div>
                 </div>
-
-                <div class="col-sm-5" onclick="" style="cursor: pointer;">
-                    <div class="widget style1 lazur-bg">
-                        <div class="row">
-                            <div class="col-xs-4">
-                                <i class="fa fa-code fa-5x"></i>
-                            </div>
-                            <div class="col-xs-8 text-right">
-                                <span> php版本 </span>
-                                <h2 class="font-bold">{:PHP_VERSION}</h2>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-sm-5" onclick="" style="cursor: pointer;">
-                    <div class="widget style1 lazur-bg">
-                        <div class="row">
-                            <div class="col-xs-4">
-                                <i class="fa fa-cloud fa-5x"></i>
-                            </div>
-                            <div class="col-xs-8 text-right">
-                                <span> 服务器ip </span>
-                                <h2 class="font-bold">{:GetHostByName($_SERVER['SERVER_NAME'])}
-                                </h2>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-sm-5" onclick="" style="cursor: pointer;">
-                    <div class="widget style1 lazur-bg">
-                        <div class="row">
-                            <div class="col-xs-4">
-                                <i class="fa fa-chrome fa-5x"></i>
-                            </div>
-                            <div class="col-xs-8 text-right">
-                                <span> 你的电脑ip </span>
-                                <h2 class="font-bold">{:IP}</h2>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
             </div>
-
+            <div class="stat-card">
+                <div class="stat-icon blue"><i class="fa fa-code"></i></div>
+                <div>
+                    <div class="stat-label">PHP 版本</div>
+                    <div class="stat-value">{:PHP_VERSION}</div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon green"><i class="fa fa-cloud"></i></div>
+                <div>
+                    <div class="stat-label">服务器外网 IP</div>
+                    <div class="stat-value">{:GetHostByName($_SERVER['SERVER_NAME'])}</div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon orange"><i class="fa fa-desktop"></i></div>
+                <div>
+                    <div class="stat-label">客户端 IP</div>
+                    <div class="stat-value">{:IP}</div>
+                </div>
+            </div>
         </div>
 
-    </div>
-    <div class="data">
-        服务器操作系统： {:PHP_OS."(".php_uname().")"} <br>
-        服务器程序： {:$_SERVER['SERVER_SOFTWARE']} <br>
-        最大上传限制： {:get_cfg_var("upload_max_filesize")?get_cfg_var ("upload_max_filesize"):"不允许上传附件"}<br>
-        最大执行时间：{:get_cfg_var("max_execution_time")."秒 "} <br>
-        脚本运行占用最大内存：{:get_cfg_var("memory_limit")?get_cfg_var("memory_limit"):"无"}<br>
-        PHP版本：{:PHP_VERSION} <br>
-        PHP路径：{:DEFAULT_INCLUDE_PATH} <br>
-        网站根目录：{:$_SERVER['DOCUMENT_ROOT']} <br>
-        服务器外网IP：{:GetHostByName($_SERVER['SERVER_NAME'])} <br>
-        服务器内网IP：{:$_SERVER['SERVER_ADDR']} <br>
-        客户端IP：{:$_SERVER['REMOTE_ADDR'] } <br>
-        服务器域名：{: $_SERVER["HTTP_HOST"]} <br>
-        服务器Web端口：{: $_SERVER['SERVER_PORT']} <br>
-        浏览器信息：{: $_SERVER['HTTP_USER_AGENT']} <br>
-        MySQL最大连接数：{: get_cfg_var("mysql.max_links")==-1 ? "不限" :get_cfg_var("mysql.max_links")} <br>
-        服务器语言：{: $_SERVER['HTTP_ACCEPT_LANGUAGE']} <br>
-        进程用户名：{:Get_Current_User()} <br>
-        当前文件路径：{: __FILE__} <br>
-        页面参数：{: htmlspecialchars($_SERVER['QUERY_STRING'])} <br>
-        完整url：{:htmlspecialchars(URL)} <br>
+        <!-- ============ 服务器详情 ============ -->
+        <div class="info-card">
+            <div class="info-card-header">
+                <span class="dot"></span>服务器环境
+                <button class="toggle-btn" id="toggleBtn" onclick="toggleSensitive()" style="margin-left:auto">显示敏感信息</button>
+            </div>
+            <table class="info-table">
+                <tr><td>操作系统</td><td>{:PHP_OS} ({:php_uname()})</td></tr>
+                <tr><td>服务器软件</td><td>{:$_SERVER['SERVER_SOFTWARE']}</td></tr>
+                <tr><td>PHP 版本</td><td>{:PHP_VERSION}</td></tr>
+                <tr><td>最大上传限制</td><td>{:get_cfg_var('upload_max_filesize') ?: '不允许上传附件'}</td></tr>
+                <tr><td>最大执行时间</td><td>{:get_cfg_var('max_execution_time')} 秒</td></tr>
+                <tr><td>内存限制</td><td>{:get_cfg_var('memory_limit') ?: '无限制'}</td></tr>
+                <tr><td>MySQL 最大连接数</td><td>{:get_cfg_var('mysql.max_links')==-1 ? '不限' : get_cfg_var('mysql.max_links')}</td></tr>
+                <tr><td>服务器域名</td><td>{:$_SERVER['HTTP_HOST']}</td></tr>
+                <tr><td>Web 端口</td><td>{:$_SERVER['SERVER_PORT']}</td></tr>
+                <tr><td>服务器外网 IP</td><td>{:GetHostByName($_SERVER['SERVER_NAME'])}</td></tr>
+                <tr><td>服务器内网 IP</td><td>{:$_SERVER['SERVER_ADDR']}</td></tr>
+                <tr><td>客户端 IP</td><td>{:$_SERVER['REMOTE_ADDR']}</td></tr>
+                <tr><td>访问语言</td><td>{:$_SERVER['HTTP_ACCEPT_LANGUAGE']}</td></tr>
+                <tr><td>浏览器</td><td>{:$_SERVER['HTTP_USER_AGENT']}</td></tr>
+                <tr class="hidden-row sensitive"><td>进程用户</td><td>{:Get_Current_User()}</td></tr>
+                <tr class="hidden-row sensitive"><td>网站根目录</td><td>{:$_SERVER['DOCUMENT_ROOT']}</td></tr>
+                <tr class="hidden-row sensitive"><td>PHP 路径</td><td>{:DEFAULT_INCLUDE_PATH}</td></tr>
+                <tr class="hidden-row sensitive"><td>当前文件</td><td>{:__FILE__}</td></tr>
+                <tr class="hidden-row sensitive"><td>页面参数</td><td>{:htmlspecialchars($_SERVER['QUERY_STRING'])}</td></tr>
+                <tr class="hidden-row sensitive"><td>完整 URL</td><td>{:htmlspecialchars(URL)}</td></tr>
+            </table>
+        </div>
+
     </div>
 </df-body>
 
 <df-footer>
-
     <script>
-        var x = true;
-
-        function showData() {
-            x = !x;
-            if (x)
-                $('.Data').css('color', 'rgb(243, 243, 244)');
-            else
-                $('.Data').css('color', 'rgb(0, 0, 0)');
+        function toggleSensitive() {
+            var rows = document.querySelectorAll('.sensitive');
+            var btn  = document.getElementById('toggleBtn');
+            var show = rows[0].style.display === 'table-row';
+            rows.forEach(function(r){ r.style.display = show ? 'none' : 'table-row'; });
+            btn.textContent = show ? '显示敏感信息' : '隐藏敏感信息';
         }
     </script>
-
 </df-footer>

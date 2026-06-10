@@ -1,67 +1,49 @@
+<df-header>
+<script>
+var _guestsData = {:json_encode(array_values($output ?: []))};
+
+document.addEventListener('DOMContentLoaded', function() {
+    new Tabulator('#guests-table', {
+        data: _guestsData, layout: 'fitColumns',
+        pagination: 'local', paginationSize: 10,
+        paginationSizeSelector: [10, 25, 50, 100],
+        langs: TABULATOR_ZH, locale: 'zh',
+        initialSort: [{column: 'hits', dir: 'desc'}],
+        columns: [
+            {title: '#', field: 'id', width: 60, hozAlign: 'center', headerFilter: false},
+            {title: 'IP', field: 'ip', width: 140, headerFilter: 'input'},
+            {title: '浏览器', field: 'browser', minWidth: 200, headerFilter: 'input'},
+            {title: '访问次数', field: 'hits', width: 100, hozAlign: 'center'},
+            {title: '首次访问', field: 'first_time', width: 160},
+            {title: '最近访问', field: 'time', width: 160}
+        ]
+    });
+    document.getElementById('guests-search').addEventListener('input', function() {
+        var v = this.value;
+        if (v) { table.setFilter([[{field:'ip',type:'like',value:v},{field:'browser',type:'like',value:v}]]); }
+        else { table.clearFilter(); }
+    });
+});
+</script>
+</df-header>
+
 <df-body>
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="ibox float-e-margins">
-                <div class="ibox-title">
-                    <h5>>></h5>
-                </div>
-                <div class="ibox-content">
-                    <div class="row form-horizontal form-group">
-                        <div class="col-sm-1">
-
-                        </div>
-
-                    </div>
-                    <table class="table table-striped table-bordered table-hover" id="tableOne">
-                        <thead>
-                            <tr>
-                                <th width="50">编号</th>
-                                <th width="100">ip</th>
-                                <th width="150">浏览器</th>
-                                <th width="150">访问次数</th>
-                                <th width="150">首次访问</th>
-                                <th width="150">最近访问</th>
-
-                            </tr>
-                        </thead>
-                        <tbody>
-
-                            <df-each $output>
-                                <tr>
-                                    <td>{$index}</td>
-                                    <td>
-                                        <a href='#'>{::ip}</a>
-                                    </td>
-                                    <td>{::browser}</td>
-                                    <td>{::hits}</td>
-                                    <td>{::first_time}</td>
-                                    <td>{::time}</td>
-                                </tr>
-                            </df-each>
-                        </tbody>
-                    </table>
-                </div>
+<div class="space-y-4">
+    <div class="flex items-center justify-between">
+        <h2 class="text-base font-semibold text-slate-800 flex items-center gap-2">
+            <i class="fa-solid fa-users-viewfinder text-indigo-500"></i>访客记录
+        </h2>
+        <span class="text-xs text-slate-400">共 {:count($output)} 条记录</span>
+    </div>
+    <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
+        <div class="flex items-center gap-3 px-4 py-3 border-b border-slate-100 bg-slate-50">
+            <div class="relative">
+                <i class="fa-solid fa-magnifying-glass absolute left-2.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs pointer-events-none"></i>
+                <input id="guests-search" type="text" placeholder="搜索 IP / 浏览器..."
+                       class="pl-8 pr-3 py-1.5 text-sm border border-slate-200 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-transparent w-56 transition-shadow">
             </div>
         </div>
+        <div id="guests-table"></div>
     </div>
-
+</div>
 </df-body>
-<df-footer>
-
-    <!-- ********************** DATATABLE START ********************** -->
-    <link rel="stylesheet" href="https://oss.dfer.site/datatables/2.0.5/css/dataTables.dataTables.min.css" />
-    <script src="https://oss.dfer.site/datatables/2.0.5/js/dataTables.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            new DataTable('#tableOne', {
-                language: {
-                    url: 'https://oss.dfer.site/datatables/2.0.5/i18n/zh.json'
-                },
-                aLengthMenu: [10, 50, 100],
-                iDisplayLength: 10
-            });
-        });
-    </script>
-    <!-- **********************  DATATABLE END  ********************** -->
-
-</df-footer>

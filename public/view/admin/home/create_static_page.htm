@@ -1,36 +1,19 @@
 <df-header>
-    <title></title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-        }
-
-        df {
-            width: 10%;
-            background: orange;
-            cursor: crosshair;
-            position: fixed;
-            top: 5%;
-            right: 5%;
-            text-align: center;
-            z-index: 999999999;
-        }
-    </style>
+<style>
+    .refresh-btn {
+        position: fixed; top: 16px; right: 16px; z-index: 9999;
+    }
+</style>
 </df-header>
+
 <df-body>
-
-
-    <df onclick="location.reload()">刷新</df>
-
-    {$str}
-
+<div class="relative">
+    <button onclick="location.reload()"
+            class="refresh-btn inline-flex items-center gap-1.5 px-3 py-1.5 text-sm rounded-lg bg-amber-500 text-white hover:bg-amber-600 transition-colors shadow-md">
+        <i class="fa-solid fa-rotate-right text-xs"></i>刷新
+    </button>
+    <div class="text-sm text-slate-700">
+        {$str}
+    </div>
+</div>
 </df-body>
-<df-footer>
-
-
-
-    <script>
-    </script>
-
-</df-footer>

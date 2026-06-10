@@ -50,21 +50,22 @@ class HomeController extends BaseController
     public function index($param)
     {
         $user = $this->user;
-        $hits = ConfigModel::where(['key' => 'hits'])->first()['val'];
+        $hitsRow = ConfigModel::where(['key' => 'hits'])->first();
+        $hits = $hitsRow['val'] ?? 0;
         //留言
         $message = MessageModel::where(['status' => 0])->select();
         if ($user->nm == 'df') {
             $where = '1';
             $user->role_name = "超级管理员";
         } else {
-            $roles = RolesModel::where($where)->first();
-            $user->role_name = $roles['nm'];
-            $roles = $roles['roles'];
-            $roles = explode('|', $roles);
-            foreach ($roles as $v) {
-                $str[] = "`id`='{$v}'";
+            $roles = RolesModel::where(['id' => (int)$user->role])->first();
+            $user->role_name = $roles['nm'] ?? '未知角色';
+            $roleIds = array_filter(explode('|', $roles['roles'] ?? ''));
+            $str = [];
+            foreach ($roleIds as $v) {
+                $str[] = "`id`='" . (int)$v . "'";
             }
-            $where = implode('or', $str);
+            $where = empty($str) ? '0' : implode(' or ', $str);
         }
         $sql = "select * from menu where parent=0 and ({$where}) order by order_num asc";
         $menu = Mysql::run($sql);
@@ -81,36 +82,31 @@ class HomeController extends BaseController
     {
         foreach ($data as $v) {
             $v['src'] = urldecode($v['src']);
+            $icon = htmlspecialchars($v['type'], ENT_QUOTES);
+            $title = htmlspecialchars($v['title'], ENT_QUOTES);
             if (empty($v['src'])) {
-                echo <<<EOT
- <li>
-  <a>
-   <i class="fa fa-{$v['type']}"></i><span class="nav-label">{$v['title']}</span><span
-    class="fa arrow"></span>
-  </a>
-  <ul class="nav nav-second-level">
-EOT;
-
-                $m = Mysql::run("select * from menu where parent={$v['id']} and ({$where}) order by order_num asc", 'sql');
-                $this->menuTree($m, $where);
-                echo <<<EOT
-</ul>
-    </li>
-EOT;
+                $children = Mysql::run("select * from menu where parent={$v['id']} and ({$where}) order by order_num asc", 'sql');
+                echo '<div class="df-submenu">'
+                    . '<button onclick="dfToggleMenu(this)" class="w-full flex items-center gap-2.5 px-2.5 py-2 rounded-lg text-slate-300 hover:text-white hover:bg-white/10 transition-colors text-sm">'
+                    . '<i class="fa fa-' . $icon . ' w-4 text-center flex-shrink-0 text-slate-400"></i>'
+                    . '<span class="nav-label">' . $title . '</span>'
+                    . '<i class="df-arrow fa fa-chevron-right text-xs text-slate-500 ml-auto transition-transform duration-200"></i>'
+                    . '</button>'
+                    . '<div class="df-submenu-children hidden ml-3 mt-0.5 space-y-0.5 border-l border-white/10 pl-2">';
+                $this->menuTree($children, $where);
+                echo '</div></div>';
             } else {
-                if (strpos($v['src'], 'js:') !== false)
-                    $src = 'onclick="' . str_replace('js:', '', $v['src']) . '"';
-                else if (strpos($v['src'], 'url:') !== false)
-                    $src = 'href="' . str_replace('url:', '', $v['src']) . '"';
-                else $src = 'href="' . split_url($v['src']) . '"';
-                echo <<<EOT
-<li>
-     <a {$src} class="J_menuItem">
-      <i class="fa fa-{$v['type']}"></i><span
-       class="nav-label">{$v['title']}</span>
-     </a>
-     </li>
-EOT;
+                if (strpos($v['src'], 'js:') !== false) {
+                    $attr = 'href="#" onclick="' . htmlspecialchars(str_replace('js:', '', $v['src']), ENT_QUOTES) . ';return false;"';
+                } elseif (strpos($v['src'], 'url:') !== false) {
+                    $attr = 'href="' . htmlspecialchars(str_replace('url:', '', $v['src']), ENT_QUOTES) . '"';
+                } else {
+                    $attr = 'href="' . split_url($v['src']) . '"';
+                }
+                echo '<a ' . $attr . ' class="df-menu-item flex items-center gap-2.5 px-2.5 py-2 rounded-lg text-slate-300 hover:text-white hover:bg-white/10 transition-colors text-sm" data-title="' . $title . '">'
+                    . '<i class="fa fa-' . $icon . ' w-4 text-center flex-shrink-0 text-slate-400"></i>'
+                    . '<span class="nav-label">' . $title . '</span>'
+                    . '</a>';
             }
         }
     }
@@ -272,7 +268,7 @@ EOT;
 
     public function rolesAdd($param)
     {
-        $err = $_GET['err'];
+        $err = $_GET['err'] ?? null;
         $output = RolesModel::where($param)->find();
         $this->view(get_defined_vars());
     }
@@ -391,8 +387,8 @@ EOT;
         //		var_dump($output);
         $output['src'] = urldecode($output['src']);
 
-        $parent = $_GET['parent'];
-        $parent_id = $_GET['parent_id'];
+        $parent = $_GET['parent'] ?? '';
+        $parent_id = $_GET['parent_id'] ?? 0;
         $title = str("%s>>>%s", [Common::setVal(MenuModel::where(str_replace(',', '', $parent))->find()['title'], ""), $output[0]]);
         $this->view(get_defined_vars());
     }
@@ -417,8 +413,8 @@ EOT;
      */
     public function menuDel($id)
     {
-        $parent_id = $_GET['parent_id'];
-        $parent = $_GET['parent'];
+        $parent_id = $_GET['parent_id'] ?? 0;
+        $parent = $_GET['parent'] ?? '';
         $ret = MenuModel::where("id={$id} or parent={$id}")->del();
         $this->jumpPrompt($ret, [MenuModel::getName(), $parent_id, $parent]);
     }

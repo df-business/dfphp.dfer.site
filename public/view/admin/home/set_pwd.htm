@@ -1,75 +1,67 @@
 <df-body>
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="ibox float-e-margins">
-                <div class="ibox-title">
-                    <h5></h5>
+<div class="space-y-4">
+    <div class="flex items-center justify-between">
+        <h2 class="text-base font-semibold text-slate-800 flex items-center gap-2">
+            <i class="fa-solid fa-key text-indigo-500"></i>修改密码
+        </h2>
+    </div>
+    <div class="bg-white rounded-xl border border-slate-200 shadow-sm max-w-lg">
+        <form method="post" action="{:split_url('update_set_pwd')}" id="pwd-form">
+            <input name="data[id]" value="{:$output[0]??'0'}" type="hidden">
+            <div class="divide-y divide-slate-100">
+                <div class="flex items-start gap-4 px-6 py-4">
+                    <label class="w-24 pt-2 text-sm font-medium text-slate-600 shrink-0 text-right">账号</label>
+                    <div class="flex-1">
+                        <input type="text" name="data[nm]" value="{:$output['nm']??''}" readonly
+                               class="w-full px-3 py-2 text-sm border border-slate-200 rounded-lg bg-slate-100 text-slate-500 cursor-not-allowed">
+                    </div>
                 </div>
-                <div class="ibox-content">
-                    <form method="post" action='{:split_url("update_set_pwd")}'>
-                        <input name="data[id]" id="pic" value="{:$output[0]??'0'}" hidden />
-                        <div class="form-horizontal m-t">
-                            <div class="form-group">
-                                <label class="col-sm-1 control-label">账号：</label>
-                                <div class="col-sm-2">
-                                    <input class="form-control" name="data[nm]" size="10" type="text"
-                                        value="{:$output['nm']??''}" readonly />
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-1 control-label">原密码：</label>
-                                <div class="col-sm-2">
-                                    <input class="form-control" name="data[pw]" size="10" type="password" value="" />
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-1 control-label">新密码：</label>
-                                <div class="col-sm-2">
-                                    <input class="form-control" name="data[npw]" size="10" type="password"
-                                        value="{:isset($output['npw'])?$output['npw']:''}" />
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-1 control-label">确认密码：</label>
-                                <div class="col-sm-2">
-                                    <input class="form-control" name="data[confirm_password]" size="10" type="password"
-                                        value="{:$output['confirm_password']??''}" />
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-sm-2 col-sm-offset-1">
-                                    <button class="btn btn-primary" onclick="return submit_form()">保存</button>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
+                <div class="flex items-start gap-4 px-6 py-4">
+                    <label class="w-24 pt-2 text-sm font-medium text-slate-600 shrink-0 text-right">原密码<span class="text-red-500 ml-0.5">*</span></label>
+                    <div class="flex-1">
+                        <input type="password" name="data[pw]" placeholder="请输入原密码"
+                               class="w-full px-3 py-2 text-sm border border-slate-200 rounded-lg bg-slate-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-transparent transition-shadow">
+                    </div>
+                </div>
+                <div class="flex items-start gap-4 px-6 py-4">
+                    <label class="w-24 pt-2 text-sm font-medium text-slate-600 shrink-0 text-right">新密码<span class="text-red-500 ml-0.5">*</span></label>
+                    <div class="flex-1">
+                        <input type="password" name="data[npw]" placeholder="请输入新密码"
+                               class="w-full px-3 py-2 text-sm border border-slate-200 rounded-lg bg-slate-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-transparent transition-shadow">
+                    </div>
+                </div>
+                <div class="flex items-start gap-4 px-6 py-4">
+                    <label class="w-24 pt-2 text-sm font-medium text-slate-600 shrink-0 text-right">确认密码<span class="text-red-500 ml-0.5">*</span></label>
+                    <div class="flex-1">
+                        <input type="password" name="data[confirm_password]" placeholder="再次输入新密码"
+                               class="w-full px-3 py-2 text-sm border border-slate-200 rounded-lg bg-slate-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-transparent transition-shadow">
+                        <p id="pwd-msg" class="mt-1 text-xs text-red-500 hidden"></p>
+                    </div>
                 </div>
             </div>
-        </div>
+            <div class="flex items-center gap-3 px-6 py-4 bg-slate-50 rounded-b-xl border-t border-slate-100">
+                <button type="button" onclick="submitPwd()"
+                        class="inline-flex items-center gap-2 px-6 py-2 text-sm font-medium rounded-lg bg-indigo-600 text-white hover:bg-indigo-700 transition-colors shadow-sm">
+                    <i class="fa-solid fa-floppy-disk"></i>保存
+                </button>
+            </div>
+        </form>
     </div>
-
+</div>
 </df-body>
 
-
 <df-footer>
-    <script>
-        function submit_form() {
-            if ($.formVerifyEmpty('data[pw]', '请输入原密码')) {
-                return false;
-            }
-            if ($.formVerifyEmpty('data[npw]', '请输入新密码')) {
-                return false;
-            }
-            if ($.formVerifyEmpty('data[confirm_password]', '请确认密码')) {
-                return false;
-            }
-            if ($("[name='data[npw]']").val() != $("[name='data[confirm_password]']").val()) {
-                $("[name='data[confirm_password]']").next().html('两次密码输入不一致')
-                return false;
-            }
-            return true;
-        }
-    </script>
-
-
+<script>
+function submitPwd() {
+    var pw  = $('[name="data[pw]"]').val().trim();
+    var npw = $('[name="data[npw]"]').val().trim();
+    var cpw = $('[name="data[confirm_password]"]').val().trim();
+    var msg = $('#pwd-msg');
+    if (!pw) { alert('请输入原密码'); return; }
+    if (!npw) { alert('请输入新密码'); return; }
+    if (npw !== cpw) { msg.text('两次密码输入不一致').removeClass('hidden'); return; }
+    msg.addClass('hidden');
+    $('#pwd-form').submit();
+}
+</script>
 </df-footer>

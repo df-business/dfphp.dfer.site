@@ -28,6 +28,18 @@ composer create-project dfer/df-php
 - 服务器最低配置：1cpu、1G、1Mbps
 
 
+**指定版本**
+```
+# Windows
+"G:\Program Files\phpstudy_pro\Extensions\php\php8.0.2nts\php.exe" "C:\ProgramData\ComposerSetup\bin\composer.phar" update
+"G:\Program Files\phpstudy_pro\Extensions\php\php8.0.2nts\php.exe" df
+
+# Linux
+# /usr/bin/php80
+/www/server/php/80/bin/php /usr/bin/composer update
+/www/server/php/80/bin/php df
+```
+
 ## 伪静态
 */www/server/panel/rewrite/nginx/DfPHP.conf*
 ```
